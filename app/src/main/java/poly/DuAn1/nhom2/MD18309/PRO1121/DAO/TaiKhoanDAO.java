@@ -1,0 +1,87 @@
+package poly.DuAn1.nhom2.MD18309.PRO1121.DAO;
+
+import android.content.ContentValues;
+import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+
+import poly.DuAn1.nhom2.MD18309.PRO1121.DBFucker;
+import poly.DuAn1.nhom2.MD18309.PRO1121.ObjectClass.TaiKhoan;
+
+public class TaiKhoanDAO {
+    private final DBFucker dbFucker;
+
+    public TaiKhoanDAO(Context context) {
+        this.dbFucker = new DBFucker(context);
+    }
+
+    public TaiKhoan login(String tk, String mk){
+        TaiKhoan taiKhoan = null;
+        SQLiteDatabase database = dbFucker.getReadableDatabase();
+        database.beginTransaction();
+        try {
+            Cursor cursor = database.rawQuery("SELECT ROLE, HOTEN, PHONE, EMAIL FROM TAIKHOAN WHERE UserName=? AND Password=?", new String[]{tk, mk});
+            if (cursor != null && cursor.getCount() > 0){
+                cursor.moveToFirst();
+                taiKhoan = new TaiKhoan(cursor.getString(0), cursor.getString(1), cursor.getString(2), cursor.getString(3));
+                cursor.close();
+            }
+            database.setTransactionSuccessful();
+        }catch (Exception e){
+            throw new RuntimeException(e);
+        }finally {
+            database.endTransaction();
+        }
+        return taiKhoan;
+    }
+
+    public boolean AddTaiKhoan(TaiKhoan aTaiKhoan){
+        boolean result = false;
+        SQLiteDatabase database = dbFucker.getWritableDatabase();
+        database.beginTransaction();
+        ContentValues pair = new ContentValues();
+        pair.put("UserName", aTaiKhoan.getUserName());
+        pair.put("Password", aTaiKhoan.getPassWord());
+        pair.put("ROLE", aTaiKhoan.getRole());
+        pair.put("HoTen", aTaiKhoan.getHoTen());
+        pair.put("Phone", aTaiKhoan.getPhone());
+        pair.put("Email", aTaiKhoan.getEmail());
+        try {
+            long kq = database.insert("TAIKHOAN", null, pair);
+            if (kq != -1){
+                result = true;
+            }
+            pair.clear();
+            database.setTransactionSuccessful();
+        }catch (Exception e){
+            throw new RuntimeException(e);
+        }finally {
+            database.endTransaction();
+        }
+        return result;
+    }
+
+    public boolean checkUserName(String tk){
+        boolean result = false;
+        SQLiteDatabase database = dbFucker.getReadableDatabase();
+        database.beginTransaction();
+        String checkQuerry;
+        try{
+            checkQuerry = "SELECT UserName FROM TAIKHOAN WHERE UserName = ?";
+            Cursor cursor = database.rawQuery(checkQuerry, new String[]{tk});
+            if (cursor != null && cursor.getCount() > 0){
+                if (cursor.moveToFirst()){
+                    result = true;
+                }
+                cursor.close();
+                database.setTransactionSuccessful();
+            }
+        }catch (Exception e){
+            throw new RuntimeException(e);
+        }finally {
+            database.endTransaction();
+        }
+        return result;
+    }
+
+}

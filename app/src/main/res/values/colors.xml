@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="white">#FFFFFFFF</color>
+    <color name="primary_color">#A1C9F1</color>
+    <color name="secondery_color">#95DCD5</color>
+    <color name="book_not_return_color">#F6CBCB</color>
+    <color name="book_return_color">#E2FFE0</color>
+    <color name="item_color">#E9DBFB</color>
+</resources>
