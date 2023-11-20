@@ -5,6 +5,8 @@ public class MatHang {
     private String idNhaCungCap;
     private String idNganhHang;
     private String donViTinh;
+
+    private int giaNhapMatHang;
     private int giaMatHang;
     private int soLuongMatHang;
 
@@ -32,11 +34,16 @@ public class MatHang {
         return soLuongMatHang;
     }
 
-    public MatHang(String idMatHang, String idNhaCungCap, String idNganhHang, String donViTinh, int giaMatHang, int soLuongMatHang) {
+    public int getGiaNhapMatHang() {
+        return giaNhapMatHang;
+    }
+
+    public MatHang(String idMatHang, String idNhaCungCap, String idNganhHang, String donViTinh, int giaNhapMatHang, int giaMatHang, int soLuongMatHang) {
         this.idMatHang = idMatHang;
         this.idNhaCungCap = idNhaCungCap;
         this.idNganhHang = idNganhHang;
         this.donViTinh = donViTinh;
+        this.giaNhapMatHang = giaNhapMatHang;
         this.giaMatHang = giaMatHang;
         this.soLuongMatHang = soLuongMatHang;
     }

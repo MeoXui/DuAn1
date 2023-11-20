@@ -3,18 +3,18 @@
 
     <item
         android:id="@+id/trangchu"
-        android:icon="@drawable/home"
+        android:icon="@drawable/home_icon"
         android:title="Trang Chủ" />
     <item
         android:id="@+id/hoadon"
-        android:icon="@drawable/invoice"
+        android:icon="@drawable/invoice_icon"
         android:title="Hóa Đơn" />
     <item
         android:id="@+id/khohang"
-        android:icon="@drawable/box"
+        android:icon="@drawable/box_icon"
         android:title="Kho Hàng" />
     <item
         android:id="@+id/menu"
-        android:icon="@drawable/menu"
+        android:icon="@drawable/menu_icon"
         android:title="Menu" />
 </menu>
