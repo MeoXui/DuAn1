@@ -10,32 +10,42 @@ import android.view.MenuItem;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
+import poly.DuAn1.nhom2.MD18309.PRO1121.ObjectClass.TaiKhoan;
 import poly.DuAn1.nhom2.MD18309.PRO1121.fragments.HoaDon;
 import poly.DuAn1.nhom2.MD18309.PRO1121.fragments.KhoHang;
 import poly.DuAn1.nhom2.MD18309.PRO1121.fragments.Menu;
 import poly.DuAn1.nhom2.MD18309.PRO1121.fragments.TrangChu;
 
 public class MainActivity extends AppCompatActivity {
-    private final FragmentManager fragmentManager = getSupportFragmentManager();
-    KhoHang khoHang = null;
-    HoaDon hoaDon = null;
-    Menu menu = null;
-    TrangChu trangChu = null;
+    private FragmentManager fragmentManager;
+    private KhoHang khoHang = null;
+    private HoaDon hoaDon = null;
+    private Menu menu = null;
+    private TrangChu trangChu = null;
+    private TaiKhoan taiKhoan = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        fragmentManager = getSupportFragmentManager();
+
+        if(savedInstanceState != null){
+            taiKhoan = (TaiKhoan) savedInstanceState.getSerializable(login_screen.KEY_TK);
+        }else {
+            taiKhoan = (TaiKhoan) getIntent().getSerializableExtra(login_screen.KEY_TK);
+        }
+        trangChu = new TrangChu(taiKhoan);
+
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNav);
         bottomNavigationView.setItemRippleColor(null);
         bottomNavigationView.setSelectedItemId(R.id.trangchu);
-        fragmentManager.beginTransaction().replace(R.id.framelayout, new TrangChu()).commit();
-
+        fragmentManager.beginTransaction().replace(R.id.framelayout, trangChu).commit();
 
         bottomNavigationView.setOnItemSelectedListener(item -> {
             if (item.getItemId() == R.id.trangchu) {
-                trangChu = new TrangChu();
+                trangChu = new TrangChu(taiKhoan);
                 fragmentManager.beginTransaction().replace(R.id.framelayout, trangChu).commit();
             } else if (item.getItemId() == R.id.hoadon) {
                 hoaDon = new HoaDon();
@@ -50,4 +60,12 @@ public class MainActivity extends AppCompatActivity {
             return true;
         });
     }
+
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        System.out.println(taiKhoan.getHoTen());
+        outState.putSerializable(login_screen.KEY_TK, taiKhoan);
+    }
+
 }

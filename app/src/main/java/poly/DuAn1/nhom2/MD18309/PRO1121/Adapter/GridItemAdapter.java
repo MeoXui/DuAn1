@@ -2,6 +2,7 @@ package poly.DuAn1.nhom2.MD18309.PRO1121.Adapter;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,12 +36,13 @@ public class GridItemAdapter extends RecyclerView.Adapter<GridItemAdapter.ViewFu
 
     @Override
     public int getItemCount() {
-        return 6;
+        return gridItemArrayList.size();
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewFucker holder, int position) {
-
+        holder.gridName.setText(gridItemArrayList.get(holder.getAdapterPosition()).getGridName());
+        holder.gridIcon.setImageResource(gridItemArrayList.get(holder.getAdapterPosition()).getGridIcon());
     }
 
     public static class ViewFucker extends RecyclerView.ViewHolder{

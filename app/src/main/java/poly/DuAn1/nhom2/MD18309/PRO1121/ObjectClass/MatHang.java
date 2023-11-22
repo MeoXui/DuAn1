@@ -5,7 +5,6 @@ public class MatHang {
     private String idNhaCungCap;
     private String idNganhHang;
     private String donViTinh;
-
     private int giaNhapMatHang;
     private int giaMatHang;
     private int soLuongMatHang;
