@@ -6,10 +6,12 @@ import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.GridLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -43,9 +45,17 @@ public class GridItemAdapter extends RecyclerView.Adapter<GridItemAdapter.ViewFu
     public void onBindViewHolder(@NonNull ViewFucker holder, int position) {
         holder.gridName.setText(gridItemArrayList.get(holder.getAdapterPosition()).getGridName());
         holder.gridIcon.setImageResource(gridItemArrayList.get(holder.getAdapterPosition()).getGridIcon());
+        if (gridItemArrayList.get(holder.getAdapterPosition()).getGridDes().isEmpty()){
+            holder.gridName.setY(20);
+            holder.gridDes.setVisibility(View.INVISIBLE);
+        }else{
+            holder.gridDes.setText(gridItemArrayList.get(holder.getAdapterPosition()).getGridDes());
+        }
     }
 
     public static class ViewFucker extends RecyclerView.ViewHolder{
+
+        ConstraintLayout gridLayout;
         TextView gridName, gridDes;
         ImageView gridIcon;
         public ViewFucker(@NonNull View itemView) {
@@ -53,6 +63,7 @@ public class GridItemAdapter extends RecyclerView.Adapter<GridItemAdapter.ViewFu
             gridName = itemView.findViewById(R.id.gridname);
             gridDes = itemView.findViewById(R.id.griddescription);
             gridIcon = itemView.findViewById(R.id.gridicon);
+            gridLayout = itemView.findViewById(R.id.girdLayout);
         }
     }
 }

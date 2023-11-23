@@ -8,7 +8,7 @@ import androidx.annotation.Nullable;
 
 public class DBFucker extends SQLiteOpenHelper {
     public DBFucker(@Nullable Context context) {
-        super(context, "DA1", null, 3);
+        super(context, "DA1", null, 4);
     }
 
     @Override
@@ -37,7 +37,7 @@ public class DBFucker extends SQLiteOpenHelper {
         db.execSQL(dummyKhachHang);
         String dummyCongViec = "INSERT INTO CONGVIEC VALUES(1, 'admin', 'nhanvien1', 'Dọn Kho', 'Còn gì để nói k?', '01-01-2069', 0), (2, 'admin', 'nhanvien2', 'Sắp Xếp Kho', 'Sắp Xếp Hàng Mới Về', '01-02-2069', 0)";
         db.execSQL(dummyCongViec);
-        String dummyMatHang = "INSERT INTO MATHANG VALUES(1, 1, 1, 'MH1', 1, 'KG', 10000, 20000),(2, 3, 3, 'MH1', 3, 'Tấn', 20000, 69000)";
+        String dummyMatHang = "INSERT INTO MATHANG VALUES(1, 1, 1, 'MH1', 1, 'KG', 10000, 20000),(2, 3, 3, 'MH2', 3, 'Tấn', 20000, 69000)";
         db.execSQL(dummyMatHang);
     }
 

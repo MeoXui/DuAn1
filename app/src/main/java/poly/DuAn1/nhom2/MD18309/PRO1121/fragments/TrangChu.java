@@ -13,6 +13,7 @@ import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -79,16 +80,23 @@ public class TrangChu extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_trang_chu, container, false);
         RecyclerView recyclerView = view.findViewById(R.id.recyclerView);
+        ImageView avatar = view.findViewById(R.id.avatar);
         TextView txtTenNguoiDung = view.findViewById(R.id.txtTenNguoiDung);
         TextView txtRoleNguoiDung = view.findViewById(R.id.txtRoleNguoiDung);
         txtTenNguoiDung.setText("Xin Chào:"+taiKhoan.getHoTen());
         txtRoleNguoiDung.setText(taiKhoan.getRole().toUpperCase());
 
+        if (taiKhoan.getRole().equalsIgnoreCase("QUANLY")){
+            avatar.setImageResource(R.drawable.user_admin);
+        }else {
+            avatar.setImageResource(R.drawable.user);
+        }
+
         ArrayList<GridItem> gridItemArrayList = new ArrayList<>();
         gridItemArrayList.add(new GridItem("Thống Kê", "None", R.drawable.bar_chart));
         gridItemArrayList.add(new GridItem("Hóa Đơn", "None", R.drawable.invoice_selected));
         gridItemArrayList.add(new GridItem("Mặt Hàng", "None", R.drawable.box_selected));
-        gridItemArrayList.add(new GridItem("Công Việc", "None", R.drawable.calendar));
+        gridItemArrayList.add(new GridItem("Công Việc", "", R.drawable.calendar));
 
 
         CustomGridLayout customGridLayout = new CustomGridLayout(getContext(), 2, false);

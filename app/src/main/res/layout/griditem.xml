@@ -14,7 +14,8 @@
         android:paddingTop="10dp"
         android:paddingBottom="10dp"
         android:paddingEnd="5dp"
-        android:paddingStart="15dp">
+        android:paddingStart="15dp"
+        android:id="@+id/girdLayout">
         <ImageView
             android:id="@+id/gridicon"
             android:layout_width="35dp"
