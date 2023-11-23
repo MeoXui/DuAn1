@@ -1,23 +1,23 @@
 package poly.DuAn1.nhom2.MD18309.PRO1121.ObjectClass;
 
 public class MatHang {
-    private String idMatHang;
-    private String idNhaCungCap;
-    private String idNganhHang;
+    private int idMatHang;
+    private int idNhaCungCap;
+    private int idNganhHang;
+    private String tenMatHang;
     private String donViTinh;
     private int giaNhapMatHang;
     private int giaMatHang;
-    private int soLuongMatHang;
+    private float soLuongMatHang;
 
-    public String getIdMatHang() {
+    public int getIdMatHang() {
         return idMatHang;
     }
-
-    public String getIdNhaCungCap() {
+    public int getIdNhaCungCap() {
         return idNhaCungCap;
     }
 
-    public String getIdNganhHang() {
+    public int getIdNganhHang() {
         return idNganhHang;
     }
 
@@ -29,7 +29,7 @@ public class MatHang {
         return giaMatHang;
     }
 
-    public int getSoLuongMatHang() {
+    public float getSoLuongMatHang() {
         return soLuongMatHang;
     }
 
@@ -37,10 +37,15 @@ public class MatHang {
         return giaNhapMatHang;
     }
 
-    public MatHang(String idMatHang, String idNhaCungCap, String idNganhHang, String donViTinh, int giaNhapMatHang, int giaMatHang, int soLuongMatHang) {
+    public String getTenMatHang() {
+        return tenMatHang;
+    }
+
+    public MatHang(int idMatHang, int idNhaCungCap, int idNganhHang, String tenMatHang, float soLuongMatHang, String donViTinh, int giaNhapMatHang, int giaMatHang) {
         this.idMatHang = idMatHang;
         this.idNhaCungCap = idNhaCungCap;
         this.idNganhHang = idNganhHang;
+        this.tenMatHang = tenMatHang;
         this.donViTinh = donViTinh;
         this.giaNhapMatHang = giaNhapMatHang;
         this.giaMatHang = giaMatHang;

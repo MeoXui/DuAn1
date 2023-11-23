@@ -23,7 +23,7 @@ public class DBFucker extends SQLiteOpenHelper {
         db.execSQL(createTableKhachHang);
         String createTableCongViec = "CREATE TABLE CONGVIEC(idCV INTEGER PRIMARY KEY, idQuanLy REFERENCES TAIKHOAN(UserName), idNhanVien REFERENCES TAIKHOAN(UserName), TieuDe TEXT NOT NULL, MoTa TEXT NOT NULL, ThoiHan TEXT NOT NULL, TrangThai INTEGER NOT NULL)";
         db.execSQL(createTableCongViec);
-        String createTableMatHang = "CREATE TABLE MATHANG(idMH INTEGER PRIMARY KEY, idNCC REFERENCES NhaCungCap(idNCC), idNH REFERENCES NganhHang(idNH), TenMH TEXT NOT NULL, SoLuong REAL NOT NULL,DVT TEXT NOT NULL, GiaNhap INTEGER NOT NULL, GiaBan INTEGER NOT NULL)";
+        String createTableMatHang = "CREATE TABLE MATHANG(idMH INTEGER PRIMARY KEY, idNCC REFERENCES NhaCungCap(idNCC), idNH REFERENCES NganhHang(idNH), TenMH TEXT NOT NULL, SoLuong REAL NOT NULL, DVT TEXT NOT NULL, GiaNhap INTEGER NOT NULL, GiaBan INTEGER NOT NULL)";
         db.execSQL(createTableMatHang);
 
         //Dữ liệu mẫu

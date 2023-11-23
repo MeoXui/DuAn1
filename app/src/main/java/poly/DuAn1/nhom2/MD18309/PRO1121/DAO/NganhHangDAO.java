@@ -7,26 +7,25 @@ import android.database.sqlite.SQLiteDatabase;
 import java.util.ArrayList;
 
 import poly.DuAn1.nhom2.MD18309.PRO1121.DBFucker;
-import poly.DuAn1.nhom2.MD18309.PRO1121.ObjectClass.MatHang;
+import poly.DuAn1.nhom2.MD18309.PRO1121.ObjectClass.NganhHang;
 
-public class MatHangDAO {
-
+public class NganhHangDAO {
     private final DBFucker dbFucker;
 
-    public MatHangDAO(Context context) {
+    public NganhHangDAO(Context context) {
         this.dbFucker = new DBFucker(context);
     }
 
-    public ArrayList<MatHang> getMatHangList(){
+    public ArrayList<NganhHang> getNganhHangList(){
         SQLiteDatabase database = dbFucker.getReadableDatabase();
-        ArrayList<MatHang> listMH = new ArrayList<>();
+        ArrayList<NganhHang> listNH = new ArrayList<>();
         database.beginTransaction();
         try{
-            Cursor cursor = database.rawQuery("SELECT * FROM MATHANG", null);
+            Cursor cursor = database.rawQuery("SELECT * FROM NGANHHANG", null);
             if(cursor != null && cursor.getCount() > 0){
                 cursor.moveToFirst();
                 while (!cursor.isAfterLast()) {
-                    listMH.add(new MatHang(cursor.getInt(0), cursor.getInt(1), cursor.getInt(2), cursor.getString(3), cursor.getFloat(4), cursor.getString(5), cursor.getInt(7), cursor.getInt(6)));
+                    listNH.add(new NganhHang(cursor.getInt(0), cursor.getString(1)));
                     cursor.moveToNext();
                 }
                 cursor.close();
@@ -37,7 +36,6 @@ public class MatHangDAO {
         }finally {
             database.endTransaction();
         }
-        return listMH;
+        return listNH;
     }
-
 }

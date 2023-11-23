@@ -67,7 +67,7 @@ public class KhoHang extends Fragment {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         linearLayoutManager.setOrientation(RecyclerView.VERTICAL);
         recyclerView.setLayoutManager(linearLayoutManager);
-        recyclerView.setAdapter(new MatHangAdapter(getContext(), null));
+        recyclerView.setAdapter(new MatHangAdapter(getContext()));
         return view;
     }
 }

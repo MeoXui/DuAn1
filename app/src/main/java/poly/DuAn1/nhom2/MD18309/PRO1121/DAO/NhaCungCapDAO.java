@@ -7,26 +7,26 @@ import android.database.sqlite.SQLiteDatabase;
 import java.util.ArrayList;
 
 import poly.DuAn1.nhom2.MD18309.PRO1121.DBFucker;
-import poly.DuAn1.nhom2.MD18309.PRO1121.ObjectClass.MatHang;
+import poly.DuAn1.nhom2.MD18309.PRO1121.ObjectClass.NhaCungCap;
 
-public class MatHangDAO {
+public class NhaCungCapDAO {
 
-    private final DBFucker dbFucker;
+    private DBFucker dbFucker;
 
-    public MatHangDAO(Context context) {
+    public NhaCungCapDAO(Context context) {
         this.dbFucker = new DBFucker(context);
     }
 
-    public ArrayList<MatHang> getMatHangList(){
+    public ArrayList<NhaCungCap> getNhaCungCapList(){
         SQLiteDatabase database = dbFucker.getReadableDatabase();
-        ArrayList<MatHang> listMH = new ArrayList<>();
+        ArrayList<NhaCungCap> listNCC = new ArrayList<>();
         database.beginTransaction();
         try{
-            Cursor cursor = database.rawQuery("SELECT * FROM MATHANG", null);
+            Cursor cursor = database.rawQuery("SELECT * FROM NhaCungCap", null);
             if(cursor != null && cursor.getCount() > 0){
                 cursor.moveToFirst();
                 while (!cursor.isAfterLast()) {
-                    listMH.add(new MatHang(cursor.getInt(0), cursor.getInt(1), cursor.getInt(2), cursor.getString(3), cursor.getFloat(4), cursor.getString(5), cursor.getInt(7), cursor.getInt(6)));
+                    listNCC.add(new NhaCungCap(cursor.getInt(0), cursor.getString(1), cursor.getString(4), cursor.getString(2), cursor.getString(3)));
                     cursor.moveToNext();
                 }
                 cursor.close();
@@ -37,7 +37,7 @@ public class MatHangDAO {
         }finally {
             database.endTransaction();
         }
-        return listMH;
+        return listNCC;
     }
-
+    
 }

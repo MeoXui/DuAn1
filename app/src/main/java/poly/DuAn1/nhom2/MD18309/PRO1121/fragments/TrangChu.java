@@ -81,8 +81,8 @@ public class TrangChu extends Fragment {
         RecyclerView recyclerView = view.findViewById(R.id.recyclerView);
         TextView txtTenNguoiDung = view.findViewById(R.id.txtTenNguoiDung);
         TextView txtRoleNguoiDung = view.findViewById(R.id.txtRoleNguoiDung);
-        txtTenNguoiDung.setText(taiKhoan.getHoTen());
-        txtRoleNguoiDung.setText(taiKhoan.getRole());
+        txtTenNguoiDung.setText("Xin Chào:"+taiKhoan.getHoTen());
+        txtRoleNguoiDung.setText(taiKhoan.getRole().toUpperCase());
 
         ArrayList<GridItem> gridItemArrayList = new ArrayList<>();
         gridItemArrayList.add(new GridItem("Thống Kê", "None", R.drawable.bar_chart));

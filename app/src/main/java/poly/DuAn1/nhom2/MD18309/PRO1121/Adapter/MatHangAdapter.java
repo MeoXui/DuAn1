@@ -13,17 +13,25 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
+import poly.DuAn1.nhom2.MD18309.PRO1121.DAO.MatHangDAO;
 import poly.DuAn1.nhom2.MD18309.PRO1121.ObjectClass.MatHang;
 import poly.DuAn1.nhom2.MD18309.PRO1121.R;
 
 public class MatHangAdapter extends RecyclerView.Adapter<MatHangAdapter.ViewFucker>{
 
-    private Context context;
+    private final Context context;
     private ArrayList<MatHang> matHangArrayList;
 
-    public MatHangAdapter(Context context, ArrayList<MatHang> matHangArrayList) {
+    private final MatHangDAO matHangDAO;
+
+    public MatHangAdapter(Context context) {
         this.context = context;
-        this.matHangArrayList = matHangArrayList;
+        this.matHangDAO = new MatHangDAO(context);
+        GetData();
+    }
+
+    private void GetData(){
+        matHangArrayList = matHangDAO.getMatHangList();
     }
 
     @NonNull
@@ -36,12 +44,15 @@ public class MatHangAdapter extends RecyclerView.Adapter<MatHangAdapter.ViewFuck
 
     @Override
     public void onBindViewHolder(@NonNull ViewFucker holder, int position) {
-
+        holder.txtTenMatHang.setText(matHangArrayList.get(holder.getAdapterPosition()).getTenMatHang());
+        holder.txtMaMatHang.setText("Mã: "+matHangArrayList.get(holder.getAdapterPosition()).getIdMatHang());
+        holder.txtSoLuong.setText(matHangArrayList.get(holder.getAdapterPosition()).getSoLuongMatHang()+" "+matHangArrayList.get(holder.getAdapterPosition()).getDonViTinh());
+        holder.txtGiaBan.setText(matHangArrayList.get(holder.getAdapterPosition()).getGiaMatHang()+" VNĐ");
     }
 
     @Override
     public int getItemCount() {
-        return 10;
+        return matHangArrayList.size();
     }
 
     public static class ViewFucker extends RecyclerView.ViewHolder{
