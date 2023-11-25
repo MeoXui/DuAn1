@@ -126,9 +126,10 @@
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:layout_width="55dp"
-                    android:layout_height="55dp"
-                    android:src="@drawable/icon_doimatkhau" />
+                    android:layout_margin="10dp"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/ic_padlock" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -138,23 +139,7 @@
                     android:textSize="18dp"/>
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
 
-                <ImageView
-                    android:layout_width="55dp"
-                    android:layout_height="55dp"
-                    android:src="@drawable/icon_baocao" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Báo cáo"
-                    android:layout_gravity="center_vertical"
-                    android:textSize="18dp"/>
-            </LinearLayout>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -170,17 +155,37 @@
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:layout_width="55dp"
-                    android:layout_height="55dp"
-                    android:src="@drawable/icon_themnhanvien" />
+                    android:layout_margin="10dp"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/ic_team_management" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Thêm nhân viên"
+                    android:text="Quản lý nhân viên"
                     android:layout_gravity="center_vertical"
                     android:textSize="18dp"/>
             </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_margin="10dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/ic_analysis" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Thống kê"
+                android:layout_gravity="center_vertical"
+                android:textSize="18dp"/>
+        </LinearLayout>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -190,15 +195,37 @@
                 android:textStyle="bold"
                 android:textSize="15sp"/>
 
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_margin="10dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/ic_report" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Báo cáo"
+                android:layout_gravity="center_vertical"
+                android:textSize="18dp"/>
+        </LinearLayout>
+
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:layout_width="55dp"
-                    android:layout_height="55dp"
-                    android:src="@drawable/icon_dangxuat" />
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/ic_logout" />
 
                 <TextView
                     android:layout_width="wrap_content"
