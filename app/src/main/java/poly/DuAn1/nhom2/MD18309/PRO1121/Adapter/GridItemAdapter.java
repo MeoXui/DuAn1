@@ -2,17 +2,17 @@ package poly.DuAn1.nhom2.MD18309.PRO1121.Adapter;
 
 import android.app.Activity;
 import android.content.Context;
-import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.GridLayout;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager.widget.ViewPager;
 
 import java.util.ArrayList;
 
@@ -22,17 +22,23 @@ import poly.DuAn1.nhom2.MD18309.PRO1121.R;
 public class GridItemAdapter extends RecyclerView.Adapter<GridItemAdapter.ViewFucker>{
     private final Context context;
     private final ArrayList<GridItem> gridItemArrayList;
+    private static OnAdapterItemClickListener adapterItemClickListener;
 
-    public GridItemAdapter(Context context, ArrayList<GridItem> gridItemArrayList) {
+    public interface OnAdapterItemClickListener{
+        void onAdapterItemCLickListener(int position);
+    }
+
+    public GridItemAdapter(Context context, ArrayList<GridItem> gridItemArrayList, OnAdapterItemClickListener onAdapterItemClickListener) {
         this.context = context;
         this.gridItemArrayList = gridItemArrayList;
+        adapterItemClickListener = onAdapterItemClickListener;
     }
 
     @NonNull
     @Override
     public ViewFucker onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = ((Activity) context).getLayoutInflater();
-        View view = inflater.inflate(R.layout.griditem, parent, false);
+        View view = inflater.inflate(R.layout.grid_item, parent, false);
         return new ViewFucker(view);
     }
 
@@ -51,19 +57,33 @@ public class GridItemAdapter extends RecyclerView.Adapter<GridItemAdapter.ViewFu
         }else{
             holder.gridDes.setText(gridItemArrayList.get(holder.getAdapterPosition()).getGridDes());
         }
+
+//        holder.itemView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if (callback != null){
+//
+//                }
+//            }
+//        });
     }
 
-    public static class ViewFucker extends RecyclerView.ViewHolder{
-
+    public static class ViewFucker extends RecyclerView.ViewHolder implements View.OnClickListener {
         ConstraintLayout gridLayout;
         TextView gridName, gridDes;
         ImageView gridIcon;
         public ViewFucker(@NonNull View itemView) {
             super(itemView);
+            itemView.setOnClickListener(this);
             gridName = itemView.findViewById(R.id.gridname);
             gridDes = itemView.findViewById(R.id.griddescription);
             gridIcon = itemView.findViewById(R.id.gridicon);
             gridLayout = itemView.findViewById(R.id.girdLayout);
+        }
+
+        @Override
+        public void onClick(View v) {
+            adapterItemClickListener.onAdapterItemCLickListener(getAdapterPosition());
         }
     }
 }

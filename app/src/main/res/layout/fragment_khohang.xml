@@ -45,7 +45,7 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="test"
+            android:text="Hiện Danh Sách(Tạm Thời)"
             android:id="@+id/btnTest"
             android:layout_gravity="center">
         </Button>

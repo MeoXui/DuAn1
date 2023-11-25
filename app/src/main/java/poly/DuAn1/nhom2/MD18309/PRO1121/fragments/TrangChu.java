@@ -1,5 +1,6 @@
 package poly.DuAn1.nhom2.MD18309.PRO1121.fragments;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -29,9 +30,15 @@ import poly.DuAn1.nhom2.MD18309.PRO1121.R;
  * Use the {@link TrangChu#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class TrangChu extends Fragment {
+public class TrangChu extends Fragment implements GridItemAdapter.OnAdapterItemClickListener {
 
     private TaiKhoan taiKhoan;
+
+    private FragmentCallback fragmentCallBack;
+
+    public interface FragmentCallback{
+        public void onItemClicked(int position);
+    }
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -46,7 +53,8 @@ public class TrangChu extends Fragment {
         // Required empty public constructor
     }
 
-    public TrangChu(TaiKhoan taiKhoan) {
+    public TrangChu(TaiKhoan taiKhoan, FragmentCallback fragmentCallBack) {
+        this.fragmentCallBack = fragmentCallBack;
         this.taiKhoan = taiKhoan;
     }
 
@@ -77,6 +85,9 @@ public class TrangChu extends Fragment {
         }
     }
 
+
+
+    @SuppressLint("SetTextI18n")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_trang_chu, container, false);
@@ -87,17 +98,17 @@ public class TrangChu extends Fragment {
         TextView txtRoleNguoiDung = view.findViewById(R.id.txtRoleNguoiDung);
 
         //Phân Quyền
-//        txtTenNguoiDung.setText("Xin Chào: "+taiKhoan.getHoTen());
-//        if (taiKhoan.getRole().equalsIgnoreCase("QUANLY")){
-//            txtRoleNguoiDung.setText("Chức Vụ: Quản Lý");
-//            avatar.setImageResource(R.drawable.user_admin);
-//        }else if (taiKhoan.getRole().equalsIgnoreCase("NhanVien")){
-//            txtRoleNguoiDung.setText("Chức Vụ: Nhân Viên");
-//            avatar.setImageResource(R.drawable.user);
-//        }else{
-//            txtRoleNguoiDung.setText("Chức Vụ: Người Dùng(Chắc Thế)");
-//            avatar.setImageResource(R.drawable.user);
-//        }
+        txtTenNguoiDung.setText("Xin Chào: "+taiKhoan.getHoTen());
+        if (taiKhoan.getRole().equalsIgnoreCase("QUANLY")){
+            txtRoleNguoiDung.setText("Chức Vụ: Quản Lý");
+            avatar.setImageResource(R.drawable.user_admin);
+        }else if (taiKhoan.getRole().equalsIgnoreCase("NhanVien")){
+            txtRoleNguoiDung.setText("Chức Vụ: Nhân Viên");
+            avatar.setImageResource(R.drawable.user);
+        }else{
+            txtRoleNguoiDung.setText("Chức Vụ: Người Dùng(Chắc Thế)");
+            avatar.setImageResource(R.drawable.user);
+        }
 
         //Danh Sách Lựa Chọn
         ArrayList<GridItem> gridItemArrayList = new ArrayList<>();
@@ -110,8 +121,13 @@ public class TrangChu extends Fragment {
         customGridLayout.setOrientation(RecyclerView.VERTICAL);
         recyclerView.setLayoutManager(customGridLayout);
 
-        recyclerView.setAdapter(new GridItemAdapter(getContext(), gridItemArrayList));
+        recyclerView.setAdapter(new GridItemAdapter(getContext(), gridItemArrayList, this));
         return view;
+    }
+
+    @Override
+    public void onAdapterItemCLickListener(int position) {
+        fragmentCallBack.onItemClicked(position);
     }
 
     public static class CustomGridLayout extends GridLayoutManager{

@@ -16,13 +16,14 @@ import android.widget.EditText;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
+import poly.DuAn1.nhom2.MD18309.PRO1121.Adapter.GridItemAdapter;
 import poly.DuAn1.nhom2.MD18309.PRO1121.ObjectClass.TaiKhoan;
 import poly.DuAn1.nhom2.MD18309.PRO1121.fragments.HoaDon;
 import poly.DuAn1.nhom2.MD18309.PRO1121.fragments.KhoHang;
 import poly.DuAn1.nhom2.MD18309.PRO1121.fragments.Menu;
 import poly.DuAn1.nhom2.MD18309.PRO1121.fragments.TrangChu;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements TrangChu.FragmentCallback {
     private FragmentManager fragmentManager;
     private KhoHang khoHang = null;
     private HoaDon hoaDon = null;
@@ -47,11 +48,11 @@ public class MainActivity extends AppCompatActivity {
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNav);
         bottomNavigationView.setItemRippleColor(null);
         bottomNavigationView.setSelectedItemId(R.id.trangchu);
-        fragmentManager.beginTransaction().replace(R.id.framelayout, new TrangChu(taiKhoan)).commit();
+        fragmentManager.beginTransaction().replace(R.id.framelayout, new TrangChu(taiKhoan, this)).commit();
 
         bottomNavigationView.setOnItemSelectedListener(item -> {
             if (item.getItemId() == R.id.trangchu) {
-                trangChu = new TrangChu(taiKhoan);
+                trangChu = new TrangChu(taiKhoan, this);
                 fragmentManager.beginTransaction().replace(R.id.framelayout, trangChu).commit();
             } else if (item.getItemId() == R.id.hoadon) {
                 hoaDon = new HoaDon();
@@ -91,5 +92,10 @@ public class MainActivity extends AppCompatActivity {
             }
         }
         return super.dispatchTouchEvent(ev);
+    }
+
+    @Override
+    public void onItemClicked(int position) {
+        System.out.println(position);
     }
 }
