@@ -22,16 +22,16 @@ import poly.DuAn1.nhom2.MD18309.PRO1121.R;
 public class GridItemAdapter extends RecyclerView.Adapter<GridItemAdapter.ViewFucker>{
     private final Context context;
     private final ArrayList<GridItem> gridItemArrayList;
-    private static OnAdapterItemClickListener adapterItemClickListener;
+    private static OnClickCallBack onClickCallBack;
 
-    public interface OnAdapterItemClickListener{
-        void onAdapterItemCLickListener(int position);
+    public interface OnClickCallBack{
+        void onCLickListener(int position);
     }
 
-    public GridItemAdapter(Context context, ArrayList<GridItem> gridItemArrayList, OnAdapterItemClickListener onAdapterItemClickListener) {
+    public GridItemAdapter(Context context, ArrayList<GridItem> gridItemArrayList, OnClickCallBack onClickCallBack) {
         this.context = context;
         this.gridItemArrayList = gridItemArrayList;
-        adapterItemClickListener = onAdapterItemClickListener;
+        GridItemAdapter.onClickCallBack = onClickCallBack;
     }
 
     @NonNull
@@ -83,7 +83,7 @@ public class GridItemAdapter extends RecyclerView.Adapter<GridItemAdapter.ViewFu
 
         @Override
         public void onClick(View v) {
-            adapterItemClickListener.onAdapterItemCLickListener(getAdapterPosition());
+            onClickCallBack.onCLickListener(getAdapterPosition());
         }
     }
 }

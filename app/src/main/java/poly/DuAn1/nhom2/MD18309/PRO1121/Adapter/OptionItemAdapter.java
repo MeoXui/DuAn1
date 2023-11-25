@@ -20,16 +20,16 @@ public class OptionItemAdapter extends RecyclerView.Adapter<OptionItemAdapter.Vi
 
     private final Context context;
     private ArrayList<OptionItem> optionItemArrayList;
-    OptionCallBack optionCallBack;
+    private static OnItemClickCallBack onItemClickCallBack;
 
-    public interface OptionCallBack{
+    public interface OnItemClickCallBack{
         void onOptionItemClickListener(int position);
     }
 
-    public OptionItemAdapter(Context context, ArrayList<OptionItem> optionItemArrayList, OptionItemAdapter.OptionCallBack optionCallBack) {
+    public OptionItemAdapter(Context context, ArrayList<OptionItem> optionItemArrayList, OnItemClickCallBack onItemClickCallBack) {
         this.context = context;
         this.optionItemArrayList = optionItemArrayList;
-        this.optionCallBack = optionCallBack;
+        OptionItemAdapter.onItemClickCallBack = onItemClickCallBack;
     }
 
     @NonNull
@@ -51,7 +51,7 @@ public class OptionItemAdapter extends RecyclerView.Adapter<OptionItemAdapter.Vi
         return optionItemArrayList.size();
     }
 
-    public class ViewFucker extends RecyclerView.ViewHolder implements View.OnClickListener{
+    public static class ViewFucker extends RecyclerView.ViewHolder implements View.OnClickListener{
 
         TextView optionName;
         ImageView optionIcon;
@@ -65,7 +65,7 @@ public class OptionItemAdapter extends RecyclerView.Adapter<OptionItemAdapter.Vi
 
         @Override
         public void onClick(View v) {
-            optionCallBack.onOptionItemClickListener(getAdapterPosition());
+            onItemClickCallBack.onOptionItemClickListener(getAdapterPosition());
         }
     }
 }

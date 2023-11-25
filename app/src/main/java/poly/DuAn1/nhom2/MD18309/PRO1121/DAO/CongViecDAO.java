@@ -11,7 +11,7 @@ import poly.DuAn1.nhom2.MD18309.PRO1121.DBFucker;
 import poly.DuAn1.nhom2.MD18309.PRO1121.ObjectClass.CongViec;
 
 public class CongViecDAO {
-    private  final DBFucker dbFucker;
+    private final DBFucker dbFucker;
 
     public CongViecDAO(Context context) {
         this.dbFucker = new DBFucker(context);

@@ -30,11 +30,16 @@ import poly.DuAn1.nhom2.MD18309.PRO1121.R;
  * Use the {@link TrangChu#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class TrangChu extends Fragment implements GridItemAdapter.OnAdapterItemClickListener {
+public class TrangChu extends Fragment implements GridItemAdapter.OnClickCallBack {
 
     private TaiKhoan taiKhoan;
 
     private FragmentCallback fragmentCallBack;
+
+    @Override
+    public void onCLickListener(int position) {
+        fragmentCallBack.onItemClicked(position);
+    }
 
     public interface FragmentCallback{
         public void onItemClicked(int position);
@@ -123,11 +128,6 @@ public class TrangChu extends Fragment implements GridItemAdapter.OnAdapterItemC
 
         recyclerView.setAdapter(new GridItemAdapter(getContext(), gridItemArrayList, this));
         return view;
-    }
-
-    @Override
-    public void onAdapterItemCLickListener(int position) {
-        fragmentCallBack.onItemClicked(position);
     }
 
     public static class CustomGridLayout extends GridLayoutManager{

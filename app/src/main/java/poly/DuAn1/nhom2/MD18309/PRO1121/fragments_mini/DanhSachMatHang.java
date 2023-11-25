@@ -29,7 +29,7 @@ import poly.DuAn1.nhom2.MD18309.PRO1121.R;
  * Use the {@link DanhSachMatHang#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class DanhSachMatHang extends Fragment {
+public class DanhSachMatHang extends Fragment implements MatHangAdapter.OnItemClickCallBack {
 
     RecyclerView recyclerView;
 
@@ -128,6 +128,12 @@ public class DanhSachMatHang extends Fragment {
     }
 
     private void setAdapter(ArrayList<MatHang> matHangArrayList){
-        recyclerView.setAdapter(new MatHangAdapter(getContext(), matHangArrayList));
+        recyclerView.setAdapter(new MatHangAdapter(getContext(), matHangArrayList, this));
+    }
+
+    @Override
+    public void onClickListener(int id) {
+        System.out.println(id);
+        Toast.makeText(getContext(), "Tưởng Tượng Màn Hình Thông Tin Chi Tiết", Toast.LENGTH_SHORT).show();
     }
 }

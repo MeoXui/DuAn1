@@ -24,11 +24,17 @@ public class MatHangAdapter extends RecyclerView.Adapter<MatHangAdapter.ViewFuck
     private final Context context;
     private ArrayList<MatHang> matHangArrayList;
     private final MatHangDAO matHangDAO;
+    private static OnItemClickCallBack onItemClickCallBack;
 
-    public MatHangAdapter(Context context, ArrayList<MatHang> matHangArrayList) {
+    public interface OnItemClickCallBack{
+        void onClickListener(int id);
+    }
+
+    public MatHangAdapter(Context context, ArrayList<MatHang> matHangArrayList, OnItemClickCallBack onItemClickCallBack) {
         this.context = context;
         this.matHangDAO = new MatHangDAO(context);
         this.matHangArrayList = matHangArrayList;
+        MatHangAdapter.onItemClickCallBack = onItemClickCallBack;
 //        GetData();
     }
 
@@ -67,16 +73,29 @@ public class MatHangAdapter extends RecyclerView.Adapter<MatHangAdapter.ViewFuck
         return matHangArrayList.size();
     }
 
-    public static class ViewFucker extends RecyclerView.ViewHolder{
+    public static class ViewFucker extends RecyclerView.ViewHolder implements View.OnLongClickListener, View.OnClickListener {
         TextView txtTenMatHang, txtMaMatHang, txtSoLuong, txtGiaBan;
         ImageButton btnDelete;
         public ViewFucker(@NonNull View itemView) {
             super(itemView);
+            itemView.setOnLongClickListener(this);
+            itemView.setOnClickListener(this);
             txtTenMatHang = itemView.findViewById(R.id.txtTenMatHang);
             txtMaMatHang = itemView.findViewById(R.id.txtMaMatHang);
             txtSoLuong = itemView.findViewById(R.id.txtSoLuong);
             txtGiaBan = itemView.findViewById(R.id.txtGiaMatHang);
             btnDelete = itemView.findViewById(R.id.btnDeleteS);
+        }
+
+        @Override
+        public void onClick(View v) {
+            onItemClickCallBack.onClickListener(Integer.parseInt(txtMaMatHang.getText().toString().replaceAll("[^0-9]", "")));
+        }
+
+        @Override
+        public boolean onLongClick(View v) {
+            onItemClickCallBack.onClickListener(Integer.parseInt(txtMaMatHang.getText().toString().replaceAll("[^0-9]", "")));
+            return true;
         }
     }
 }

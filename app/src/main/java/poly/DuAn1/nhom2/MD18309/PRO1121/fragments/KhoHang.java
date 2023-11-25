@@ -31,15 +31,19 @@ import poly.DuAn1.nhom2.MD18309.PRO1121.Adapter.OptionItemAdapter;
 import poly.DuAn1.nhom2.MD18309.PRO1121.ObjectClass.OptionItem;
 import poly.DuAn1.nhom2.MD18309.PRO1121.R;
 import poly.DuAn1.nhom2.MD18309.PRO1121.fragments_mini.DanhSachMatHang;
+import poly.DuAn1.nhom2.MD18309.PRO1121.fragments_mini.DanhSachNganhHang;
+import poly.DuAn1.nhom2.MD18309.PRO1121.fragments_mini.DanhSachNhaCungCap;
 
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link KhoHang#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class KhoHang extends Fragment implements OptionItemAdapter.OptionCallBack {
+public class KhoHang extends Fragment implements OptionItemAdapter.OnItemClickCallBack {
 
     private DanhSachMatHang danhSachMatHang;
+    private DanhSachNhaCungCap danhSachNhaCungCap;
+    private DanhSachNganhHang danhSachNganhHang;
     private FragmentManager fragmentManager;
     private RecyclerView recyclerView;
     private TextView toolBarTitle;
@@ -110,6 +114,9 @@ public class KhoHang extends Fragment implements OptionItemAdapter.OptionCallBac
 
         //Khai Báo Fragment(Tạm Thời)
         danhSachMatHang = new DanhSachMatHang();
+        danhSachNhaCungCap = new DanhSachNhaCungCap();
+        danhSachNganhHang = new DanhSachNganhHang();
+
 
         btnTest.setVisibility(View.INVISIBLE);
 
@@ -127,7 +134,13 @@ public class KhoHang extends Fragment implements OptionItemAdapter.OptionCallBac
         toolbar.setNavigationOnClickListener(v -> {
             ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(false);
             ((AppCompatActivity)getActivity()).getSupportActionBar().setHomeButtonEnabled(false);
-            fragmentManager.beginTransaction().remove(danhSachMatHang).commit();
+//            if(danhSachMatHang != null){
+                fragmentManager.beginTransaction().remove(danhSachMatHang).commit();
+//            } else if (danhSachNganhHang != null) {
+                fragmentManager.beginTransaction().remove(danhSachNganhHang).commit();
+//            } else if (danhSachNhaCungCap != null) {
+                fragmentManager.beginTransaction().remove(danhSachNhaCungCap).commit();
+//            }
             toolBarTitle.setText("Quản Lý Kho Hàng");
 //            btnTest.setVisibility(View.VISIBLE);
             recyclerView.setVisibility(View.VISIBLE);
@@ -150,15 +163,40 @@ public class KhoHang extends Fragment implements OptionItemAdapter.OptionCallBac
         System.out.println(position);
         if (position == 0){
             openDanhSachMatHang();
+        }else if (position == 1){
+            openNCC();
+        } else if (position == 2) {
+            openNganhHang();
         }
     }
 
     private void openDanhSachMatHang(){
+//        danhSachMatHang = new DanhSachMatHang();
         ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         ((AppCompatActivity)getActivity()).getSupportActionBar().setHomeButtonEnabled(true);
         fragmentManager.beginTransaction().replace(R.id.framelayout, danhSachMatHang).commit();
         recyclerView.setVisibility(View.INVISIBLE);
         toolBarTitle.setText("Danh Sách Mặt Hàng");
+        System.out.println("OK");
+    }
+
+    private void openNCC(){
+//        danhSachNhaCungCap = new DanhSachNhaCungCap();
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setHomeButtonEnabled(true);
+        fragmentManager.beginTransaction().replace(R.id.framelayout, danhSachNhaCungCap).commit();
+        recyclerView.setVisibility(View.INVISIBLE);
+        toolBarTitle.setText("Danh Sách N.C.Cấp");
+        System.out.println("OK");
+    }
+
+    private void openNganhHang(){
+//        danhSachNganhHang = new DanhSachNganhHang();
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setHomeButtonEnabled(true);
+        fragmentManager.beginTransaction().replace(R.id.framelayout, danhSachNganhHang).commit();
+        recyclerView.setVisibility(View.INVISIBLE);
+        toolBarTitle.setText("Danh Sách Ngành Hàng");
         System.out.println("OK");
     }
 }

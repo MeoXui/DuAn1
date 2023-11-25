@@ -34,7 +34,7 @@
         <Button
             android:layout_width="0dp"
             android:layout_weight="0.3"
-            android:text="Thêm MH"
+            android:text="Thêm NCC"
             android:id="@+id/btnAdd"
             android:layout_height="match_parent">
         </Button>
