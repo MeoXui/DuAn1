@@ -8,26 +8,26 @@ import androidx.annotation.Nullable;
 
 public class DBFucker extends SQLiteOpenHelper {
     public DBFucker(@Nullable Context context) {
-        super(context, "DA1", null, 4);
+        super(context, "DA1", null, 5);
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
         String createTableTaiKhoan = "CREATE TABLE TAIKHOAN(UserName TEXT PRIMARY KEY, Password TEXT NOT NULL, ROLE TEXT NOT NULL, HoTen TEXT NOT NULL, Phone TEXT(10) NOT NULL, Email TEXT NOT NULL)";
         db.execSQL(createTableTaiKhoan);
-        String createTableNhaCungCap = "CREATE TABLE NHACUNGCAP(idNCC INTEGER PRIMARY KEY, TenNCC TEXT NOT NULL, NguoiDaiDien TEXT NOT NULL, DiaChi TEXT NOT NULL, Sdt TEXT NOT NULL)";
+        String createTableNhaCungCap = "CREATE TABLE NHACUNGCAP(idNCC INTEGER PRIMARY KEY AUTOINCREMENT, TenNCC TEXT NOT NULL, NguoiDaiDien TEXT NOT NULL, DiaChi TEXT NOT NULL, Sdt TEXT NOT NULL)";
         db.execSQL(createTableNhaCungCap);
-        String createTableNganhHang = "CREATE TABLE NGANHHANG(idNH INTEGER PRIMARY KEY, TenNH TEXT NOT NULL)";
+        String createTableNganhHang = "CREATE TABLE NGANHHANG(idNH INTEGER PRIMARY KEY AUTOINCREMENT, TenNH TEXT NOT NULL)";
         db.execSQL(createTableNganhHang);
-        String createTableKhachHang = "CREATE TABLE KHACHHANG(idKH INTEGER PRIMARY KEY, HoTen TEXT NOT NULL, Email TEXT NOT NULL, SdtKH TEXT NOT NULL)";
+        String createTableKhachHang = "CREATE TABLE KHACHHANG(idKH INTEGER PRIMARY KEY AUTOINCREMENT, HoTen TEXT NOT NULL, Email TEXT NOT NULL, SdtKH TEXT NOT NULL)";
         db.execSQL(createTableKhachHang);
-        String createTableCongViec = "CREATE TABLE CONGVIEC(idCV INTEGER PRIMARY KEY, idQuanLy REFERENCES TAIKHOAN(UserName), idNhanVien REFERENCES TAIKHOAN(UserName), TieuDe TEXT NOT NULL, MoTa TEXT NOT NULL, ThoiHan TEXT NOT NULL, TrangThai INTEGER NOT NULL)";
+        String createTableCongViec = "CREATE TABLE CONGVIEC(idCV INTEGER PRIMARY KEY AUTOINCREMENT, idQuanLy REFERENCES TAIKHOAN(UserName), idNhanVien REFERENCES TAIKHOAN(UserName), TieuDe TEXT NOT NULL, MoTa TEXT NOT NULL, ThoiHan TEXT NOT NULL, TrangThai INTEGER NOT NULL)";
         db.execSQL(createTableCongViec);
-        String createTableMatHang = "CREATE TABLE MATHANG(idMH INTEGER PRIMARY KEY, idNCC REFERENCES NhaCungCap(idNCC), idNH REFERENCES NganhHang(idNH), TenMH TEXT NOT NULL, SoLuong REAL NOT NULL, DVT TEXT NOT NULL, GiaNhap INTEGER NOT NULL, GiaBan INTEGER NOT NULL)";
+        String createTableMatHang = "CREATE TABLE MATHANG(idMH INTEGER PRIMARY KEY AUTOINCREMENT, idNCC REFERENCES NhaCungCap(idNCC), idNH REFERENCES NganhHang(idNH), TenMH TEXT NOT NULL, SoLuong REAL NOT NULL, DVT TEXT NOT NULL, GiaNhap INTEGER NOT NULL, GiaBan INTEGER NOT NULL)";
         db.execSQL(createTableMatHang);
 
         //Dữ liệu mẫu
-        String dummyTaiKhoan = "INSERT INTO TAIKHOAN VALUES('admin', 'test1', 'quanly', 'Nguyễn Em Tuấn', '0987654321', 'test@test.com')";
+        String dummyTaiKhoan = "INSERT INTO TAIKHOAN VALUES('admin', 'test1', 'quanly', 'Nguyễn Em Tuấn', '0987654321', 'test@test.com'), ('nhanvien', 'test1', 'nhanvien', 'Nguyễn Tuấn Em', '0987654123', 'test2@test.com')";
         db.execSQL(dummyTaiKhoan);
         String dummyNhaCungCap = "INSERT INTO NHACUNGCAP VALUES(1, 'NCC1', 'NDD1', 'Địa Chỉ 1', '0123456789'),(2, 'NCC2', 'NDD2', 'Địa Chỉ 2', '0123654789'),(3, 'NCC3', 'NDD3', 'Địa Chỉ 3', '0123456987')";
         db.execSQL(dummyNhaCungCap);

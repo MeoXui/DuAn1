@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -79,25 +80,31 @@ public class TrangChu extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_trang_chu, container, false);
+
         RecyclerView recyclerView = view.findViewById(R.id.recyclerView);
         ImageView avatar = view.findViewById(R.id.avatar);
         TextView txtTenNguoiDung = view.findViewById(R.id.txtTenNguoiDung);
         TextView txtRoleNguoiDung = view.findViewById(R.id.txtRoleNguoiDung);
-        txtTenNguoiDung.setText("Xin Chào:"+taiKhoan.getHoTen());
-        txtRoleNguoiDung.setText(taiKhoan.getRole().toUpperCase());
 
-        if (taiKhoan.getRole().equalsIgnoreCase("QUANLY")){
-            avatar.setImageResource(R.drawable.user_admin);
-        }else {
-            avatar.setImageResource(R.drawable.user);
-        }
+        //Phân Quyền
+//        txtTenNguoiDung.setText("Xin Chào: "+taiKhoan.getHoTen());
+//        if (taiKhoan.getRole().equalsIgnoreCase("QUANLY")){
+//            txtRoleNguoiDung.setText("Chức Vụ: Quản Lý");
+//            avatar.setImageResource(R.drawable.user_admin);
+//        }else if (taiKhoan.getRole().equalsIgnoreCase("NhanVien")){
+//            txtRoleNguoiDung.setText("Chức Vụ: Nhân Viên");
+//            avatar.setImageResource(R.drawable.user);
+//        }else{
+//            txtRoleNguoiDung.setText("Chức Vụ: Người Dùng(Chắc Thế)");
+//            avatar.setImageResource(R.drawable.user);
+//        }
 
+        //Danh Sách Lựa Chọn
         ArrayList<GridItem> gridItemArrayList = new ArrayList<>();
         gridItemArrayList.add(new GridItem("Thống Kê", "None", R.drawable.bar_chart));
         gridItemArrayList.add(new GridItem("Hóa Đơn", "None", R.drawable.invoice_selected));
         gridItemArrayList.add(new GridItem("Mặt Hàng", "None", R.drawable.box_selected));
         gridItemArrayList.add(new GridItem("Công Việc", "", R.drawable.calendar));
-
 
         CustomGridLayout customGridLayout = new CustomGridLayout(getContext(), 2, false);
         customGridLayout.setOrientation(RecyclerView.VERTICAL);
