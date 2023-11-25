@@ -8,47 +8,59 @@ import android.database.sqlite.SQLiteDatabase;
 import java.util.ArrayList;
 
 import poly.DuAn1.nhom2.MD18309.PRO1121.DBFucker;
-import poly.DuAn1.nhom2.MD18309.PRO1121.ObjectClass.NganhHang;
+import poly.DuAn1.nhom2.MD18309.PRO1121.ObjectClass.CongViec;
 
-public class NganhHangDAO {
-    private final DBFucker dbFucker;
+public class CongViecDAO {
+    private  final DBFucker dbFucker;
 
-    public NganhHangDAO(Context context) {
+    public CongViecDAO(Context context) {
         this.dbFucker = new DBFucker(context);
     }
 
-    public ArrayList<NganhHang> getNganhHangList(){
+    public ArrayList<CongViec> getCongViecList() {
         SQLiteDatabase database = dbFucker.getReadableDatabase();
-        ArrayList<NganhHang> listNH = new ArrayList<>();
+        ArrayList<CongViec> listCV = new ArrayList<>();
         database.beginTransaction();
-        try{
-            Cursor cursor = database.rawQuery("SELECT * FROM NGANHHANG", null);
-            if(cursor != null && cursor.getCount() > 0){
+        try {
+            Cursor cursor = database.rawQuery("SELECT * FROM CONGVIEC", null);
+            if (cursor != null && cursor.getCount() > 0) {
                 cursor.moveToFirst();
                 while (!cursor.isAfterLast()) {
-                    listNH.add(new NganhHang(cursor.getInt(0), cursor.getString(1)));
+                    listCV.add(new CongViec(cursor.getInt(0),
+                            cursor.getString(1),
+                            cursor.getString(2),
+                            cursor.getString(3),
+                            cursor.getString(4),
+                            cursor.getString(5),
+                            cursor.getInt(6)));
                     cursor.moveToNext();
                 }
-                cursor.close();
+                    cursor.close();
             }
             database.setTransactionSuccessful();
-        }catch (Exception e){
+        } catch (Exception e) {
             throw new RuntimeException(e);
-        }finally {
+        } finally {
             database.endTransaction();
         }
-        return listNH;
+
+        return listCV;
     }
 
-    public boolean AddNganhHang(NganhHang nganhHang) {
+    public boolean AddCongViec(CongViec congViec) {
         boolean result = false;
         SQLiteDatabase database = dbFucker.getWritableDatabase();
         database.beginTransaction();
         ContentValues values = new ContentValues();
-        values.put("idNH", nganhHang.getIdNganhHang());
-        values.put("TenNH", nganhHang.getTenNganhHang());
+        values.put("idCV", congViec.getIdCV());
+        values.put("idQuanLy", congViec.getIdQuanLy());
+        values.put("idNhanVien", congViec.getIdNhanVien());
+        values.put("TieuDe", congViec.getTieuDe());
+        values.put("MoTa", congViec.getMoTa());
+        values.put("ThoiHan", congViec.getThoiHan());
+        values.put("TrangThai", congViec.getTrangThai());
         try {
-            long kq = database.insert("NGANHHANG", null, values);
+            long kq = database.insert("CONGVIEC", null, values);
             if (kq != -1) {
                 result = true;
             }
@@ -62,12 +74,12 @@ public class NganhHangDAO {
         return result;
     }
 
-    public boolean DeleteNganhHang(int id) {
+    public boolean DeleteCongViec(int id) {
         SQLiteDatabase database = dbFucker.getWritableDatabase();
         boolean result = false;
         database.beginTransaction();
         try {
-            long kq = database.delete("NGANHHANG", "idNH = ?", new String[]{String.valueOf(id)});
+            long kq = database.delete("CONGVIEC", "idCV = ?", new String[]{String.valueOf(id)});
             if (kq > -1) {
                 result = true;
             }

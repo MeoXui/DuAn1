@@ -8,47 +8,53 @@ import android.database.sqlite.SQLiteDatabase;
 import java.util.ArrayList;
 
 import poly.DuAn1.nhom2.MD18309.PRO1121.DBFucker;
-import poly.DuAn1.nhom2.MD18309.PRO1121.ObjectClass.NganhHang;
+import poly.DuAn1.nhom2.MD18309.PRO1121.ObjectClass.KhachHang;
 
-public class NganhHangDAO {
+public class KhachHangDAO {
     private final DBFucker dbFucker;
 
-    public NganhHangDAO(Context context) {
+    public KhachHangDAO(Context context) {
         this.dbFucker = new DBFucker(context);
     }
 
-    public ArrayList<NganhHang> getNganhHangList(){
+    public ArrayList<KhachHang> getKhachHangList() {
         SQLiteDatabase database = dbFucker.getReadableDatabase();
-        ArrayList<NganhHang> listNH = new ArrayList<>();
+        ArrayList<KhachHang> listKH = new ArrayList<>();
         database.beginTransaction();
-        try{
-            Cursor cursor = database.rawQuery("SELECT * FROM NGANHHANG", null);
-            if(cursor != null && cursor.getCount() > 0){
+        try {
+            Cursor cursor = database.rawQuery("SELECT * FROM KHACHHANG", null);
+            if (cursor != null && cursor.getCount() > 0) {
                 cursor.moveToFirst();
                 while (!cursor.isAfterLast()) {
-                    listNH.add(new NganhHang(cursor.getInt(0), cursor.getString(1)));
+                    listKH.add(new KhachHang(cursor.getString(0),
+                            cursor.getString(1),
+                            cursor.getString(2),
+                            cursor.getString(3)));
                     cursor.moveToNext();
                 }
                 cursor.close();
             }
             database.setTransactionSuccessful();
-        }catch (Exception e){
+        } catch (Exception e) {
             throw new RuntimeException(e);
-        }finally {
+        } finally {
             database.endTransaction();
         }
-        return listNH;
+
+        return listKH;
     }
 
-    public boolean AddNganhHang(NganhHang nganhHang) {
+    public boolean AddKhachHang(KhachHang khachhang) {
         boolean result = false;
         SQLiteDatabase database = dbFucker.getWritableDatabase();
         database.beginTransaction();
         ContentValues values = new ContentValues();
-        values.put("idNH", nganhHang.getIdNganhHang());
-        values.put("TenNH", nganhHang.getTenNganhHang());
+        values.put("idKH", khachhang.getIdKH());
+        values.put("HoTen", khachhang.getHoTenKH());
+        values.put("Email", khachhang.getAddressKH());
+        values.put("SdtKH", khachhang.getPhoneKH());
         try {
-            long kq = database.insert("NGANHHANG", null, values);
+            long kq = database.insert("KHACHHANG", null, values);
             if (kq != -1) {
                 result = true;
             }
@@ -62,12 +68,12 @@ public class NganhHangDAO {
         return result;
     }
 
-    public boolean DeleteNganhHang(int id) {
+    public boolean DeleteKhachHang(int id) {
         SQLiteDatabase database = dbFucker.getWritableDatabase();
         boolean result = false;
         database.beginTransaction();
         try {
-            long kq = database.delete("NGANHHANG", "idNH = ?", new String[]{String.valueOf(id)});
+            long kq = database.delete("KHACHHANG", "idKH = ?", new String[]{String.valueOf(id)});
             if (kq > -1) {
                 result = true;
             }

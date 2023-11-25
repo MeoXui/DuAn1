@@ -1,5 +1,6 @@
 package poly.DuAn1.nhom2.MD18309.PRO1121.DAO;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -39,5 +40,47 @@ public class NhaCungCapDAO {
         }
         return listNCC;
     }
-    
+
+    public boolean AddNhaCungCap(NhaCungCap nhaCungCap) {
+        boolean result = false;
+        SQLiteDatabase database = dbFucker.getWritableDatabase();
+        database.beginTransaction();
+        ContentValues values = new ContentValues();
+        values.put("idNCC", nhaCungCap.getIdNhaCungCap());
+        values.put("TenNCC", nhaCungCap.getTenNhaCungCap());
+        values.put("NguoiDaiDien", nhaCungCap.getHoTenNguoiDaiDien());
+        values.put("DiaChi", nhaCungCap.getDiaChiNhaCungCap());
+        values.put("Sdt", nhaCungCap.getSdtNhaCungCap());
+        try {
+            long kq = database.insert("NHACUNGCAP", null, values);
+            if (kq != -1) {
+                result = true;
+            }
+            values.clear();
+            database.setTransactionSuccessful();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        } finally {
+            database.endTransaction();
+        }
+        return result;
+    }
+
+    public boolean DeleteNhaCungCap(int id) {
+        SQLiteDatabase database = dbFucker.getWritableDatabase();
+        boolean result = false;
+        database.beginTransaction();
+        try {
+            long kq = database.delete("NHACUNGCAP", "idNCC = ?", new String[]{String.valueOf(id)});
+            if (kq > -1) {
+                result = true;
+            }
+            database.setTransactionSuccessful();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        } finally {
+            database.endTransaction();
+        }
+        return result;
+    }
 }
