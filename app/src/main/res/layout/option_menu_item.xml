@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:gravity="center"
+    android:padding="10dp">
+
+    <ImageView
+        android:layout_width="0dp"
+        android:layout_weight="0.15"
+        android:layout_height="match_parent"
+        android:src="@drawable/home"
+        android:id="@+id/optionIcon"
+        android:scaleY="1"
+        android:scaleX="1">
+    </ImageView>
+    <TextView
+        android:layout_width="0dp"
+        android:layout_weight="0.75"
+        android:layout_height="wrap_content"
+        android:id="@+id/optionName"
+        android:text="PlaceHolder"
+        android:textSize="15sp"
+        android:textColor="@android:color/black">
+    </TextView>
+    <ImageView
+        android:layout_width="0dp"
+        android:layout_weight="0.1"
+        android:layout_height="match_parent"
+        android:src="@drawable/baseline_keyboard_arrow_right_24"
+        app:tint="@color/primary_color">
+    </ImageView>
+
+</LinearLayout>

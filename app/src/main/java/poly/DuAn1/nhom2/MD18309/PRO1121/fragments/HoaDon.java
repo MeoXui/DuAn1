@@ -2,12 +2,18 @@ package poly.DuAn1.nhom2.MD18309.PRO1121.fragments;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.viewpager2.widget.ViewPager2;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.android.material.tabs.TabLayout;
+import com.google.android.material.tabs.TabLayoutMediator;
+
+import poly.DuAn1.nhom2.MD18309.PRO1121.Adapter.ViewPager2Adapter;
 import poly.DuAn1.nhom2.MD18309.PRO1121.R;
 
 /**
@@ -58,9 +64,30 @@ public class HoaDon extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_hoadon, container, false);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_hoadon, container, false);
+        //Khai Báo
+        TabLayout tabLayout = view.findViewById(R.id.tabLayout);
+        ViewPager2 viewPager2 = view.findViewById(R.id.viewPager);
+
+        //Tạo ViewPager Adapter
+        ViewPager2Adapter viewPager2Adapter = new ViewPager2Adapter(this);
+        viewPager2.setAdapter(viewPager2Adapter);
+
+        tabLayout.setTabRippleColor(null);
+
+        new TabLayoutMediator(tabLayout, viewPager2, (tab, position) -> {
+            switch (position){
+                case 0:
+                    tab.setText("Hóa Đơn Bán");
+                    break;
+                case 1:
+                    tab.setText("Hóa Đơn Nhập");
+                    break;
+                default:
+                    break;
+            }
+        }).attach();
+        return view;
     }
 }
