@@ -75,6 +75,7 @@ public class HoaDon extends Fragment {
         viewPager2.setAdapter(viewPager2Adapter);
 
         tabLayout.setTabRippleColor(null);
+//        tabLayout.setVisibility(View.INVISIBLE);
 
         new TabLayoutMediator(tabLayout, viewPager2, (tab, position) -> {
             switch (position){

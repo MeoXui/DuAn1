@@ -5,8 +5,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_margin="10dp"
     app:cardElevation="3dp"
-    app:cardCornerRadius="15dp"
-    android:backgroundTint="@color/primary_color">
+    app:cardCornerRadius="15dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -15,7 +14,8 @@
         android:paddingBottom="10dp"
         android:paddingEnd="5dp"
         android:paddingStart="15dp"
-        android:id="@+id/girdLayout">
+        android:id="@+id/girdLayout"
+        android:background="@drawable/radianbackground">
         <ImageView
             android:id="@+id/gridicon"
             android:layout_width="35dp"

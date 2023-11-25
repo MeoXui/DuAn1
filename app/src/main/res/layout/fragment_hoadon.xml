@@ -47,7 +47,8 @@
         app:tabIndicatorAnimationMode="linear"
         app:tabIndicatorAnimationDuration="0"
         app:tabSelectedTextColor="@android:color/black"
-        app:tabIndicatorFullWidth="false">
+        app:tabIndicatorFullWidth="false"
+        app:tabTextAppearance="@android:style/TextAppearance.Widget.TabWidget">
     </com.google.android.material.tabs.TabLayout>
 
     <androidx.viewpager2.widget.ViewPager2
