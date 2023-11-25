@@ -177,26 +177,26 @@
 
     </LinearLayout>
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="120dp"
-        app:boxStrokeWidth="3dp"
-        app:boxStrokeColor="@color/primary_color"
-        app:boxCornerRadiusBottomEnd="7dp"
-        app:boxCornerRadiusBottomStart="7dp"
-        app:boxCornerRadiusTopStart="7dp"
-        app:boxCornerRadiusTopEnd="7dp"
-        app:boxStrokeErrorColor="@android:color/holo_red_light"
-        android:id="@+id/edtGhichuLayout">
-        <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Ghi chú..."
-            android:gravity="start"
-            android:id="@+id/edtGhichu"
-            android:lines="3">
-        </com.google.android.material.textfield.TextInputEditText>
-    </com.google.android.material.textfield.TextInputLayout>
+<!--    <com.google.android.material.textfield.TextInputLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="120dp"-->
+<!--        app:boxStrokeWidth="3dp"-->
+<!--        app:boxStrokeColor="@color/primary_color"-->
+<!--        app:boxCornerRadiusBottomEnd="7dp"-->
+<!--        app:boxCornerRadiusBottomStart="7dp"-->
+<!--        app:boxCornerRadiusTopStart="7dp"-->
+<!--        app:boxCornerRadiusTopEnd="7dp"-->
+<!--        app:boxStrokeErrorColor="@android:color/holo_red_light"-->
+<!--        android:id="@+id/edtGhichuLayout">-->
+<!--        <com.google.android.material.textfield.TextInputEditText-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:hint="Ghi chú..."-->
+<!--            android:gravity="start"-->
+<!--            android:id="@+id/edtGhichu"-->
+<!--            android:lines="3">-->
+<!--        </com.google.android.material.textfield.TextInputEditText>-->
+<!--    </com.google.android.material.textfield.TextInputLayout>-->
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -207,13 +207,15 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
-            android:text="Hủy"/>
+            android:text="Hủy"
+            android:id="@+id/btnCancel"/>
 
         <androidx.appcompat.widget.AppCompatButton
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
-            android:text="Hoàn THÀNH"/>
+            android:text="Hoàn THÀNH"
+            android:id="@+id/btnAdd"/>
     </LinearLayout>
 
 </LinearLayout>

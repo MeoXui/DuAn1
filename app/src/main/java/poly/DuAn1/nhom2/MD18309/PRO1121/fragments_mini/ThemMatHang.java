@@ -1,5 +1,6 @@
 package poly.DuAn1.nhom2.MD18309.PRO1121.fragments_mini;
 
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -7,7 +8,9 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
+import poly.DuAn1.nhom2.MD18309.PRO1121.DAO.MatHangDAO;
 import poly.DuAn1.nhom2.MD18309.PRO1121.R;
 
 /**
@@ -16,6 +19,13 @@ import poly.DuAn1.nhom2.MD18309.PRO1121.R;
  * create an instance of this fragment.
  */
 public class ThemMatHang extends Fragment {
+
+    private Context context;
+    private MatHangDAO matHangDAO;
+    FragmentCallBack fragmentCallBack;
+    public interface FragmentCallBack{
+        void finishCall();
+    }
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -28,6 +38,12 @@ public class ThemMatHang extends Fragment {
 
     public ThemMatHang() {
         // Required empty public constructor
+    }
+
+    public ThemMatHang(Context context, FragmentCallBack fragmentCallBack) {
+        this.context = context;
+        this.matHangDAO = new MatHangDAO(context);
+        this.fragmentCallBack = fragmentCallBack;
     }
 
     /**
@@ -58,9 +74,15 @@ public class ThemMatHang extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_them_mat_hang, container, false);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_them_mat_hang, container, false);
+        Button btnCancel = view.findViewById(R.id.btnCancel);
+        Button btnAdd = view.findViewById(R.id.btnAdd);
+
+        btnCancel.setOnClickListener(v -> fragmentCallBack.finishCall());
+
+
+
+        return view;
     }
 }

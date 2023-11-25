@@ -4,7 +4,9 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -29,9 +31,12 @@ import poly.DuAn1.nhom2.MD18309.PRO1121.R;
  * Use the {@link DanhSachMatHang#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class DanhSachMatHang extends Fragment implements MatHangAdapter.OnItemClickCallBack {
+public class DanhSachMatHang extends Fragment implements MatHangAdapter.OnItemClickCallBack, ThemMatHang.FragmentCallBack {
 
-    RecyclerView recyclerView;
+    private RecyclerView recyclerView;
+    private ThemMatHang themMatHang;
+    private FragmentManager fragmentManager;
+    private ConstraintLayout constraintLayout;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -82,6 +87,9 @@ public class DanhSachMatHang extends Fragment implements MatHangAdapter.OnItemCl
         EditText edtSearch = view.findViewById(R.id.edtSearch);
         ArrayList<MatHang> listTimKiem = new ArrayList<>();
         ArrayList<MatHang> listMatHang = new MatHangDAO(getContext()).getMatHangList();
+        fragmentManager = getChildFragmentManager();
+        constraintLayout = view.findViewById(R.id.constraintLayout);
+        themMatHang = new ThemMatHang(getContext(), this);
 
         //Tìm Kiếm
         edtSearch.addTextChangedListener(new TextWatcher() {
@@ -113,11 +121,10 @@ public class DanhSachMatHang extends Fragment implements MatHangAdapter.OnItemCl
         });
 
         //Thêm
-        btnAdd.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(getContext(), "Thêm Thành Công(Chắc Thế)", Toast.LENGTH_SHORT).show();
-            }
+        btnAdd.setOnClickListener(v -> {
+//                Toast.makeText(getContext(), "Thêm Thành Công(Chắc Thế)", Toast.LENGTH_SHORT).show();
+            fragmentManager.beginTransaction().replace(R.id.framelayout, themMatHang).commit();
+            constraintLayout.setVisibility(View.INVISIBLE);
         });
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
@@ -135,5 +142,11 @@ public class DanhSachMatHang extends Fragment implements MatHangAdapter.OnItemCl
     public void onClickListener(int id) {
         System.out.println(id);
         Toast.makeText(getContext(), "Tưởng Tượng Màn Hình Thông Tin Chi Tiết", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void finishCall() {
+        fragmentManager.beginTransaction().remove(themMatHang).commit();
+        constraintLayout.setVisibility(View.VISIBLE);
     }
 }
