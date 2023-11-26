@@ -23,7 +23,7 @@ import poly.DuAn1.nhom2.MD18309.PRO1121.fragments.KhoHang;
 import poly.DuAn1.nhom2.MD18309.PRO1121.fragments.Menu;
 import poly.DuAn1.nhom2.MD18309.PRO1121.fragments.TrangChu;
 
-public class MainActivity extends AppCompatActivity implements TrangChu.FragmentCallback {
+public class MainActivity extends AppCompatActivity implements TrangChu.FragmentCallback, Menu.FragmentCallBack {
     private FragmentManager fragmentManager;
     private KhoHang khoHang = null;
     private HoaDon hoaDon = null;
@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity implements TrangChu.Fragment
                 khoHang = new KhoHang();
                 fragmentManager.beginTransaction().replace(R.id.framelayout, khoHang).commit();
             } else if (item.getItemId() == R.id.menu) {
-                menu = new Menu();
+                menu = new Menu(taiKhoan, this);
                 fragmentManager.beginTransaction().replace(R.id.framelayout, menu).commit();
             }
             return true;
@@ -97,5 +97,10 @@ public class MainActivity extends AppCompatActivity implements TrangChu.Fragment
     @Override
     public void onItemClicked(int position) {
         System.out.println(position);
+    }
+
+    @Override
+    public void logout() {
+        onBackPressed();
     }
 }

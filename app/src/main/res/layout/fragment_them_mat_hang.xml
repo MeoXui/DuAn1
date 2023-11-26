@@ -99,6 +99,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Giá nhập"
+                android:inputType="number"
                 android:id="@+id/edtGianhap"
                 android:lines="1">
             </com.google.android.material.textfield.TextInputEditText>
@@ -120,6 +121,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Giá bán"
+                android:inputType="number"
                 android:id="@+id/edtGiaban"
                 android:lines="1">
             </com.google.android.material.textfield.TextInputEditText>
@@ -149,6 +151,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Số lượng"
+                android:inputType="number"
                 android:id="@+id/edtSoluong"
                 android:lines="1">
             </com.google.android.material.textfield.TextInputEditText>

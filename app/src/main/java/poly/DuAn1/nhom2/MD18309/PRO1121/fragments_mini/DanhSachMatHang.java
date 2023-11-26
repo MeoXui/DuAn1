@@ -37,6 +37,11 @@ public class DanhSachMatHang extends Fragment implements MatHangAdapter.OnItemCl
     private ThemMatHang themMatHang;
     private FragmentManager fragmentManager;
     private ConstraintLayout constraintLayout;
+    FragmentCallBack fragmentCallBack;
+    public interface FragmentCallBack{
+        void enterAddFragment();
+        void exitAddFragment();
+    }
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -49,6 +54,10 @@ public class DanhSachMatHang extends Fragment implements MatHangAdapter.OnItemCl
 
     public DanhSachMatHang() {
         // Required empty public constructor
+    }
+
+    public DanhSachMatHang(FragmentCallBack fragmentCallBack) {
+        this.fragmentCallBack = fragmentCallBack;
     }
 
     /**
@@ -125,6 +134,7 @@ public class DanhSachMatHang extends Fragment implements MatHangAdapter.OnItemCl
 //                Toast.makeText(getContext(), "Thêm Thành Công(Chắc Thế)", Toast.LENGTH_SHORT).show();
             fragmentManager.beginTransaction().replace(R.id.framelayout, themMatHang).commit();
             constraintLayout.setVisibility(View.INVISIBLE);
+            fragmentCallBack.enterAddFragment();
         });
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
@@ -148,5 +158,6 @@ public class DanhSachMatHang extends Fragment implements MatHangAdapter.OnItemCl
     public void finishCall() {
         fragmentManager.beginTransaction().remove(themMatHang).commit();
         constraintLayout.setVisibility(View.VISIBLE);
+        fragmentCallBack.exitAddFragment();
     }
 }

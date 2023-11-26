@@ -81,7 +81,12 @@ public class ThemMatHang extends Fragment {
 
         btnCancel.setOnClickListener(v -> fragmentCallBack.finishCall());
 
+        btnAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+            }
+        });
 
         return view;
     }

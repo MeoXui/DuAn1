@@ -7,7 +7,13 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
+import poly.DuAn1.nhom2.MD18309.PRO1121.ObjectClass.TaiKhoan;
 import poly.DuAn1.nhom2.MD18309.PRO1121.R;
 
 /**
@@ -16,6 +22,13 @@ import poly.DuAn1.nhom2.MD18309.PRO1121.R;
  * create an instance of this fragment.
  */
 public class Menu extends Fragment {
+
+    private TaiKhoan taiKhoan;
+    private FragmentCallBack fragmentCallBack;
+
+    public interface FragmentCallBack{
+        void logout();
+    }
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -28,6 +41,11 @@ public class Menu extends Fragment {
 
     public Menu() {
         // Required empty public constructor
+    }
+
+    public Menu(TaiKhoan taiKhoan, FragmentCallBack fragmentCallBack) {
+        this.taiKhoan = taiKhoan;
+        this.fragmentCallBack = fragmentCallBack;
     }
 
     /**
@@ -58,9 +76,36 @@ public class Menu extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_menu, container, false);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_menu, container, false);
+
+        //Khai Báo
+        TextView txtHoTen = view.findViewById(R.id.txtHoTen);
+        TextView txtChucVu = view.findViewById(R.id.txtRole);
+        ImageView imgProfile = view.findViewById(R.id.imgProfile);
+        LinearLayout btnLogOut = view.findViewById(R.id.btnLogOut);
+
+        //Hiện Thị Thông Tin
+        txtHoTen.setText(taiKhoan.getHoTen());
+//        txtChucVu.setText(taiKhoan.getRole());
+        if (taiKhoan.getRole().equalsIgnoreCase("QUANLY")){
+            imgProfile.setImageResource(R.drawable.user_admin);
+            txtChucVu.setText("Quản Lý");
+        } else if (taiKhoan.getRole().equalsIgnoreCase("NhanVien")) {
+            imgProfile.setImageResource(R.drawable.user_admin);
+            txtChucVu.setText("Nhân Viên");
+        }else {
+            imgProfile.setImageResource(R.drawable.user_admin);
+            txtChucVu.setText("Người Dùng");
+        }
+
+        btnLogOut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                fragmentCallBack.logout();
+            }
+        });
+
+        return view;
     }
 }
