@@ -3,11 +3,25 @@ package poly.DuAn1.nhom2.MD18309.PRO1121.fragments_mini;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 
+import java.util.ArrayList;
+
+import poly.DuAn1.nhom2.MD18309.PRO1121.Adapter.NhaCungCapAdapter;
+import poly.DuAn1.nhom2.MD18309.PRO1121.DAO.NhaCungCapDAO;
+import poly.DuAn1.nhom2.MD18309.PRO1121.ObjectClass.MatHang;
+import poly.DuAn1.nhom2.MD18309.PRO1121.ObjectClass.NhaCungCap;
 import poly.DuAn1.nhom2.MD18309.PRO1121.R;
 
 /**
@@ -15,7 +29,12 @@ import poly.DuAn1.nhom2.MD18309.PRO1121.R;
  * Use the {@link DanhSachNhaCungCap#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class DanhSachNhaCungCap extends Fragment {
+public class DanhSachNhaCungCap extends Fragment implements NhaCungCapAdapter.OnItemClickCallBack {
+
+    private RecyclerView recyclerView;
+    private FragmentManager fragmentManager;
+    private NhaCungCapDAO nhaCungCapDAO;
+//    private ArrayList<NhaCungCap> nhaCungCapArrayList;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -58,9 +77,67 @@ public class DanhSachNhaCungCap extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_danh_sach_nha_cung_cap, container, false);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_danh_sach_nha_cung_cap, container, false);
+
+        //Khai Báo
+        recyclerView = view.findViewById(R.id.recyclerView);
+        EditText edtSearch = view.findViewById(R.id.edtSearch);
+        Button btnAdd = view.findViewById(R.id.btnAdd);
+        nhaCungCapDAO = new NhaCungCapDAO(getContext());
+        ArrayList<NhaCungCap> nhaCungCapArrayList = nhaCungCapDAO.getNhaCungCapList();
+        ArrayList<NhaCungCap> listTimKiem = new ArrayList<>();
+
+        //Tìm Kiếm Theo Tên
+        edtSearch.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                listTimKiem.clear();
+                for (NhaCungCap nhaCungCap: nhaCungCapArrayList){
+                    if(!s.toString().isEmpty()){
+                        if (nhaCungCap.getTenNhaCungCap().contains(s)){
+                            listTimKiem.add(nhaCungCap);
+                            setAdapter(listTimKiem);
+                        }else{
+                            setAdapter(listTimKiem);
+                        }
+                    }else{
+                        setAdapter(nhaCungCapArrayList);
+                    }
+                }
+            }
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+        //setup RecyclerView
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
+        linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        recyclerView.setLayoutManager(linearLayoutManager);
+        setAdapter(nhaCungCapArrayList);
+
+        btnAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getContext(), "Thêm Thành Công(Chắc Thế)", Toast.LENGTH_SHORT).show();
+            }
+        });
+        return view;
+    }
+
+    private void setAdapter(ArrayList<NhaCungCap> nhaCungCapArrayList){
+        recyclerView.setAdapter(new NhaCungCapAdapter(getContext(), nhaCungCapArrayList, this));
+    }
+
+    @Override
+    public void onItemClick(int id) {
+
     }
 }

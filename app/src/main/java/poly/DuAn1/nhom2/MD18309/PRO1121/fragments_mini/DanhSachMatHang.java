@@ -100,7 +100,7 @@ public class DanhSachMatHang extends Fragment implements MatHangAdapter.OnItemCl
         constraintLayout = view.findViewById(R.id.constraintLayout);
         themMatHang = new ThemMatHang(getContext(), this);
 
-        //Tìm Kiếm
+        //Tìm Kiếm Theo Tên
         edtSearch.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {

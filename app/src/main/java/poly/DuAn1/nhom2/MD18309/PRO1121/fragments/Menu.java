@@ -1,5 +1,6 @@
 package poly.DuAn1.nhom2.MD18309.PRO1121.fragments;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -75,6 +76,7 @@ public class Menu extends Fragment {
         }
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_menu, container, false);
@@ -92,19 +94,14 @@ public class Menu extends Fragment {
             imgProfile.setImageResource(R.drawable.user_admin);
             txtChucVu.setText("Quản Lý");
         } else if (taiKhoan.getRole().equalsIgnoreCase("NhanVien")) {
-            imgProfile.setImageResource(R.drawable.user_admin);
+            imgProfile.setImageResource(R.drawable.user);
             txtChucVu.setText("Nhân Viên");
         }else {
-            imgProfile.setImageResource(R.drawable.user_admin);
+            imgProfile.setImageResource(R.drawable.user);
             txtChucVu.setText("Người Dùng");
         }
 
-        btnLogOut.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                fragmentCallBack.logout();
-            }
-        });
+        btnLogOut.setOnClickListener(v -> fragmentCallBack.logout());
 
         return view;
     }

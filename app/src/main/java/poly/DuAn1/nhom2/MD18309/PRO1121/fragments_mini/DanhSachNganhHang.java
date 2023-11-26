@@ -3,9 +3,12 @@ package poly.DuAn1.nhom2.MD18309.PRO1121.fragments_mini;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,8 +16,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+
 import poly.DuAn1.nhom2.MD18309.PRO1121.Adapter.NganhHangAdapter;
 import poly.DuAn1.nhom2.MD18309.PRO1121.DAO.NganhHangDAO;
+import poly.DuAn1.nhom2.MD18309.PRO1121.DAO.NhaCungCapDAO;
+import poly.DuAn1.nhom2.MD18309.PRO1121.ObjectClass.MatHang;
+import poly.DuAn1.nhom2.MD18309.PRO1121.ObjectClass.NganhHang;
 import poly.DuAn1.nhom2.MD18309.PRO1121.R;
 
 /**
@@ -23,6 +32,11 @@ import poly.DuAn1.nhom2.MD18309.PRO1121.R;
  * create an instance of this fragment.
  */
 public class DanhSachNganhHang extends Fragment implements NganhHangAdapter.OnItemClickCallBack {
+
+    private RecyclerView recyclerView;
+    private FragmentManager fragmentManager;
+    private NganhHangDAO nganhHangDAO;
+//    private ArrayList<NganhHang> nganhHangArrayList;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -69,15 +83,47 @@ public class DanhSachNganhHang extends Fragment implements NganhHangAdapter.OnIt
         View view = inflater.inflate(R.layout.fragment_danh_sach_nganh_hang, container, false);
 
         //Khai Báo
-        RecyclerView recyclerView = view.findViewById(R.id.recyclerView);
+        recyclerView = view.findViewById(R.id.recyclerView);
         EditText edtSearch = view.findViewById(R.id.edtSearch);
         Button btnAdd = view.findViewById(R.id.btnAdd);
+        nganhHangDAO = new NganhHangDAO(getContext());
+        ArrayList<NganhHang> nganhHangArrayList = nganhHangDAO.getNganhHangList();
+        ArrayList<NganhHang> listTimKiem = new ArrayList<>();
+
+        //Tìm Kiếm Theo Tên
+        edtSearch.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                listTimKiem.clear();
+                for (NganhHang nganhHang: nganhHangArrayList){
+                    if(!s.toString().isEmpty()){
+                        if (nganhHang.getTenNganhHang().contains(s)){
+                            listTimKiem.add(nganhHang);
+                            setAdapter(listTimKiem);
+                        }else{
+                            setAdapter(listTimKiem);
+                        }
+                    }else{
+                        setAdapter(nganhHangArrayList);
+                    }
+                }
+            }
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
 
         //Setup RecyclerView
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(linearLayoutManager);
-        recyclerView.setAdapter(new NganhHangAdapter(getContext(), new NganhHangDAO(getContext()).getNganhHangList(), this));
+        setAdapter(nganhHangArrayList);
 
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -87,6 +133,10 @@ public class DanhSachNganhHang extends Fragment implements NganhHangAdapter.OnIt
         });
 
         return view;
+    }
+
+    private void setAdapter(ArrayList<NganhHang> nganhHangArrayList){
+        recyclerView.setAdapter(new NganhHangAdapter(getContext(), nganhHangArrayList, this));
     }
 
     @Override
