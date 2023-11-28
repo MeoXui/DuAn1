@@ -25,6 +25,7 @@ import poly.DuAn1.nhom2.MD18309.PRO1121.fragments.TrangChu;
 
 public class MainActivity extends AppCompatActivity implements TrangChu.FragmentCallback, Menu.FragmentCallBack {
     private FragmentManager fragmentManager;
+    private BottomNavigationView bottomNavigationView;
     private KhoHang khoHang = null;
     private HoaDon hoaDon = null;
     private Menu menu = null;
@@ -45,7 +46,7 @@ public class MainActivity extends AppCompatActivity implements TrangChu.Fragment
         taiKhoan = (TaiKhoan) getIntent().getSerializableExtra(login_screen.KEY_TK);
 //        trangChu = new TrangChu(taiKhoan);
 
-        BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNav);
+        bottomNavigationView = findViewById(R.id.bottomNav);
         bottomNavigationView.setItemRippleColor(null);
         bottomNavigationView.setSelectedItemId(R.id.trangchu);
         fragmentManager.beginTransaction().replace(R.id.framelayout, new TrangChu(taiKhoan, this)).commit();
@@ -97,6 +98,11 @@ public class MainActivity extends AppCompatActivity implements TrangChu.Fragment
     @Override
     public void onItemClicked(int position) {
         System.out.println(position);
+        if (position == 2){
+            bottomNavigationView.setSelectedItemId(R.id.khohang);
+        } else if (position == 1) {
+            bottomNavigationView.setSelectedItemId(R.id.hoadon);
+        }
     }
 
     @Override

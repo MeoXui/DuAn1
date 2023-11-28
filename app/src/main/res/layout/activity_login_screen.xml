@@ -16,7 +16,7 @@
         android:layout_marginTop="0dp"
         android:scaleX="0.7"
         android:scaleY="0.7"
-        android:src="@drawable/wholesaler">
+        android:src="@drawable/logo">
     </ImageView>
 
     <com.google.android.material.textfield.TextInputLayout
