@@ -1,8 +1,12 @@
 package poly.DuAn1.nhom2.MD18309.PRO1121.fragments_mini;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import android.os.Handler;
@@ -96,6 +100,7 @@ public class ThemMatHang extends Fragment {
         View view = inflater.inflate(R.layout.fragment_them_mat_hang, container, false);
         Button btnCancel = view.findViewById(R.id.btnCancel);
         Button btnAdd = view.findViewById(R.id.btnAdd);
+        Button btnDelete = view.findViewById(R.id.btnDelete);
         AtomicBoolean editMode = new AtomicBoolean(false);
 
         TextInputLayout edtTenMatHangLayout = view.findViewById(R.id.edtTenmathangLayout);
@@ -114,9 +119,11 @@ public class ThemMatHang extends Fragment {
         TextInputEditText edtSoLuong = view.findViewById(R.id.edtSoluong);
         TextInputEditText edtDVT = view.findViewById(R.id.edtDVT);
 
-
+        //Chuyển chế độ dựa trên tham số
         if (idMH != -1){
             btnAdd.setText("Chỉnh sửa");
+            btnCancel.setText("Thoát");
+            btnCancel.setBackground(ContextCompat.getDrawable(context, R.drawable.button_background));
             MatHang matHang = matHangDAO.getMatHangByID(idMH);
             NganhHang nganhHang = nganhHangDAO.getNganhHangByID(matHang.getIdNganhHang());
             NhaCungCap nhaCungCap = nhaCungCapDAO.getNhaCungCapByID(matHang.getIdNhaCungCap());
@@ -136,8 +143,9 @@ public class ThemMatHang extends Fragment {
             edtNganhHang.setEnabled(false);
             edtGiaBan.setEnabled(false);
             edtGiaNhap.setEnabled(false);
+        }else{
+            btnDelete.setVisibility(View.INVISIBLE);
         }
-
 
         btnCancel.setOnClickListener(v -> fragmentCallBack.finishCall(0));
 
@@ -174,7 +182,7 @@ public class ThemMatHang extends Fragment {
                     }else{
                         if (matHangDAO.updateMatHang(new MatHang(idMH, 1, 1, tenMatHang, Float.parseFloat(soLuong), dVT, Integer.parseInt(giaNhap), Integer.parseInt(giaBan), 0))){
                             Toast.makeText(getContext(), "Sửa Thành Công", Toast.LENGTH_SHORT).show();
-                            fragmentCallBack.finishCall(1);
+                            fragmentCallBack.finishCall(2);
                         }else{
                             Toast.makeText(getContext(), "Sửa Thành Bại", Toast.LENGTH_SHORT).show();
 //                            Toast.makeText(getContext(), "Thêm Thành Bại", Toast.LENGTH_SHORT).show();
@@ -224,6 +232,24 @@ public class ThemMatHang extends Fragment {
             }
         });
 
+        btnDelete.setOnClickListener(v -> {
+            AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+            builder.setTitle("Xác Nhận Xóa");
+            builder.setMessage("Chắc Không Đấy Bạn?");
+            builder.setPositiveButton("Chắc", (dialog, which) -> {
+                if (matHangDAO.DeleteMatHang(idMH)){
+                    Toast.makeText(getContext(), "Xóa Thành Công", Toast.LENGTH_SHORT).show();
+                    fragmentCallBack.finishCall(2);
+                }else{
+                    Toast.makeText(getContext(), "Xóa Thành Bại", Toast.LENGTH_SHORT).show();
+                }
+            });
+            builder.setNegativeButton("Không", (dialog, which) -> {
+
+            });
+            AlertDialog alertDialog = builder.create();
+            alertDialog.show();
+        });
         return view;
     }
 }

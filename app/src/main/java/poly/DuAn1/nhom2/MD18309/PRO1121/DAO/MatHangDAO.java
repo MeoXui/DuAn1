@@ -45,8 +45,10 @@ public class MatHangDAO {
         SQLiteDatabase database = dbFucker.getWritableDatabase();
         boolean result = false;
         database.beginTransaction();
+        ContentValues pairs = new ContentValues();
+        pairs.put("STATUS", 1);
         try {
-            long kq = database.delete("MATHANG", "idMH=?", new String[]{String.valueOf(ID)});
+            long kq = database.update("MATHANG", pairs,"idMH=?", new String[]{String.valueOf(ID)});
             if (kq > -1) {
                 result = true;
             }

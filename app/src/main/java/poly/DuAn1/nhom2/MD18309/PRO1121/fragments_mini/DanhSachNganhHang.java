@@ -39,6 +39,9 @@ public class DanhSachNganhHang extends Fragment implements NganhHangAdapter.OnIt
     private NganhHangDAO nganhHangDAO;
     private ConstraintLayout constraintLayout;
     private ThemNganhHang themNganhHang;
+    private NganhHangAdapter nganhHangAdapter;
+    private ArrayList<NganhHang> nganhHangArrayList;
+    private int holderPOS;
     FragmentCallBack fragmentCallBack;
 
     public interface FragmentCallBack{
@@ -99,7 +102,6 @@ public class DanhSachNganhHang extends Fragment implements NganhHangAdapter.OnIt
         EditText edtSearch = view.findViewById(R.id.edtSearch);
         Button btnAdd = view.findViewById(R.id.btnAdd);
         nganhHangDAO = new NganhHangDAO(getContext());
-        ArrayList<NganhHang> nganhHangArrayList = nganhHangDAO.getNganhHangList();
         ArrayList<NganhHang> listTimKiem = new ArrayList<>();
         constraintLayout = view.findViewById(R.id.constraintLayout);
         fragmentManager = getChildFragmentManager();
@@ -134,6 +136,7 @@ public class DanhSachNganhHang extends Fragment implements NganhHangAdapter.OnIt
         });
 
         //Setup RecyclerView
+        loadList();
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(linearLayoutManager);
@@ -150,14 +153,21 @@ public class DanhSachNganhHang extends Fragment implements NganhHangAdapter.OnIt
         return view;
     }
 
+    private void loadList(){
+        nganhHangArrayList = nganhHangDAO.getNganhHangList();
+
+    }
+
     private void setAdapter(ArrayList<NganhHang> nganhHangArrayList){
-        recyclerView.setAdapter(new NganhHangAdapter(getContext(), nganhHangArrayList, this));
+        nganhHangAdapter = new NganhHangAdapter(getContext(), nganhHangArrayList, this);
+        recyclerView.setAdapter(nganhHangAdapter);
     }
 
     //Xem Thông Tin Ngành Hàng
     @Override
-    public void onClickListener(int id) {
+    public void onClickListener(int id, int holderPOS) {
         System.out.println(id);
+        this.holderPOS = holderPOS;
         themNganhHang = new ThemNganhHang(getContext(), id, this);
         fragmentManager.beginTransaction().replace(R.id.framelayout, themNganhHang).commit();
         constraintLayout.setVisibility(View.INVISIBLE);
@@ -171,6 +181,9 @@ public class DanhSachNganhHang extends Fragment implements NganhHangAdapter.OnIt
         fragmentCallBack.exitAddFragment();
         if (result == 1){
             setAdapter(nganhHangDAO.getNganhHangList());
+        }else if (result == 2){
+            loadList();
+            nganhHangAdapter.notifyChange(holderPOS);
         }
     }
 }

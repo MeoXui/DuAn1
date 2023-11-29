@@ -39,6 +39,10 @@ public class DanhSachMatHang extends Fragment implements MatHangAdapter.OnItemCl
     private ConstraintLayout constraintLayout;
     private MatHangDAO matHangDAO;
     private ArrayList<MatHang> listMatHang;
+    private MatHangAdapter matHangAdapter;
+    private int holderPOS;
+
+    //Gọi ngược lại activity
     FragmentCallBack fragmentCallBack;
     public interface FragmentCallBack{
         void enterAddFragment(String title);
@@ -149,16 +153,18 @@ public class DanhSachMatHang extends Fragment implements MatHangAdapter.OnItemCl
 
     private void loadList(){
         listMatHang = matHangDAO.getMatHangList();
-
     }
 
     private void setAdapter(ArrayList<MatHang> matHangArrayList){
-        recyclerView.setAdapter(new MatHangAdapter(getContext(), matHangArrayList, this));
+        matHangAdapter = new MatHangAdapter(getContext(), matHangArrayList, this);
+        recyclerView.setAdapter(matHangAdapter);
     }
 
     @Override
-    public void onClickListener(int id) {
+    public void onClickListener(int id, int holderPOS) {
         System.out.println(id);
+        this.holderPOS = holderPOS;
+//        System.out.println(holderPOS);
 //        Toast.makeText(getContext(), "Tưởng Tượng Màn Hình Thông Tin Chi Tiết", Toast.LENGTH_SHORT).show();
         themMatHang = new ThemMatHang(getContext(), id,this);
         fragmentManager.beginTransaction().replace(R.id.framelayout, themMatHang).commit();
@@ -174,6 +180,9 @@ public class DanhSachMatHang extends Fragment implements MatHangAdapter.OnItemCl
         if (result == 1){
             loadList();
             setAdapter(listMatHang);
+        } else if (result == 2) {
+//            System.out.println(holderPOS);
+            matHangAdapter.notifyChange(holderPOS);
         }
     }
 }

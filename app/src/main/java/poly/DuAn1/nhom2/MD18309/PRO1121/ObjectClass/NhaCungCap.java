@@ -6,6 +6,7 @@ public class NhaCungCap {
     private String sdtNhaCungCap;
     private String hoTenNguoiDaiDien;
     private String diaChiNhaCungCap;
+    private int trangThai;
 
     public int getIdNhaCungCap() {
         return idNhaCungCap;
@@ -27,11 +28,16 @@ public class NhaCungCap {
         return diaChiNhaCungCap;
     }
 
-    public NhaCungCap(int idNhaCungCap, String tenNhaCungCap, String sdtNhaCungCap, String hoTenNguoiDaiDien, String diaChiNhaCungCap) {
+    public int getTrangThai() {
+        return trangThai;
+    }
+
+    public NhaCungCap(int idNhaCungCap, String tenNhaCungCap, String sdtNhaCungCap, String hoTenNguoiDaiDien, String diaChiNhaCungCap, int trangThai) {
         this.idNhaCungCap = idNhaCungCap;
         this.tenNhaCungCap = tenNhaCungCap;
         this.sdtNhaCungCap = sdtNhaCungCap;
         this.hoTenNguoiDaiDien = hoTenNguoiDaiDien;
         this.diaChiNhaCungCap = diaChiNhaCungCap;
+        this.trangThai = trangThai;
     }
 }

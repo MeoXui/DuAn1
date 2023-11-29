@@ -37,6 +37,9 @@ public class DanhSachNhaCungCap extends Fragment implements NhaCungCapAdapter.On
     private NhaCungCapDAO nhaCungCapDAO;
     private ThemNhaCungCap themNhaCungCap;
     private ConstraintLayout constraintLayout;
+    private ArrayList<NhaCungCap> nhaCungCapArrayList;
+    private NhaCungCapAdapter nhaCungCapAdapter;
+    private int holderPOS;
 
     FragmentCallBack fragmentCallBack;
     public interface FragmentCallBack{
@@ -98,7 +101,6 @@ public class DanhSachNhaCungCap extends Fragment implements NhaCungCapAdapter.On
         EditText edtSearch = view.findViewById(R.id.edtSearch);
         Button btnAdd = view.findViewById(R.id.btnAdd);
         nhaCungCapDAO = new NhaCungCapDAO(getContext());
-        ArrayList<NhaCungCap> nhaCungCapArrayList = nhaCungCapDAO.getNhaCungCapList();
         ArrayList<NhaCungCap> listTimKiem = new ArrayList<>();
         fragmentManager = getChildFragmentManager();
         constraintLayout = view.findViewById(R.id.constraintLayout);
@@ -133,6 +135,7 @@ public class DanhSachNhaCungCap extends Fragment implements NhaCungCapAdapter.On
         });
 
         //setup RecyclerView
+        loadList();
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(linearLayoutManager);
@@ -148,19 +151,24 @@ public class DanhSachNhaCungCap extends Fragment implements NhaCungCapAdapter.On
         return view;
     }
 
+    private void loadList(){
+        nhaCungCapArrayList = nhaCungCapDAO.getNhaCungCapList();
+    }
+
     private void setAdapter(ArrayList<NhaCungCap> nhaCungCapArrayList){
-        recyclerView.setAdapter(new NhaCungCapAdapter(getContext(), nhaCungCapArrayList, this));
+        nhaCungCapAdapter = new NhaCungCapAdapter(getContext(), nhaCungCapArrayList, this);
+        recyclerView.setAdapter(nhaCungCapAdapter);
     }
 
     @Override
-    public void onItemClick(int id) {
+    public void onItemClick(int id, int holderPOS) {
         System.out.println(id);
+        this.holderPOS = holderPOS;
         themNhaCungCap = new ThemNhaCungCap(getContext(), id, this);
         fragmentManager.beginTransaction().replace(R.id.framelayout, themNhaCungCap).commit();
         constraintLayout.setVisibility(View.INVISIBLE);
         fragmentCallBack.enterAddFragment("Thông Tin N.C.C");
 //        Toast.makeText(getContext(), "Tưởng Tượng Màn Hình Thông Tin Chi Tiết", Toast.LENGTH_SHORT).show();
-
     }
 
     @Override
@@ -169,7 +177,10 @@ public class DanhSachNhaCungCap extends Fragment implements NhaCungCapAdapter.On
         constraintLayout.setVisibility(View.VISIBLE);
         fragmentCallBack.exitAddFragment();
         if (result == 1){
-            setAdapter(nhaCungCapDAO.getNhaCungCapList());
+            loadList();
+            setAdapter(nhaCungCapArrayList);
+        } else if (result == 2) {
+            nhaCungCapAdapter.notifyChange(holderPOS);
         }
     }
 }

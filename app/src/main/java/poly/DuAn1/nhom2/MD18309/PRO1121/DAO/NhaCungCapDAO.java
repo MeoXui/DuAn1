@@ -8,7 +8,6 @@ import android.database.sqlite.SQLiteDatabase;
 import java.util.ArrayList;
 
 import poly.DuAn1.nhom2.MD18309.PRO1121.DBFucker;
-import poly.DuAn1.nhom2.MD18309.PRO1121.ObjectClass.MatHang;
 import poly.DuAn1.nhom2.MD18309.PRO1121.ObjectClass.NhaCungCap;
 
 public class NhaCungCapDAO {
@@ -28,7 +27,7 @@ public class NhaCungCapDAO {
             if(cursor != null && cursor.getCount() > 0){
                 cursor.moveToFirst();
                 while (!cursor.isAfterLast()) {
-                    listNCC.add(new NhaCungCap(cursor.getInt(0), cursor.getString(1), cursor.getString(4), cursor.getString(2), cursor.getString(3)));
+                    listNCC.add(new NhaCungCap(cursor.getInt(0), cursor.getString(1), cursor.getString(4), cursor.getString(2), cursor.getString(3), cursor.getInt(5)));
                     cursor.moveToNext();
                 }
                 cursor.close();
@@ -119,7 +118,7 @@ public class NhaCungCapDAO {
         try{
             Cursor cursor = database.rawQuery("SELECT * FROM NHACUNGCAP Where idNCC=?", new String[]{String.valueOf(id)});
             if(cursor != null && cursor.getCount() > 0 && cursor.moveToFirst()){
-                nhaCungCap = new NhaCungCap(cursor.getInt(0), cursor.getString(1), cursor.getString(4), cursor.getString(2), cursor.getString(3));
+                nhaCungCap = new NhaCungCap(cursor.getInt(0), cursor.getString(1), cursor.getString(4), cursor.getString(2), cursor.getString(3), cursor.getInt(5));
                 cursor.close();
             }
             database.setTransactionSuccessful();

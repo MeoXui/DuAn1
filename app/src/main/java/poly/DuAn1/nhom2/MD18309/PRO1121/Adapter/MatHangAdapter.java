@@ -27,7 +27,7 @@ public class MatHangAdapter extends RecyclerView.Adapter<MatHangAdapter.ViewFuck
     private static OnItemClickCallBack onItemClickCallBack;
 
     public interface OnItemClickCallBack{
-        void onClickListener(int id);
+        void onClickListener(int id, int holderPOS);
     }
 
     public MatHangAdapter(Context context, ArrayList<MatHang> matHangArrayList, OnItemClickCallBack onItemClickCallBack) {
@@ -57,13 +57,28 @@ public class MatHangAdapter extends RecyclerView.Adapter<MatHangAdapter.ViewFuck
         holder.txtMaMatHang.setText("Mã: "+matHangArrayList.get(holder.getAdapterPosition()).getIdMatHang());
         holder.txtSoLuong.setText("Số Lượng: "+matHangArrayList.get(holder.getAdapterPosition()).getSoLuongMatHang()+" "+matHangArrayList.get(holder.getAdapterPosition()).getDonViTinh());
         holder.txtGiaBan.setText("Giá Bán: "+matHangArrayList.get(holder.getAdapterPosition()).getGiaMatHang()+" VNĐ");
+        holder.holderPOS = holder.getAdapterPosition();
 
-        holder.btnDelete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(context, "Xóa Thành Công(Chắc Thế)", Toast.LENGTH_SHORT).show();
-            }
-        });
+
+        if (matHangArrayList.get(holder.getAdapterPosition()).getTrangThai() == 1){
+            ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) holder.itemView.getLayoutParams();
+            params.height = 0;
+            params.topMargin = -10;
+            holder.itemView.setLayoutParams(params);
+        }
+
+
+    }
+    public void notifyChange(int holderPOS){
+        matHangArrayList.clear();
+        GetData();
+        notifyItemChanged(holderPOS);
+    }
+
+    public void notifyDelete(int holderPOS){
+        notifyItemRemoved(holderPOS);
+        matHangArrayList.clear();
+        GetData();
     }
 
     @Override
@@ -73,7 +88,7 @@ public class MatHangAdapter extends RecyclerView.Adapter<MatHangAdapter.ViewFuck
 
     public static class ViewFucker extends RecyclerView.ViewHolder implements View.OnLongClickListener, View.OnClickListener {
         TextView txtTenMatHang, txtMaMatHang, txtSoLuong, txtGiaBan;
-        ImageButton btnDelete;
+        int holderPOS;
         public ViewFucker(@NonNull View itemView) {
             super(itemView);
             itemView.setOnLongClickListener(this);
@@ -82,7 +97,6 @@ public class MatHangAdapter extends RecyclerView.Adapter<MatHangAdapter.ViewFuck
             txtMaMatHang = itemView.findViewById(R.id.txtMaMatHang);
             txtSoLuong = itemView.findViewById(R.id.txtSoLuong);
             txtGiaBan = itemView.findViewById(R.id.txtGiaMatHang);
-            btnDelete = itemView.findViewById(R.id.btnDeleteS);
         }
 
         @Override
@@ -92,7 +106,7 @@ public class MatHangAdapter extends RecyclerView.Adapter<MatHangAdapter.ViewFuck
 
         @Override
         public boolean onLongClick(View v) {
-            onItemClickCallBack.onClickListener(Integer.parseInt(txtMaMatHang.getText().toString().replaceAll("[^0-9]", "")));
+            onItemClickCallBack.onClickListener(Integer.parseInt(txtMaMatHang.getText().toString().replaceAll("[^0-9]", "")), holderPOS);
             return true;
         }
     }
