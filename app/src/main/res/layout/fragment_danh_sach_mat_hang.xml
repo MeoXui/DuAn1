@@ -38,12 +38,13 @@
                 android:background="@drawable/border"
                 android:layout_marginEnd="10dp"
                 android:paddingStart="10dp"
-                android:paddingEnd="10dp">
+                android:paddingEnd="10dp"
+                >
             </EditText>
             <Button
                 android:layout_width="0dp"
                 android:layout_weight="0.3"
-                android:text="Thêm +"
+                android:text="Thêm"
                 android:id="@+id/btnAdd"
                 android:layout_height="match_parent"
                 android:background="@drawable/button_background">

@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragments.TrangChu"
-    android:background="@drawable/radianbackground">
+    android:background="@drawable/background_2_drawio">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/linear1"
@@ -20,7 +20,7 @@
         android:paddingEnd="20dp"
         android:paddingStart="20dp"
         android:paddingBottom="10dp"
-        android:paddingTop="10dp">
+        android:paddingTop="25dp">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="50dp"
@@ -46,21 +46,21 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/txtTenNguoiDung"
-                    android:text="PlaceHolder"
+                    android:text="Xin chào, Nguyễn Văn Hưng"
                     android:textSize="18sp">
                 </TextView>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/txtRoleNguoiDung"
-                    android:text="PlaceHolder"
+                    android:text="Welcome back"
                     android:textSize="12sp">
                 </TextView>
             </LinearLayout>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="140dp"
+            android:layout_height="150dp"
             android:background="@drawable/linear1"
             android:padding="20dp"
             android:orientation="vertical"
@@ -70,15 +70,29 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="PlaceHolder"
+                android:text="Doanh thu:"
                 android:textSize="20sp"
                 android:textStyle="bold">
             </TextView>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="PlaceHolder"
-                android:textSize="16sp">
+                android:text="10.000.000 VND"
+                android:textSize="19sp">
+            </TextView>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Nhân viên:"
+                android:textSize="20sp"
+                android:textStyle="bold">
+            </TextView>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="25 người"
+                android:textSize="19sp">
             </TextView>
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>

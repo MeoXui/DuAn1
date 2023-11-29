@@ -7,4 +7,12 @@
         android:endColor="@color/primary_color">
     </gradient>
 
+    <stroke
+        android:color="@android:color/background_dark"
+        android:width="2dp">
+    </stroke>
+
+    <corners
+        android:radius="8dp"/>
+
 </shape>

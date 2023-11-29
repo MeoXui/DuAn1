@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     app:cardElevation="3dp"
-    app:cardCornerRadius="15dp"
-    android:layout_margin="5dp">
+    android:layout_margin="7dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -15,16 +15,18 @@
         android:padding="10dp"
         android:background="@drawable/radianbackground">
         <LinearLayout
+            android:id="@+id/layout_1"
             android:layout_width="0dp"
             android:layout_weight="0.9"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent">
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/layout_2">
 
             <TextView
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Place Holder"
                 android:id="@+id/txtTenMatHang"
@@ -33,16 +35,29 @@
             </TextView>
 
             <TextView
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Place Holder"
                 android:id="@+id/txtMaMatHang"
                 android:textSize="17sp"
                 android:textStyle="normal">
             </TextView>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layout_2"
+            android:layout_width="0dp"
+            android:layout_weight="0.9"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/layout_1"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:gravity="end">
 
             <TextView
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Place Holder"
                 android:id="@+id/txtSoLuong"
@@ -51,30 +66,14 @@
             </TextView>
 
             <TextView
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Place Holder"
+                android:text="@string/chinh_sua"
                 android:id="@+id/txtGiaMatHang"
-                android:textSize="17sp"
-                android:textStyle="normal">
+                android:textSize="13sp"
+                android:textStyle="normal"
+                android:textColor="#F19C99">
             </TextView>
         </LinearLayout>
-        <ImageButton
-            android:layout_width="0dp"
-            android:layout_weight="0.10"
-            android:layout_height="wrap_content"
-            android:id="@+id/btnDeleteS"
-            android:scaleY="1.1"
-            android:backgroundTint="@android:color/holo_red_dark"
-            android:src="@drawable/baseline_delete_forever_24"
-            android:contentDescription="Delete"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent">
-        </ImageButton>
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-
-
 </androidx.cardview.widget.CardView>

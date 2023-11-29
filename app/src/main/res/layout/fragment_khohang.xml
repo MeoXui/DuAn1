@@ -27,7 +27,7 @@
             android:layout_height="wrap_content"
             android:text="Quản Lý Kho Hàng"
             android:layout_gravity="center"
-            android:textColor="@color/white"
+            android:textColor="@color/cardview_dark_background"
             android:textSize="22sp"
             android:id="@+id/toolBarTitle">
         </TextView>
