@@ -26,7 +26,7 @@ public class NganhHangDAO {
             if(cursor != null && cursor.getCount() > 0){
                 cursor.moveToFirst();
                 while (!cursor.isAfterLast()) {
-                    listNH.add(new NganhHang(cursor.getInt(0), cursor.getString(1)));
+                    listNH.add(new NganhHang(cursor.getInt(0), cursor.getString(1), cursor.getInt(2)));
                     cursor.moveToNext();
                 }
                 cursor.close();
@@ -45,8 +45,9 @@ public class NganhHangDAO {
         SQLiteDatabase database = dbFucker.getWritableDatabase();
         database.beginTransaction();
         ContentValues values = new ContentValues();
-        values.put("idNH", nganhHang.getIdNganhHang());
+//        values.put("idNH", nganhHang.getIdNganhHang());
         values.put("TenNH", nganhHang.getTenNganhHang());
+        values.put("STATUS", 0);
         try {
             long kq = database.insert("NGANHHANG", null, values);
             if (kq != -1) {
@@ -78,5 +79,25 @@ public class NganhHangDAO {
             database.endTransaction();
         }
         return result;
+    }
+
+    public NganhHang getNganhHangByID(int id){
+        NganhHang nganhHang = null;
+        SQLiteDatabase database = dbFucker.getReadableDatabase();
+        database.beginTransaction();
+        try{
+            Cursor cursor = database.rawQuery("SELECT * FROM NGANHHANG Where idNH=?", new String[]{String.valueOf(id)});
+            if(cursor != null && cursor.getCount() > 0 && cursor.moveToFirst()){
+                nganhHang = new NganhHang(cursor.getInt(0), cursor.getString(1), cursor.getInt(2));
+                cursor.close();
+            }
+
+            database.setTransactionSuccessful();
+        }catch (Exception e){
+            throw new RuntimeException(e);
+        }finally {
+            database.endTransaction();
+        }
+        return nganhHang;
     }
 }

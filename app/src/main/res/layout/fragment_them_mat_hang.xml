@@ -22,30 +22,10 @@
         android:layout_height="83dp"
         app:boxStrokeWidth="3dp"
         app:boxStrokeColor="@color/primary_color"
-        app:boxCornerRadiusBottomEnd="7dp"
-        app:boxCornerRadiusBottomStart="7dp"
-        app:boxCornerRadiusTopStart="7dp"
-        app:boxCornerRadiusTopEnd="7dp"
-        app:boxStrokeErrorColor="@android:color/holo_red_light"
-        android:id="@+id/edtMamathangLayout">
-        <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Mã mặt phẩm"
-            android:id="@+id/edtMamathang"
-            android:lines="1">
-        </com.google.android.material.textfield.TextInputEditText>
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="83dp"
-        app:boxStrokeWidth="3dp"
-        app:boxStrokeColor="@color/primary_color"
-        app:boxCornerRadiusBottomEnd="7dp"
-        app:boxCornerRadiusBottomStart="7dp"
-        app:boxCornerRadiusTopStart="7dp"
-        app:boxCornerRadiusTopEnd="7dp"
+        app:boxCornerRadiusBottomEnd="15dp"
+        app:boxCornerRadiusBottomStart="15dp"
+        app:boxCornerRadiusTopStart="15dp"
+        app:boxCornerRadiusTopEnd="15dp"
         app:boxStrokeErrorColor="@android:color/holo_red_light"
         android:id="@+id/edtTenmathangLayout">
         <com.google.android.material.textfield.TextInputEditText
@@ -62,10 +42,30 @@
         android:layout_height="83dp"
         app:boxStrokeWidth="3dp"
         app:boxStrokeColor="@color/primary_color"
-        app:boxCornerRadiusBottomEnd="7dp"
-        app:boxCornerRadiusBottomStart="7dp"
-        app:boxCornerRadiusTopStart="7dp"
-        app:boxCornerRadiusTopEnd="7dp"
+        app:boxCornerRadiusBottomEnd="15dp"
+        app:boxCornerRadiusBottomStart="15dp"
+        app:boxCornerRadiusTopStart="15dp"
+        app:boxCornerRadiusTopEnd="15dp"
+        app:boxStrokeErrorColor="@android:color/holo_red_light"
+        android:id="@+id/edtNhaCungCapLayout">
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Nhà cung cấp"
+            android:id="@+id/edtNhacungcap"
+            android:lines="1">
+        </com.google.android.material.textfield.TextInputEditText>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="83dp"
+        app:boxStrokeWidth="3dp"
+        app:boxStrokeColor="@color/primary_color"
+        app:boxCornerRadiusBottomEnd="15dp"
+        app:boxCornerRadiusBottomStart="15dp"
+        app:boxCornerRadiusTopStart="15dp"
+        app:boxCornerRadiusTopEnd="15dp"
         app:boxStrokeErrorColor="@android:color/holo_red_light"
         android:id="@+id/edtNganhhangLayout">
         <com.google.android.material.textfield.TextInputEditText
@@ -88,10 +88,10 @@
             android:layout_weight="0.5"
             app:boxStrokeWidth="3dp"
             app:boxStrokeColor="@color/primary_color"
-            app:boxCornerRadiusBottomEnd="7dp"
-            app:boxCornerRadiusBottomStart="7dp"
-            app:boxCornerRadiusTopStart="7dp"
-            app:boxCornerRadiusTopEnd="7dp"
+            app:boxCornerRadiusBottomEnd="15dp"
+            app:boxCornerRadiusBottomStart="15dp"
+            app:boxCornerRadiusTopStart="15dp"
+            app:boxCornerRadiusTopEnd="15dp"
             app:boxStrokeErrorColor="@android:color/holo_red_light"
             android:id="@+id/edtGianhapLayout"
             android:layout_marginRight="10dp">
@@ -111,10 +111,10 @@
             android:layout_weight="0.5"
             app:boxStrokeWidth="3dp"
             app:boxStrokeColor="@color/primary_color"
-            app:boxCornerRadiusBottomEnd="7dp"
-            app:boxCornerRadiusBottomStart="7dp"
-            app:boxCornerRadiusTopStart="7dp"
-            app:boxCornerRadiusTopEnd="7dp"
+            app:boxCornerRadiusBottomEnd="15dp"
+            app:boxCornerRadiusBottomStart="15dp"
+            app:boxCornerRadiusTopStart="15dp"
+            app:boxCornerRadiusTopEnd="15dp"
             app:boxStrokeErrorColor="@android:color/holo_red_light"
             android:id="@+id/edtGiabanLayout">
             <com.google.android.material.textfield.TextInputEditText
@@ -140,10 +140,10 @@
             android:layout_weight="0.75"
             app:boxStrokeWidth="3dp"
             app:boxStrokeColor="@color/primary_color"
-            app:boxCornerRadiusBottomEnd="7dp"
-            app:boxCornerRadiusBottomStart="7dp"
-            app:boxCornerRadiusTopStart="7dp"
-            app:boxCornerRadiusTopEnd="7dp"
+            app:boxCornerRadiusBottomEnd="15dp"
+            app:boxCornerRadiusBottomStart="15dp"
+            app:boxCornerRadiusTopStart="15dp"
+            app:boxCornerRadiusTopEnd="15dp"
             app:boxStrokeErrorColor="@android:color/holo_red_light"
             android:id="@+id/edtSoluongLayout"
             android:layout_marginRight="10dp">
@@ -163,10 +163,10 @@
             android:layout_weight="0.25"
             app:boxStrokeWidth="3dp"
             app:boxStrokeColor="@color/primary_color"
-            app:boxCornerRadiusBottomEnd="7dp"
-            app:boxCornerRadiusBottomStart="7dp"
-            app:boxCornerRadiusTopStart="7dp"
-            app:boxCornerRadiusTopEnd="7dp"
+            app:boxCornerRadiusBottomEnd="15dp"
+            app:boxCornerRadiusBottomStart="15dp"
+            app:boxCornerRadiusTopStart="15dp"
+            app:boxCornerRadiusTopEnd="15dp"
             app:boxStrokeErrorColor="@android:color/holo_red_light"
             android:id="@+id/edtDVTLayout">
             <com.google.android.material.textfield.TextInputEditText
@@ -185,10 +185,10 @@
 <!--        android:layout_height="120dp"-->
 <!--        app:boxStrokeWidth="3dp"-->
 <!--        app:boxStrokeColor="@color/primary_color"-->
-<!--        app:boxCornerRadiusBottomEnd="7dp"-->
-<!--        app:boxCornerRadiusBottomStart="7dp"-->
-<!--        app:boxCornerRadiusTopStart="7dp"-->
-<!--        app:boxCornerRadiusTopEnd="7dp"-->
+<!--        app:boxCornerRadiusBottomEnd="15dp"-->
+<!--        app:boxCornerRadiusBottomStart="15dp"-->
+<!--        app:boxCornerRadiusTopStart="15dp"-->
+<!--        app:boxCornerRadiusTopEnd="15dp"-->
 <!--        app:boxStrokeErrorColor="@android:color/holo_red_light"-->
 <!--        android:id="@+id/edtGhichuLayout">-->
 <!--        <com.google.android.material.textfield.TextInputEditText-->
@@ -210,15 +210,18 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
+            android:layout_marginEnd="10dp"
             android:text="Hủy"
-            android:id="@+id/btnCancel"/>
+            android:id="@+id/btnCancel"
+            android:background="@drawable/cancel_button_background"/>
 
         <androidx.appcompat.widget.AppCompatButton
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
             android:text="Hoàn THÀNH"
-            android:id="@+id/btnAdd"/>
+            android:id="@+id/btnAdd"
+            android:background="@drawable/button_background"/>
     </LinearLayout>
 
 </LinearLayout>

@@ -5,12 +5,24 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
+
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
+
+import java.util.concurrent.atomic.AtomicBoolean;
 
 import poly.DuAn1.nhom2.MD18309.PRO1121.DAO.MatHangDAO;
+import poly.DuAn1.nhom2.MD18309.PRO1121.DAO.NganhHangDAO;
+import poly.DuAn1.nhom2.MD18309.PRO1121.DAO.NhaCungCapDAO;
+import poly.DuAn1.nhom2.MD18309.PRO1121.ObjectClass.MatHang;
+import poly.DuAn1.nhom2.MD18309.PRO1121.ObjectClass.NganhHang;
+import poly.DuAn1.nhom2.MD18309.PRO1121.ObjectClass.NhaCungCap;
 import poly.DuAn1.nhom2.MD18309.PRO1121.R;
 
 /**
@@ -22,9 +34,12 @@ public class ThemMatHang extends Fragment {
 
     private Context context;
     private MatHangDAO matHangDAO;
+    private NhaCungCapDAO nhaCungCapDAO;
+    private NganhHangDAO nganhHangDAO;
+    private int idMH;
     FragmentCallBack fragmentCallBack;
     public interface FragmentCallBack{
-        void finishCall();
+        void finishCall(int result);
     }
 
     // TODO: Rename parameter arguments, choose names that match
@@ -40,9 +55,12 @@ public class ThemMatHang extends Fragment {
         // Required empty public constructor
     }
 
-    public ThemMatHang(Context context, FragmentCallBack fragmentCallBack) {
+    public ThemMatHang(Context context, int idMH, FragmentCallBack fragmentCallBack) {
         this.context = context;
         this.matHangDAO = new MatHangDAO(context);
+        this.nganhHangDAO = new NganhHangDAO(context);
+        this.nhaCungCapDAO = new NhaCungCapDAO(context);
+        this.idMH = idMH;
         this.fragmentCallBack = fragmentCallBack;
     }
 
@@ -78,13 +96,131 @@ public class ThemMatHang extends Fragment {
         View view = inflater.inflate(R.layout.fragment_them_mat_hang, container, false);
         Button btnCancel = view.findViewById(R.id.btnCancel);
         Button btnAdd = view.findViewById(R.id.btnAdd);
+        AtomicBoolean editMode = new AtomicBoolean(false);
 
-        btnCancel.setOnClickListener(v -> fragmentCallBack.finishCall());
+        TextInputLayout edtTenMatHangLayout = view.findViewById(R.id.edtTenmathangLayout);
+        TextInputLayout edtNhaCungCapLayout = view.findViewById(R.id.edtNhaCungCapLayout);
+        TextInputLayout edtNganhHangLayout = view.findViewById(R.id.edtNganhhangLayout);
+        TextInputLayout edtGiaNhapLayout = view.findViewById(R.id.edtGianhapLayout);
+        TextInputLayout edtGiaBanLayout = view.findViewById(R.id.edtGiabanLayout);
+        TextInputLayout edtSoLuongLayout = view.findViewById(R.id.edtSoluongLayout);
+        TextInputLayout edtDVTLayout = view.findViewById(R.id.edtDVTLayout);
 
-        btnAdd.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        TextInputEditText edtTenMatHang = view.findViewById(R.id.edtTenmathang);
+        TextInputEditText edtNhaCungCap = view.findViewById(R.id.edtNhacungcap);
+        TextInputEditText edtNganhHang = view.findViewById(R.id.edtNganhhang);
+        TextInputEditText edtGiaNhap = view.findViewById(R.id.edtGianhap);
+        TextInputEditText edtGiaBan = view.findViewById(R.id.edtGiaban);
+        TextInputEditText edtSoLuong = view.findViewById(R.id.edtSoluong);
+        TextInputEditText edtDVT = view.findViewById(R.id.edtDVT);
 
+
+        if (idMH != -1){
+            btnAdd.setText("Chỉnh sửa");
+            MatHang matHang = matHangDAO.getMatHangByID(idMH);
+            NganhHang nganhHang = nganhHangDAO.getNganhHangByID(matHang.getIdNganhHang());
+            NhaCungCap nhaCungCap = nhaCungCapDAO.getNhaCungCapByID(matHang.getIdNhaCungCap());
+
+            edtNhaCungCap.setText(nhaCungCap.getTenNhaCungCap());
+            edtTenMatHang.setText(matHang.getTenMatHang());
+            edtNganhHang.setText(nganhHang.getTenNganhHang());
+            edtGiaNhap.setText(matHang.getGiaNhapMatHang()+"");
+            edtGiaBan.setText(matHang.getGiaMatHang()+"");
+            edtSoLuong.setText(matHang.getSoLuongMatHang()+"");
+            edtDVT.setText(matHang.getDonViTinh());
+
+            edtNhaCungCap.setEnabled(false);
+            edtTenMatHang.setEnabled(false);
+            edtSoLuong.setEnabled(false);
+            edtDVT.setEnabled(false);
+            edtNganhHang.setEnabled(false);
+            edtGiaBan.setEnabled(false);
+            edtGiaNhap.setEnabled(false);
+        }
+
+
+        btnCancel.setOnClickListener(v -> fragmentCallBack.finishCall(0));
+
+        btnAdd.setOnClickListener(v -> {
+            String nhaCungCap = edtNhaCungCap.getText().toString();
+            String tenMatHang = edtTenMatHang.getText().toString();
+            String nganhHang = edtNganhHang.getText().toString();
+            String giaNhap = edtGiaNhap.getText().toString();
+            String giaBan = edtGiaBan.getText().toString();
+            String soLuong = edtSoLuong.getText().toString();
+            String dVT = edtDVT.getText().toString();
+            if(idMH != -1){
+                if (editMode.get()){
+                    if(nhaCungCap.isEmpty() || tenMatHang.isEmpty() || nganhHang.isEmpty() || giaBan.isEmpty() || giaNhap.isEmpty() || soLuong.isEmpty() || dVT.isEmpty()){
+                        edtNhaCungCapLayout.setError("Trống");
+                        edtTenMatHangLayout.setError("Trống");
+                        edtNganhHangLayout.setError("Trống");
+                        edtGiaNhapLayout.setError("Trống");
+                        edtGiaBanLayout.setError("Trống");
+                        edtSoLuongLayout.setError("Trống");
+                        edtDVTLayout.setError("Trống");
+                        Runnable runnable = () -> {
+                            edtNhaCungCapLayout.setErrorEnabled(false);
+                            edtTenMatHangLayout.setErrorEnabled(false);
+                            edtNganhHangLayout.setErrorEnabled(false);
+                            edtGiaNhapLayout.setErrorEnabled(false);
+                            edtGiaBanLayout.setErrorEnabled(false);
+                            edtSoLuongLayout.setErrorEnabled(false);
+                            edtDVTLayout.setErrorEnabled(false);
+
+                        };
+                        Handler handler = new Handler();
+                        handler.postDelayed(runnable, 1200);
+                    }else{
+                        if (matHangDAO.updateMatHang(new MatHang(idMH, 1, 1, tenMatHang, Float.parseFloat(soLuong), dVT, Integer.parseInt(giaNhap), Integer.parseInt(giaBan), 0))){
+                            Toast.makeText(getContext(), "Sửa Thành Công", Toast.LENGTH_SHORT).show();
+                            fragmentCallBack.finishCall(1);
+                        }else{
+                            Toast.makeText(getContext(), "Sửa Thành Bại", Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(getContext(), "Thêm Thành Bại", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                }else{
+                    btnAdd.setText("Xong");
+                    edtNhaCungCap.setEnabled(true);
+                    edtTenMatHang.setEnabled(true);
+                    edtSoLuong.setEnabled(true);
+                    edtDVT.setEnabled(true);
+                    edtNganhHang.setEnabled(true);
+                    edtGiaBan.setEnabled(true);
+                    edtGiaNhap.setEnabled(true);
+                    edtTenMatHang.requestFocus();
+                }
+                editMode.set(true);
+            }else{
+                if(nhaCungCap.isEmpty() || tenMatHang.isEmpty() || nganhHang.isEmpty() || giaBan.isEmpty() || giaNhap.isEmpty() || soLuong.isEmpty() || dVT.isEmpty()){
+                    edtNhaCungCapLayout.setError("Trống");
+                    edtTenMatHangLayout.setError("Trống");
+                    edtNganhHangLayout.setError("Trống");
+                    edtGiaNhapLayout.setError("Trống");
+                    edtGiaBanLayout.setError("Trống");
+                    edtSoLuongLayout.setError("Trống");
+                    edtDVTLayout.setError("Trống");
+                    Runnable runnable = () -> {
+                        edtNhaCungCapLayout.setErrorEnabled(false);
+                        edtTenMatHangLayout.setErrorEnabled(false);
+                        edtNganhHangLayout.setErrorEnabled(false);
+                        edtGiaNhapLayout.setErrorEnabled(false);
+                        edtGiaBanLayout.setErrorEnabled(false);
+                        edtSoLuongLayout.setErrorEnabled(false);
+                        edtDVTLayout.setErrorEnabled(false);
+
+                    };
+                    Handler handler = new Handler();
+                    handler.postDelayed(runnable, 1200);
+                }else{
+                    if (matHangDAO.AddMatHang(new MatHang(0, 1, 1, tenMatHang, Float.parseFloat(soLuong), dVT, Integer.parseInt(giaNhap), Integer.parseInt(giaBan), 0))){
+                        Toast.makeText(getContext(), "Thêm Thành Công", Toast.LENGTH_SHORT).show();
+                        fragmentCallBack.finishCall(1);
+                    }else{
+                        Toast.makeText(getContext(), "Thêm Thành Bại", Toast.LENGTH_SHORT).show();
+                    }
+                }
             }
         });
 

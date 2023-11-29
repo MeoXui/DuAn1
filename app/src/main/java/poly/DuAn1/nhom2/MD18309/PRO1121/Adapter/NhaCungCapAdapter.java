@@ -75,11 +75,11 @@ public class NhaCungCapAdapter extends RecyclerView.Adapter<NhaCungCapAdapter.Vi
 
         @Override
         public void onClick(View v) {
-            onItemClickCallBack.onItemClick(Integer.parseInt(txtMaNCC.getText().toString().replaceAll("^[0-9]", "")));
         }
 
         @Override
         public boolean onLongClick(View v) {
+            onItemClickCallBack.onItemClick(Integer.parseInt(txtMaNCC.getText().toString().replaceAll("[^0-9]", "")));
             return true;
         }
     }

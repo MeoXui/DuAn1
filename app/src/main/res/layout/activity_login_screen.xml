@@ -24,10 +24,10 @@
         android:layout_height="83dp"
         app:boxStrokeWidth="3dp"
         app:boxStrokeColor="@color/primary_color"
-        app:boxCornerRadiusBottomEnd="7dp"
-        app:boxCornerRadiusBottomStart="7dp"
-        app:boxCornerRadiusTopStart="7dp"
-        app:boxCornerRadiusTopEnd="7dp"
+        app:boxCornerRadiusBottomEnd="15dp"
+        app:boxCornerRadiusBottomStart="15dp"
+        app:boxCornerRadiusTopStart="15dp"
+        app:boxCornerRadiusTopEnd="15dp"
         app:boxStrokeErrorColor="@android:color/holo_red_light"
         android:id="@+id/edtUsernameLayout">
         <com.google.android.material.textfield.TextInputEditText
@@ -44,10 +44,10 @@
         android:layout_height="83dp"
         app:boxStrokeWidth="3dp"
         app:boxStrokeColor="@color/primary_color"
-        app:boxCornerRadiusBottomEnd="7dp"
-        app:boxCornerRadiusBottomStart="7dp"
-        app:boxCornerRadiusTopStart="7dp"
-        app:boxCornerRadiusTopEnd="7dp"
+        app:boxCornerRadiusBottomEnd="15dp"
+        app:boxCornerRadiusBottomStart="15dp"
+        app:boxCornerRadiusTopStart="15dp"
+        app:boxCornerRadiusTopEnd="15dp"
         app:passwordToggleEnabled="true"
         app:boxStrokeErrorColor="@android:color/holo_red_light"
         android:id="@+id/edtPasswordLayout">
@@ -66,7 +66,8 @@
         android:layout_height="wrap_content"
         android:text="Ghi Nhớ Tôi"
         android:layout_marginTop="-10dp"
-        android:id="@+id/chkRemember">
+        android:id="@+id/chkRemember"
+        app:buttonTint="@color/primary_color">
     </CheckBox>
 
     <LinearLayout
@@ -80,7 +81,9 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Đăng Nhập">
+            android:text="Đăng Nhập"
+            android:background="@drawable/button_background"
+            android:layout_marginEnd="10dp">
         </androidx.appcompat.widget.AppCompatButton>
 
         <androidx.appcompat.widget.AppCompatButton
@@ -88,7 +91,8 @@
             android:layout_weight="1"
             android:layout_height="wrap_content"
             android:text="Huỷ"
-            android:id="@+id/btnForgot">
+            android:id="@+id/btnForgot"
+            android:background="@drawable/cancel_button_background">
         </androidx.appcompat.widget.AppCompatButton>
     </LinearLayout>
 

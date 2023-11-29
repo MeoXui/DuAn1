@@ -2,6 +2,7 @@ package poly.DuAn1.nhom2.MD18309.PRO1121.fragments_mini;
 
 import android.os.Bundle;
 
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -29,12 +30,20 @@ import poly.DuAn1.nhom2.MD18309.PRO1121.R;
  * Use the {@link DanhSachNhaCungCap#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class DanhSachNhaCungCap extends Fragment implements NhaCungCapAdapter.OnItemClickCallBack {
+public class DanhSachNhaCungCap extends Fragment implements NhaCungCapAdapter.OnItemClickCallBack, ThemNhaCungCap.FragmentCallBack {
 
     private RecyclerView recyclerView;
     private FragmentManager fragmentManager;
     private NhaCungCapDAO nhaCungCapDAO;
-//    private ArrayList<NhaCungCap> nhaCungCapArrayList;
+    private ThemNhaCungCap themNhaCungCap;
+    private ConstraintLayout constraintLayout;
+
+    FragmentCallBack fragmentCallBack;
+    public interface FragmentCallBack{
+        void enterAddFragment(String title);
+        void exitAddFragment();
+    }
+
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -47,6 +56,10 @@ public class DanhSachNhaCungCap extends Fragment implements NhaCungCapAdapter.On
 
     public DanhSachNhaCungCap() {
         // Required empty public constructor
+    }
+
+    public DanhSachNhaCungCap(FragmentCallBack fragmentCallBack) {
+        this.fragmentCallBack = fragmentCallBack;
     }
 
     /**
@@ -87,6 +100,8 @@ public class DanhSachNhaCungCap extends Fragment implements NhaCungCapAdapter.On
         nhaCungCapDAO = new NhaCungCapDAO(getContext());
         ArrayList<NhaCungCap> nhaCungCapArrayList = nhaCungCapDAO.getNhaCungCapList();
         ArrayList<NhaCungCap> listTimKiem = new ArrayList<>();
+        fragmentManager = getChildFragmentManager();
+        constraintLayout = view.findViewById(R.id.constraintLayout);
 
         //Tìm Kiếm Theo Tên
         edtSearch.addTextChangedListener(new TextWatcher() {
@@ -123,11 +138,12 @@ public class DanhSachNhaCungCap extends Fragment implements NhaCungCapAdapter.On
         recyclerView.setLayoutManager(linearLayoutManager);
         setAdapter(nhaCungCapArrayList);
 
-        btnAdd.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(getContext(), "Thêm Thành Công(Chắc Thế)", Toast.LENGTH_SHORT).show();
-            }
+        btnAdd.setOnClickListener(v -> {
+            themNhaCungCap = new ThemNhaCungCap(getContext(), -1, this);
+            fragmentManager.beginTransaction().replace(R.id.framelayout, themNhaCungCap).commit();
+            constraintLayout.setVisibility(View.INVISIBLE);
+            fragmentCallBack.enterAddFragment("Thêm N.C.C");
+//            Toast.makeText(getContext(), "Thêm Thành Công(Chắc Thế)", Toast.LENGTH_SHORT).show();
         });
         return view;
     }
@@ -138,6 +154,22 @@ public class DanhSachNhaCungCap extends Fragment implements NhaCungCapAdapter.On
 
     @Override
     public void onItemClick(int id) {
+        System.out.println(id);
+        themNhaCungCap = new ThemNhaCungCap(getContext(), id, this);
+        fragmentManager.beginTransaction().replace(R.id.framelayout, themNhaCungCap).commit();
+        constraintLayout.setVisibility(View.INVISIBLE);
+        fragmentCallBack.enterAddFragment("Thông Tin N.C.C");
+//        Toast.makeText(getContext(), "Tưởng Tượng Màn Hình Thông Tin Chi Tiết", Toast.LENGTH_SHORT).show();
 
+    }
+
+    @Override
+    public void finishCall(int result) {
+        fragmentManager.beginTransaction().remove(themNhaCungCap).commit();
+        constraintLayout.setVisibility(View.VISIBLE);
+        fragmentCallBack.exitAddFragment();
+        if (result == 1){
+            setAdapter(nhaCungCapDAO.getNhaCungCapList());
+        }
     }
 }

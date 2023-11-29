@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteDatabase;
 import java.util.ArrayList;
 
 import poly.DuAn1.nhom2.MD18309.PRO1121.DBFucker;
+import poly.DuAn1.nhom2.MD18309.PRO1121.ObjectClass.MatHang;
 import poly.DuAn1.nhom2.MD18309.PRO1121.ObjectClass.NhaCungCap;
 
 public class NhaCungCapDAO {
@@ -82,5 +83,24 @@ public class NhaCungCapDAO {
             database.endTransaction();
         }
         return result;
+    }
+
+    public NhaCungCap getNhaCungCapByID(int id){
+        NhaCungCap nhaCungCap = null;
+        SQLiteDatabase database = dbFucker.getReadableDatabase();
+        database.beginTransaction();
+        try{
+            Cursor cursor = database.rawQuery("SELECT * FROM NHACUNGCAP Where idNCC=?", new String[]{String.valueOf(id)});
+            if(cursor != null && cursor.getCount() > 0 && cursor.moveToFirst()){
+                nhaCungCap = new NhaCungCap(cursor.getInt(0), cursor.getString(1), cursor.getString(4), cursor.getString(2), cursor.getString(3));
+                cursor.close();
+            }
+            database.setTransactionSuccessful();
+        }catch (Exception e){
+            throw new RuntimeException(e);
+        }finally {
+            database.endTransaction();
+        }
+        return nhaCungCap;
     }
 }

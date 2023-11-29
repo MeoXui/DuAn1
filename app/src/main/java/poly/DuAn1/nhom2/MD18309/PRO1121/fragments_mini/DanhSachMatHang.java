@@ -37,9 +37,11 @@ public class DanhSachMatHang extends Fragment implements MatHangAdapter.OnItemCl
     private ThemMatHang themMatHang;
     private FragmentManager fragmentManager;
     private ConstraintLayout constraintLayout;
+    private MatHangDAO matHangDAO;
+    private ArrayList<MatHang> listMatHang;
     FragmentCallBack fragmentCallBack;
     public interface FragmentCallBack{
-        void enterAddFragment();
+        void enterAddFragment(String title);
         void exitAddFragment();
     }
 
@@ -94,11 +96,10 @@ public class DanhSachMatHang extends Fragment implements MatHangAdapter.OnItemCl
         recyclerView = view.findViewById(R.id.recyclerView);
         Button btnAdd = view.findViewById(R.id.btnAdd);
         EditText edtSearch = view.findViewById(R.id.edtSearch);
+        matHangDAO = new MatHangDAO(getContext());
         ArrayList<MatHang> listTimKiem = new ArrayList<>();
-        ArrayList<MatHang> listMatHang = new MatHangDAO(getContext()).getMatHangList();
         fragmentManager = getChildFragmentManager();
         constraintLayout = view.findViewById(R.id.constraintLayout);
-        themMatHang = new ThemMatHang(getContext(), this);
 
         //Tìm Kiếm Theo Tên
         edtSearch.addTextChangedListener(new TextWatcher() {
@@ -131,17 +132,24 @@ public class DanhSachMatHang extends Fragment implements MatHangAdapter.OnItemCl
 
         //Thêm
         btnAdd.setOnClickListener(v -> {
-//                Toast.makeText(getContext(), "Thêm Thành Công(Chắc Thế)", Toast.LENGTH_SHORT).show();
+            themMatHang = new ThemMatHang(getContext(), -1,this);
             fragmentManager.beginTransaction().replace(R.id.framelayout, themMatHang).commit();
             constraintLayout.setVisibility(View.INVISIBLE);
-            fragmentCallBack.enterAddFragment();
+            fragmentCallBack.enterAddFragment("Thêm Mặt Hàng");
         });
 
+        //Setup recyclerView
+        loadList();
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         linearLayoutManager.setOrientation(RecyclerView.VERTICAL);
         recyclerView.setLayoutManager(linearLayoutManager);
         setAdapter(listMatHang);
         return view;
+    }
+
+    private void loadList(){
+        listMatHang = matHangDAO.getMatHangList();
+
     }
 
     private void setAdapter(ArrayList<MatHang> matHangArrayList){
@@ -151,13 +159,21 @@ public class DanhSachMatHang extends Fragment implements MatHangAdapter.OnItemCl
     @Override
     public void onClickListener(int id) {
         System.out.println(id);
-        Toast.makeText(getContext(), "Tưởng Tượng Màn Hình Thông Tin Chi Tiết", Toast.LENGTH_SHORT).show();
+//        Toast.makeText(getContext(), "Tưởng Tượng Màn Hình Thông Tin Chi Tiết", Toast.LENGTH_SHORT).show();
+        themMatHang = new ThemMatHang(getContext(), id,this);
+        fragmentManager.beginTransaction().replace(R.id.framelayout, themMatHang).commit();
+        constraintLayout.setVisibility(View.INVISIBLE);
+        fragmentCallBack.enterAddFragment("Thông Tin Mặt hàng");
     }
 
     @Override
-    public void finishCall() {
+    public void finishCall(int result) {
         fragmentManager.beginTransaction().remove(themMatHang).commit();
         constraintLayout.setVisibility(View.VISIBLE);
         fragmentCallBack.exitAddFragment();
+        if (result == 1){
+            loadList();
+            setAdapter(listMatHang);
+        }
     }
 }

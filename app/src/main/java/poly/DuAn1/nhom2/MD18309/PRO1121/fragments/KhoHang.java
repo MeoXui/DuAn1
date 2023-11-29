@@ -41,7 +41,10 @@ import poly.DuAn1.nhom2.MD18309.PRO1121.fragments_mini.DanhSachNhaCungCap;
  * create an instance of this fragment.
  */
 @SuppressLint("SetTextI18n")
-public class KhoHang extends Fragment implements OptionItemAdapter.OnItemClickCallBack, DanhSachMatHang.FragmentCallBack {
+public class KhoHang extends Fragment implements OptionItemAdapter.OnItemClickCallBack,
+                                                DanhSachMatHang.FragmentCallBack,
+                                                DanhSachNganhHang.FragmentCallBack,
+                                                DanhSachNhaCungCap.FragmentCallBack {
 
     private DanhSachMatHang danhSachMatHang;
     private DanhSachNhaCungCap danhSachNhaCungCap;
@@ -116,8 +119,8 @@ public class KhoHang extends Fragment implements OptionItemAdapter.OnItemClickCa
 
         //Khai Báo Fragment(Tạm Thời)
         danhSachMatHang = new DanhSachMatHang(this);
-        danhSachNhaCungCap = new DanhSachNhaCungCap();
-        danhSachNganhHang = new DanhSachNganhHang();
+        danhSachNhaCungCap = new DanhSachNhaCungCap(this);
+        danhSachNganhHang = new DanhSachNganhHang(this);
 
         btnTest.setVisibility(View.INVISIBLE);
 
@@ -202,10 +205,10 @@ public class KhoHang extends Fragment implements OptionItemAdapter.OnItemClickCa
     }
 
     @Override
-    public void enterAddFragment() {
+    public void enterAddFragment(String title) {
         ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         ((AppCompatActivity)getActivity()).getSupportActionBar().setHomeButtonEnabled(false);
-        toolBarTitle.setText("Thêm Mặt Hàng");
+        toolBarTitle.setText(title);
     }
 
     @Override

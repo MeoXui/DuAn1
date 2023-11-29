@@ -2,6 +2,7 @@ package poly.DuAn1.nhom2.MD18309.PRO1121.fragments_mini;
 
 import android.os.Bundle;
 
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -31,12 +32,19 @@ import poly.DuAn1.nhom2.MD18309.PRO1121.R;
  * Use the {@link DanhSachNganhHang#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class DanhSachNganhHang extends Fragment implements NganhHangAdapter.OnItemClickCallBack {
+public class DanhSachNganhHang extends Fragment implements NganhHangAdapter.OnItemClickCallBack, ThemNganhHang.FragmentCallBack {
 
     private RecyclerView recyclerView;
     private FragmentManager fragmentManager;
     private NganhHangDAO nganhHangDAO;
-//    private ArrayList<NganhHang> nganhHangArrayList;
+    private ConstraintLayout constraintLayout;
+    private ThemNganhHang themNganhHang;
+    FragmentCallBack fragmentCallBack;
+
+    public interface FragmentCallBack{
+        void enterAddFragment(String title);
+        void exitAddFragment();
+    }
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -49,6 +57,10 @@ public class DanhSachNganhHang extends Fragment implements NganhHangAdapter.OnIt
 
     public DanhSachNganhHang() {
         // Required empty public constructor
+    }
+
+    public DanhSachNganhHang(FragmentCallBack fragmentCallBack) {
+        this.fragmentCallBack = fragmentCallBack;
     }
 
     /**
@@ -89,6 +101,8 @@ public class DanhSachNganhHang extends Fragment implements NganhHangAdapter.OnIt
         nganhHangDAO = new NganhHangDAO(getContext());
         ArrayList<NganhHang> nganhHangArrayList = nganhHangDAO.getNganhHangList();
         ArrayList<NganhHang> listTimKiem = new ArrayList<>();
+        constraintLayout = view.findViewById(R.id.constraintLayout);
+        fragmentManager = getChildFragmentManager();
 
         //Tìm Kiếm Theo Tên
         edtSearch.addTextChangedListener(new TextWatcher() {
@@ -125,11 +139,12 @@ public class DanhSachNganhHang extends Fragment implements NganhHangAdapter.OnIt
         recyclerView.setLayoutManager(linearLayoutManager);
         setAdapter(nganhHangArrayList);
 
-        btnAdd.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(getContext(), "Thêm Thành Công(Chắc Thế)", Toast.LENGTH_SHORT).show();
-            }
+        //Thêm Ngành Hàng
+        btnAdd.setOnClickListener(v -> {
+            themNganhHang = new ThemNganhHang(getContext(), -1, this);
+            fragmentManager.beginTransaction().replace(R.id.framelayout, themNganhHang).commit();
+            constraintLayout.setVisibility(View.INVISIBLE);
+            fragmentCallBack.enterAddFragment("Thêm Ngành Hàng");
         });
 
         return view;
@@ -139,9 +154,23 @@ public class DanhSachNganhHang extends Fragment implements NganhHangAdapter.OnIt
         recyclerView.setAdapter(new NganhHangAdapter(getContext(), nganhHangArrayList, this));
     }
 
+    //Xem Thông Tin Ngành Hàng
     @Override
     public void onClickListener(int id) {
         System.out.println(id);
-        Toast.makeText(getContext(), "Tưởng Tượng Màn Hình Thông Tin Chi Tiết", Toast.LENGTH_SHORT).show();
+        themNganhHang = new ThemNganhHang(getContext(), id, this);
+        fragmentManager.beginTransaction().replace(R.id.framelayout, themNganhHang).commit();
+        constraintLayout.setVisibility(View.INVISIBLE);
+        fragmentCallBack.enterAddFragment("Thông Tin Ngành Hàng");
+    }
+
+    @Override
+    public void finishCall(int result) {
+        fragmentManager.beginTransaction().remove(themNganhHang).commit();
+        constraintLayout.setVisibility(View.VISIBLE);
+        fragmentCallBack.exitAddFragment();
+        if (result == 1){
+            setAdapter(nganhHangDAO.getNganhHangList());
+        }
     }
 }

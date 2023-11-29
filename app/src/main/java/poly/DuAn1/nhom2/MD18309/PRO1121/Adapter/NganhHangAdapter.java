@@ -60,7 +60,7 @@ public class NganhHangAdapter extends RecyclerView.Adapter<NganhHangAdapter.View
         return nganhHangArrayList.size();
     }
 
-    public static class ViewFucker extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public static class ViewFucker extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {
 
         TextView txtTenNganhHang, txtMaHangHang;
         ImageButton btnDelete;
@@ -68,6 +68,7 @@ public class NganhHangAdapter extends RecyclerView.Adapter<NganhHangAdapter.View
         public ViewFucker(@NonNull View itemView) {
             super(itemView);
             itemView.setOnClickListener(this);
+            itemView.setOnLongClickListener(this);
             txtTenNganhHang = itemView.findViewById(R.id.txtTenNganhHang);
             txtMaHangHang = itemView.findViewById(R.id.txtMaNganhHang);
             btnDelete = itemView.findViewById(R.id.btnDeleteLS);
@@ -75,7 +76,12 @@ public class NganhHangAdapter extends RecyclerView.Adapter<NganhHangAdapter.View
 
         @Override
         public void onClick(View v) {
+        }
+
+        @Override
+        public boolean onLongClick(View v) {
             onItemClickCallBack.onClickListener(Integer.parseInt(txtMaHangHang.getText().toString().replaceAll("[^0-9]", "")));
+            return true;
         }
     }
 }

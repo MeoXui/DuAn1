@@ -89,7 +89,7 @@ public class MatHangAdapter extends RecyclerView.Adapter<MatHangAdapter.ViewFuck
 
         @Override
         public void onClick(View v) {
-            onItemClickCallBack.onClickListener(Integer.parseInt(txtMaMatHang.getText().toString().replaceAll("[^0-9]", "")));
+//            onItemClickCallBack.onClickListener(Integer.parseInt(txtMaMatHang.getText().toString().replaceAll("[^0-9]", "")));
         }
 
         @Override
