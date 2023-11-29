@@ -81,6 +81,29 @@ public class NganhHangDAO {
         return result;
     }
 
+    public boolean updateNganhHang(NganhHang nganhHang) {
+        boolean result = true;
+        SQLiteDatabase database = dbFucker.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("TenNH", nganhHang.getTenNganhHang());
+        values.put("STATUS", 0);
+        database.beginTransaction();
+        try {
+            long kq = database.update("NGANHHANG", values, "idNH = ?", new String[]{String.valueOf(nganhHang.getIdNganhHang())});
+            if (kq != -1) {
+                result = true;
+            }
+            values.clear();
+            database.setTransactionSuccessful();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        } finally {
+            database.endTransaction();
+        }
+
+        return result;
+    }
+
     public NganhHang getNganhHangByID(int id){
         NganhHang nganhHang = null;
         SQLiteDatabase database = dbFucker.getReadableDatabase();

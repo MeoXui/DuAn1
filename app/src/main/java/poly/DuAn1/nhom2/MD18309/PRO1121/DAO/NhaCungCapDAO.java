@@ -52,6 +52,7 @@ public class NhaCungCapDAO {
         values.put("NguoiDaiDien", nhaCungCap.getHoTenNguoiDaiDien());
         values.put("DiaChi", nhaCungCap.getDiaChiNhaCungCap());
         values.put("Sdt", nhaCungCap.getSdtNhaCungCap());
+        values.put("STATUS", 0);
         try {
             long kq = database.insert("NHACUNGCAP", null, values);
             if (kq != -1) {
@@ -82,6 +83,32 @@ public class NhaCungCapDAO {
         } finally {
             database.endTransaction();
         }
+        return result;
+    }
+
+    public boolean updateNhaCungCap(NhaCungCap nhaCungCap) {
+        boolean result = false;
+        SQLiteDatabase database = dbFucker.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("TenNCC", nhaCungCap.getTenNhaCungCap());
+        values.put("NguoiDaiDien", nhaCungCap.getHoTenNguoiDaiDien());
+        values.put("DiaChi", nhaCungCap.getDiaChiNhaCungCap());
+        values.put("Sdt", nhaCungCap.getSdtNhaCungCap());
+        values.put("STATUS", 0);
+        database.setTransactionSuccessful();
+        try {
+            long kq = database.update("NHACUNGCAP", values, "idNCC = ?", new String[]{String.valueOf(nhaCungCap.getIdNhaCungCap())});
+            if (kq != -1) {
+                result = true;
+            }
+            values.clear();
+            database.setTransactionSuccessful();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        } finally {
+            database.endTransaction();
+        }
+
         return result;
     }
 

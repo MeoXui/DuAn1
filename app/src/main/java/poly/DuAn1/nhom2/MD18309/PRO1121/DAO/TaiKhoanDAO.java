@@ -46,6 +46,7 @@ public class TaiKhoanDAO {
         pair.put("HoTen", aTaiKhoan.getHoTen());
         pair.put("Phone", aTaiKhoan.getPhone());
         pair.put("Email", aTaiKhoan.getEmail());
+        pair.put("STATUS", 0);
         try {
             long kq = database.insert("TAIKHOAN", null, pair);
             if (kq != -1){
@@ -58,6 +59,52 @@ public class TaiKhoanDAO {
         }finally {
             database.endTransaction();
         }
+        return result;
+    }
+
+    public boolean DeleteTaiKhoan(String username) {
+        SQLiteDatabase database = dbFucker.getWritableDatabase();
+        boolean result = false;
+        database.beginTransaction();
+        try {
+            long kq = database.delete("TAIKHOAN", "UserName = ?", new String[]{username});
+            if (kq > -1) {
+                result = true;
+            }
+            database.setTransactionSuccessful();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        } finally {
+            database.endTransaction();
+        }
+
+        return result;
+    }
+
+    public boolean updateTaiKhoan(TaiKhoan taiKhoan) {
+        boolean result = false;
+        SQLiteDatabase database = dbFucker.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("Password", taiKhoan.getPassWord());
+        values.put("ROLE", taiKhoan.getRole());
+        values.put("HoTen", taiKhoan.getHoTen());
+        values.put("Phone", taiKhoan.getPhone());
+        values.put("Email", taiKhoan.getEmail());
+        values.put("STATUS", 0);
+        database.beginTransaction();
+        try {
+            long kq = database.update("TAIKHOAN", values, "UserName = ?", new String[]{taiKhoan.getUserName()});
+            if (kq != -1) {
+                result = true;
+            }
+            values.clear();
+            database.setTransactionSuccessful();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        } finally {
+            database.endTransaction();
+        }
+
         return result;
     }
 
@@ -83,5 +130,7 @@ public class TaiKhoanDAO {
         }
         return result;
     }
+
+
 
 }

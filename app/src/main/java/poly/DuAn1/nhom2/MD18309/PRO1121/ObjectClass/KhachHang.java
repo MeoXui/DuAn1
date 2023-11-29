@@ -1,12 +1,18 @@
 package poly.DuAn1.nhom2.MD18309.PRO1121.ObjectClass;
 
 public class KhachHang {
-    private String idKH;
+    private int idKH;
     private String HoTenKH;
     private String phoneKH;
     private String addressKH;
 
-    public String getIdKH() {
+    private int trangThai;
+
+    public int getTrangThai() {
+        return trangThai;
+    }
+
+    public int getIdKH() {
         return idKH;
     }
 
@@ -22,10 +28,11 @@ public class KhachHang {
         return addressKH;
     }
 
-    public KhachHang(String idKH, String hoTenKH, String phoneKH, String addressKH) {
+    public KhachHang(int idKH, String hoTenKH, String phoneKH, String addressKH, int trangThai) {
         this.idKH = idKH;
         HoTenKH = hoTenKH;
         this.phoneKH = phoneKH;
         this.addressKH = addressKH;
+        this.trangThai = trangThai;
     }
 }

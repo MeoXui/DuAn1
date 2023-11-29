@@ -54,7 +54,7 @@ public class HoaDonDAO {
         values.put("idNguoiTao", hoaDon.getIdNguoiTao());
         values.put("idNguoiMua", hoaDon.getIdNguoiMua());
         values.put("NgayTao", hoaDon.getNgayTao());
-        values.put("TrangThai", hoaDon.getTrangThai());
+        values.put("TrangThai", 0);
         try {
             long kq = database.insert("HOADON", null, values);
             if (kq != -1) {
@@ -86,6 +86,31 @@ public class HoaDonDAO {
         } finally {
             database.endTransaction();
         }
+        return result;
+    }
+
+    public boolean updateHoaDon(HoaDon hoaDon) {
+        boolean result = false;
+        SQLiteDatabase database = dbFucker.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("idNguoiTao", hoaDon.getIdNguoiTao());
+        values.put("idNguoiMua", hoaDon.getIdNguoiMua());
+        values.put("NgayTao", hoaDon.getNgayTao());
+        values.put("TrangThai", 0);
+        database.beginTransaction();
+        try {
+            long kq = database.update("HOADON", values, "idHD = ?", new String[]{String.valueOf(hoaDon.getIdHD())});
+            if (kq != -1) {
+                result = true;
+            }
+            values.clear();
+            database.setTransactionSuccessful();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        } finally {
+            database.endTransaction();
+        }
+
         return result;
     }
 }

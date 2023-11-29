@@ -58,7 +58,7 @@ public class CongViecDAO {
         values.put("TieuDe", congViec.getTieuDe());
         values.put("MoTa", congViec.getMoTa());
         values.put("ThoiHan", congViec.getThoiHan());
-        values.put("TrangThai", congViec.getTrangThai());
+        values.put("TrangThai", 0);
         try {
             long kq = database.insert("CONGVIEC", null, values);
             if (kq != -1) {
@@ -89,6 +89,33 @@ public class CongViecDAO {
         } finally {
             database.endTransaction();
         }
+        return result;
+    }
+
+    public boolean updateCongViec(CongViec congViec) {
+        boolean result = false;
+        SQLiteDatabase database =dbFucker.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("idQuanLy", congViec.getIdQuanLy());
+        values.put("idNhanVien", congViec.getIdNhanVien());
+        values.put("TieuDe", congViec.getTieuDe());
+        values.put("MoTa", congViec.getMoTa());
+        values.put("ThoiHan", congViec.getTrangThai());
+        values.put("STATUS", 0);
+        database.beginTransaction();
+        try {
+            long kq = database.update("CONGVIEC", values, "idCV = ?", new String[]{String.valueOf(congViec.getIdCV())});
+            if (kq != -1) {
+                result = true;
+            }
+            values.clear();
+            database.setTransactionSuccessful();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        } finally {
+            database.endTransaction();
+        }
+
         return result;
     }
 }

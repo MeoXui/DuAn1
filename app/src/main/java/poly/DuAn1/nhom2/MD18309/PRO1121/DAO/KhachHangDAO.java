@@ -26,10 +26,11 @@ public class KhachHangDAO {
             if (cursor != null && cursor.getCount() > 0) {
                 cursor.moveToFirst();
                 while (!cursor.isAfterLast()) {
-                    listKH.add(new KhachHang(cursor.getString(0),
+                    listKH.add(new KhachHang(cursor.getInt(0),
                             cursor.getString(1),
                             cursor.getString(2),
-                            cursor.getString(3)));
+                            cursor.getString(3),
+                            cursor.getInt(4)));
                     cursor.moveToNext();
                 }
                 cursor.close();
@@ -53,6 +54,8 @@ public class KhachHangDAO {
         values.put("HoTen", khachhang.getHoTenKH());
         values.put("Email", khachhang.getAddressKH());
         values.put("SdtKH", khachhang.getPhoneKH());
+        values.put("STATUS", 0);
+
         try {
             long kq = database.insert("KHACHHANG", null, values);
             if (kq != -1) {
@@ -83,6 +86,31 @@ public class KhachHangDAO {
         } finally {
             database.endTransaction();
         }
+        return result;
+    }
+
+    public boolean updateKhachHang(KhachHang khachHang) {
+        boolean result = false;
+        SQLiteDatabase database = dbFucker.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("HoTen", khachHang.getHoTenKH());
+        values.put("Email", khachHang.getAddressKH());
+        values.put("SdtKH", khachHang.getPhoneKH());
+        values.put("STATUS", 0);
+        database.beginTransaction();
+        try {
+            long kq = database.update("KHACHHANG", values, "idKH = ?", new String[]{String.valueOf(khachHang.getIdKH())});
+            if (kq != -1) {
+                result = true;
+            }
+            values.clear();
+            database.setTransactionSuccessful();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        } finally {
+            database.endTransaction();
+        }
+
         return result;
     }
 }

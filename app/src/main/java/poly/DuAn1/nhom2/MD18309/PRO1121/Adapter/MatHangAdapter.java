@@ -64,8 +64,6 @@ public class MatHangAdapter extends RecyclerView.Adapter<MatHangAdapter.ViewFuck
                 Toast.makeText(context, "Xóa Thành Công(Chắc Thế)", Toast.LENGTH_SHORT).show();
             }
         });
-
-
     }
 
     @Override
