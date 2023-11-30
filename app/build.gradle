@@ -8,7 +8,7 @@ android {
 
     defaultConfig {
         applicationId "poly.DuAn1.nhom2.MD18309.PRO1121"
-        minSdk 24
+        minSdk 22
         targetSdk 33
         versionCode 1
         versionName "1.0"

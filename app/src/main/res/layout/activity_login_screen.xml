@@ -11,12 +11,27 @@
     tools:context=".login_screen">
 
     <ImageView
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:layout_marginTop="0dp"
-        android:scaleX="0.7"
-        android:scaleY="0.7"
-        android:src="@drawable/logo"></ImageView>
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:src="@drawable/logo"
+        android:layout_gravity="left"
+        android:layout_marginTop="50dp">
+    </ImageView>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Phuong Bac"
+        android:textSize="35sp"
+        android:layout_gravity="left"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Management"
+        android:layout_gravity="left"
+        android:layout_marginBottom="20sp"/>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/edtUsernameLayout"
@@ -68,9 +83,10 @@
         android:id="@+id/chkRemember"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="-10dp"
+        android:layout_marginTop="-20dp"
         android:text="Ghi Nhớ Tôi"
-        app:buttonTint="@color/primary_color"></CheckBox>
+        app:buttonTint="@color/primary_color"
+        android:layout_marginLeft="-3dp"></CheckBox>
 
     <LinearLayout
         android:layout_width="match_parent"
