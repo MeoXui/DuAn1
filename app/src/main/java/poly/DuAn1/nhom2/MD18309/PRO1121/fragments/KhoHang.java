@@ -174,7 +174,7 @@ public class KhoHang extends Fragment implements OptionItemAdapter.OnItemClickCa
         }
     }
 
-    private void openDanhSachMatHang(){
+    public void openDanhSachMatHang(){
 //        danhSachMatHang = new DanhSachMatHang();
         ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         ((AppCompatActivity)getActivity()).getSupportActionBar().setHomeButtonEnabled(true);

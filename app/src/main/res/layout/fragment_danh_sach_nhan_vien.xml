@@ -59,7 +59,7 @@
                 android:layout_width="0dp"
                 android:layout_weight="0.7"
                 android:layout_height="match_parent"
-                android:hint="Tìm Kiếm"
+                android:hint="Tìm Kiếm Nhân Viên"
                 android:id="@+id/edtSearch"
                 android:lines="1"
                 android:background="@drawable/border"

@@ -160,6 +160,7 @@ public class DanhSachMatHang extends Fragment implements MatHangAdapter.OnItemCl
         recyclerView.setAdapter(matHangAdapter);
     }
 
+    //Xem Thông Tin
     @Override
     public void onClickListener(int id, int holderPOS) {
         System.out.println(id);
@@ -172,6 +173,7 @@ public class DanhSachMatHang extends Fragment implements MatHangAdapter.OnItemCl
         fragmentCallBack.enterAddFragment("Thông Tin Mặt hàng");
     }
 
+    //Thoát Fragment Thêm
     @Override
     public void finishCall(int result) {
         fragmentManager.beginTransaction().remove(themMatHang).commit();

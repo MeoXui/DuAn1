@@ -2,6 +2,8 @@ package poly.DuAn1.nhom2.MD18309.PRO1121.fragments_mini;
 
 import android.os.Bundle;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -17,6 +19,13 @@ import poly.DuAn1.nhom2.MD18309.PRO1121.R;
  */
 public class ThongKe extends Fragment {
 
+    private FragmentCallBack fragmentCallBack;
+
+    public interface FragmentCallBack{
+        void exitFragment();
+    }
+
+
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -28,6 +37,10 @@ public class ThongKe extends Fragment {
 
     public ThongKe() {
         // Required empty public constructor
+    }
+
+    public ThongKe(FragmentCallBack fragmentCallBack) {
+        this.fragmentCallBack = fragmentCallBack;
     }
 
     /**
@@ -58,9 +71,14 @@ public class ThongKe extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_thong_ke, container, false);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_thong_ke, container, false);
+        Toolbar toolbar = view.findViewById(R.id.toolbar);
+        toolbar.setTitle("");
+        ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setHomeButtonEnabled(true);
+        toolbar.setNavigationOnClickListener(v -> fragmentCallBack.exitFragment());
+        return view;
     }
 }

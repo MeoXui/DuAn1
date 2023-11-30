@@ -14,6 +14,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import poly.DuAn1.nhom2.MD18309.PRO1121.fragments_mini.BaoCao;
+import poly.DuAn1.nhom2.MD18309.PRO1121.fragments_mini.DanhSachKhachHang;
 import poly.DuAn1.nhom2.MD18309.PRO1121.fragments_mini.DoiMatKhau;
 import poly.DuAn1.nhom2.MD18309.PRO1121.ObjectClass.TaiKhoan;
 import poly.DuAn1.nhom2.MD18309.PRO1121.R;
@@ -25,9 +26,19 @@ import poly.DuAn1.nhom2.MD18309.PRO1121.fragments_mini.DanhSachNhanVien;
  * Use the {@link Menu#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class Menu extends Fragment {
+public class Menu extends Fragment implements DanhSachKhachHang.FragmentCallBack, DanhSachNhanVien.FragmentCallBack, ThongKe.FragmentCallBack, DoiMatKhau.FragmentCallBack, BaoCao.FragmentCallBack {
 
     private TaiKhoan taiKhoan;
+    private FragmentManager fragmentManager;
+    private LinearLayout parentLayout;
+
+    //Fragment
+    private DanhSachNhanVien danhSachNhanVien;
+    private DanhSachKhachHang danhSachKhachHang;
+    private DoiMatKhau doiMatKhau;
+    private BaoCao baoCao;
+    private ThongKe thongKe;
+
     private FragmentCallBack fragmentCallBack;
 
     public interface FragmentCallBack{
@@ -88,13 +99,19 @@ public class Menu extends Fragment {
         TextView txtHoTen = view.findViewById(R.id.txtHoTen);
         TextView txtChucVu = view.findViewById(R.id.txtRole);
         ImageView imgProfile = view.findViewById(R.id.imgProfile);
-        LinearLayout parentLayout = view.findViewById(R.id.linearLayout);
+        parentLayout = view.findViewById(R.id.linearLayout);
         LinearLayout btnChangePass = view.findViewById(R.id.btnChangePass);
         LinearLayout btnQLNhanVien = view.findViewById(R.id.btnQLNhanVien);
         LinearLayout btnThongKe = view.findViewById(R.id.btnThongKe);
         LinearLayout btnBaoCao = view.findViewById(R.id.btnBaoCao);
         LinearLayout btnLogOut = view.findViewById(R.id.btnLogOut);
-        FragmentManager fragmentManager = getChildFragmentManager();
+        fragmentManager = getChildFragmentManager();
+        danhSachNhanVien = new DanhSachNhanVien(this);
+        danhSachKhachHang = new DanhSachKhachHang(this);
+        thongKe = new ThongKe(this);
+        baoCao = new BaoCao(this);
+        doiMatKhau = new DoiMatKhau(this);
+
 
         //Hiện Thị Thông Tin
         txtHoTen.setText(taiKhoan.getHoTen());
@@ -112,26 +129,35 @@ public class Menu extends Fragment {
 
         btnQLNhanVien.setOnClickListener(v -> {
             parentLayout.setVisibility(View.INVISIBLE);
-            fragmentManager.beginTransaction().replace(R.id.framelayout, new DanhSachNhanVien()).commit();
+            fragmentManager.beginTransaction().replace(R.id.framelayout, danhSachNhanVien).commit();
         });
 
         btnThongKe.setOnClickListener(v -> {
             parentLayout.setVisibility(View.INVISIBLE);
-            fragmentManager.beginTransaction().replace(R.id.framelayout, new ThongKe()).commit();
+            fragmentManager.beginTransaction().replace(R.id.framelayout, thongKe).commit();
         });
 
         btnBaoCao.setOnClickListener(v -> {
             parentLayout.setVisibility(View.INVISIBLE);
-            fragmentManager.beginTransaction().replace(R.id.framelayout, new BaoCao()).commit();
+            fragmentManager.beginTransaction().replace(R.id.framelayout, baoCao).commit();
         });
 
         btnChangePass.setOnClickListener(v -> {
             parentLayout.setVisibility(View.INVISIBLE);
-            fragmentManager.beginTransaction().replace(R.id.framelayout, new DoiMatKhau()).commit();
+            fragmentManager.beginTransaction().replace(R.id.framelayout, doiMatKhau).commit();
         });
 
         btnLogOut.setOnClickListener(v -> fragmentCallBack.logout());
 
         return view;
+    }
+
+    @Override
+    public void exitFragment() {
+        fragmentManager.beginTransaction().remove(danhSachNhanVien).commit();
+        fragmentManager.beginTransaction().remove(thongKe).commit();
+        fragmentManager.beginTransaction().remove(baoCao).commit();
+        fragmentManager.beginTransaction().remove(doiMatKhau).commit();
+        parentLayout.setVisibility(View.VISIBLE);
     }
 }

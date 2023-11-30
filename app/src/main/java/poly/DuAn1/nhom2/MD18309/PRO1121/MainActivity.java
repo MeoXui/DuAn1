@@ -7,6 +7,7 @@ import androidx.fragment.app.FragmentManager;
 import android.content.Context;
 import android.graphics.Rect;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
@@ -31,6 +32,7 @@ public class MainActivity extends AppCompatActivity implements TrangChu.Fragment
     private Menu menu = null;
     private TrangChu trangChu = null;
     private TaiKhoan taiKhoan = null;
+    private final Handler handler = new Handler();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,6 +102,8 @@ public class MainActivity extends AppCompatActivity implements TrangChu.Fragment
         System.out.println(position);
         if (position == 2){
             bottomNavigationView.setSelectedItemId(R.id.khohang);
+            Runnable delay = () -> khoHang.openDanhSachMatHang();
+            handler.postDelayed(delay, 1);
         } else if (position == 1) {
             bottomNavigationView.setSelectedItemId(R.id.hoadon);
         }
