@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,10 +13,12 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
+import poly.DuAn1.nhom2.MD18309.PRO1121.fragments_mini.BaoCao;
+import poly.DuAn1.nhom2.MD18309.PRO1121.fragments_mini.DoiMatKhau;
 import poly.DuAn1.nhom2.MD18309.PRO1121.ObjectClass.TaiKhoan;
 import poly.DuAn1.nhom2.MD18309.PRO1121.R;
+import poly.DuAn1.nhom2.MD18309.PRO1121.fragments_mini.ThongKe;
+import poly.DuAn1.nhom2.MD18309.PRO1121.fragments_mini.DanhSachNhanVien;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -85,7 +88,13 @@ public class Menu extends Fragment {
         TextView txtHoTen = view.findViewById(R.id.txtHoTen);
         TextView txtChucVu = view.findViewById(R.id.txtRole);
         ImageView imgProfile = view.findViewById(R.id.imgProfile);
+        LinearLayout parentLayout = view.findViewById(R.id.linearLayout);
+        LinearLayout btnChangePass = view.findViewById(R.id.btnChangePass);
+        LinearLayout btnQLNhanVien = view.findViewById(R.id.btnQLNhanVien);
+        LinearLayout btnThongKe = view.findViewById(R.id.btnThongKe);
+        LinearLayout btnBaoCao = view.findViewById(R.id.btnBaoCao);
         LinearLayout btnLogOut = view.findViewById(R.id.btnLogOut);
+        FragmentManager fragmentManager = getChildFragmentManager();
 
         //Hiện Thị Thông Tin
         txtHoTen.setText(taiKhoan.getHoTen());
@@ -100,6 +109,26 @@ public class Menu extends Fragment {
             imgProfile.setImageResource(R.drawable.user);
             txtChucVu.setText("Người Dùng");
         }
+
+        btnQLNhanVien.setOnClickListener(v -> {
+            parentLayout.setVisibility(View.INVISIBLE);
+            fragmentManager.beginTransaction().replace(R.id.framelayout, new DanhSachNhanVien()).commit();
+        });
+
+        btnThongKe.setOnClickListener(v -> {
+            parentLayout.setVisibility(View.INVISIBLE);
+            fragmentManager.beginTransaction().replace(R.id.framelayout, new ThongKe()).commit();
+        });
+
+        btnBaoCao.setOnClickListener(v -> {
+            parentLayout.setVisibility(View.INVISIBLE);
+            fragmentManager.beginTransaction().replace(R.id.framelayout, new BaoCao()).commit();
+        });
+
+        btnChangePass.setOnClickListener(v -> {
+            parentLayout.setVisibility(View.INVISIBLE);
+            fragmentManager.beginTransaction().replace(R.id.framelayout, new DoiMatKhau()).commit();
+        });
 
         btnLogOut.setOnClickListener(v -> fragmentCallBack.logout());
 

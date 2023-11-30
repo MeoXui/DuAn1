@@ -73,7 +73,7 @@ public class HoaDonDAO {
 
     public boolean DeleteHoaDon(int id) {
         SQLiteDatabase database = dbFucker.getWritableDatabase();
-        boolean result = true;
+        boolean result = false;
         database.beginTransaction();
         try {
             long kq = database.delete("HOADON", "idHD = ?", new String[]{String.valueOf(id)});

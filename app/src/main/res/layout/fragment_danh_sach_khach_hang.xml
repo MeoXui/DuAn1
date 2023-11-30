@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".fragments_mini.DanhSachNhanVien"
+    tools:context=".fragments_mini.DanhSachMatHang"
     android:id="@+id/framelayout">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -13,7 +13,8 @@
         android:paddingTop="0dp"
         android:paddingStart="0dp"
         android:paddingEnd="0dp"
-        android:background="@color/white">
+        android:background="@color/white"
+        android:id="@+id/constraintLayout">
 
         <androidx.appcompat.widget.Toolbar
             android:layout_width="match_parent"
@@ -33,14 +34,13 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Quản Lý Nhân Viên"
+                android:text="Quản Lý Kho Hàng"
                 android:layout_gravity="center"
                 android:textColor="@color/cardview_dark_background"
                 android:textSize="22sp"
                 android:id="@+id/toolBarTitle">
             </TextView>
         </androidx.appcompat.widget.Toolbar>
-
 
         <LinearLayout
             android:id="@+id/linearLayout"
@@ -59,7 +59,7 @@
                 android:layout_width="0dp"
                 android:layout_weight="0.7"
                 android:layout_height="match_parent"
-                android:hint="Tìm Kiếm"
+                android:hint="Tìm Kiếm Khách Hàng"
                 android:id="@+id/edtSearch"
                 android:lines="1"
                 android:background="@drawable/border"
@@ -90,7 +90,7 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent">
         </androidx.recyclerview.widget.RecyclerView>
-    </androidx.constraintlayout.widget.ConstraintLayout>
 
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </FrameLayout>

@@ -25,10 +25,10 @@
             android:layout_height="83dp"
             app:boxStrokeWidth="3dp"
             app:boxStrokeColor="@color/primary_color"
-            app:boxCornerRadiusBottomEnd="15dp"
-            app:boxCornerRadiusBottomStart="15dp"
-            app:boxCornerRadiusTopStart="15dp"
-            app:boxCornerRadiusTopEnd="15dp"
+            app:boxCornerRadiusBottomEnd="8dp"
+            app:boxCornerRadiusBottomStart="8dp"
+            app:boxCornerRadiusTopStart="8dp"
+            app:boxCornerRadiusTopEnd="8dp"
             app:boxStrokeErrorColor="@android:color/holo_red_light"
             android:id="@+id/edtTenmathangLayout">
             <com.google.android.material.textfield.TextInputEditText
@@ -45,10 +45,10 @@
             android:layout_height="83dp"
             app:boxStrokeWidth="3dp"
             app:boxStrokeColor="@color/primary_color"
-            app:boxCornerRadiusBottomEnd="15dp"
-            app:boxCornerRadiusBottomStart="15dp"
-            app:boxCornerRadiusTopStart="15dp"
-            app:boxCornerRadiusTopEnd="15dp"
+            app:boxCornerRadiusBottomEnd="8dp"
+            app:boxCornerRadiusBottomStart="8dp"
+            app:boxCornerRadiusTopStart="8dp"
+            app:boxCornerRadiusTopEnd="8dp"
             app:boxStrokeErrorColor="@android:color/holo_red_light"
             android:id="@+id/edtNhaCungCapLayout">
             <com.google.android.material.textfield.TextInputEditText
@@ -65,10 +65,10 @@
             android:layout_height="83dp"
             app:boxStrokeWidth="3dp"
             app:boxStrokeColor="@color/primary_color"
-            app:boxCornerRadiusBottomEnd="15dp"
-            app:boxCornerRadiusBottomStart="15dp"
-            app:boxCornerRadiusTopStart="15dp"
-            app:boxCornerRadiusTopEnd="15dp"
+            app:boxCornerRadiusBottomEnd="8dp"
+            app:boxCornerRadiusBottomStart="8dp"
+            app:boxCornerRadiusTopStart="8dp"
+            app:boxCornerRadiusTopEnd="8dp"
             app:boxStrokeErrorColor="@android:color/holo_red_light"
             android:id="@+id/edtNganhhangLayout">
             <com.google.android.material.textfield.TextInputEditText
@@ -91,10 +91,10 @@
                 android:layout_weight="0.5"
                 app:boxStrokeWidth="3dp"
                 app:boxStrokeColor="@color/primary_color"
-                app:boxCornerRadiusBottomEnd="15dp"
-                app:boxCornerRadiusBottomStart="15dp"
-                app:boxCornerRadiusTopStart="15dp"
-                app:boxCornerRadiusTopEnd="15dp"
+                app:boxCornerRadiusBottomEnd="8dp"
+                app:boxCornerRadiusBottomStart="8dp"
+                app:boxCornerRadiusTopStart="8dp"
+                app:boxCornerRadiusTopEnd="8dp"
                 app:boxStrokeErrorColor="@android:color/holo_red_light"
                 android:id="@+id/edtGianhapLayout"
                 android:layout_marginRight="10dp">
@@ -114,10 +114,10 @@
                 android:layout_weight="0.5"
                 app:boxStrokeWidth="3dp"
                 app:boxStrokeColor="@color/primary_color"
-                app:boxCornerRadiusBottomEnd="15dp"
-                app:boxCornerRadiusBottomStart="15dp"
-                app:boxCornerRadiusTopStart="15dp"
-                app:boxCornerRadiusTopEnd="15dp"
+                app:boxCornerRadiusBottomEnd="8dp"
+                app:boxCornerRadiusBottomStart="8dp"
+                app:boxCornerRadiusTopStart="8dp"
+                app:boxCornerRadiusTopEnd="8dp"
                 app:boxStrokeErrorColor="@android:color/holo_red_light"
                 android:id="@+id/edtGiabanLayout">
                 <com.google.android.material.textfield.TextInputEditText
@@ -143,10 +143,10 @@
                 android:layout_weight="0.75"
                 app:boxStrokeWidth="3dp"
                 app:boxStrokeColor="@color/primary_color"
-                app:boxCornerRadiusBottomEnd="15dp"
-                app:boxCornerRadiusBottomStart="15dp"
-                app:boxCornerRadiusTopStart="15dp"
-                app:boxCornerRadiusTopEnd="15dp"
+                app:boxCornerRadiusBottomEnd="8dp"
+                app:boxCornerRadiusBottomStart="8dp"
+                app:boxCornerRadiusTopStart="8dp"
+                app:boxCornerRadiusTopEnd="8dp"
                 app:boxStrokeErrorColor="@android:color/holo_red_light"
                 android:id="@+id/edtSoluongLayout"
                 android:layout_marginRight="10dp">
@@ -166,10 +166,10 @@
                 android:layout_weight="0.25"
                 app:boxStrokeWidth="3dp"
                 app:boxStrokeColor="@color/primary_color"
-                app:boxCornerRadiusBottomEnd="15dp"
-                app:boxCornerRadiusBottomStart="15dp"
-                app:boxCornerRadiusTopStart="15dp"
-                app:boxCornerRadiusTopEnd="15dp"
+                app:boxCornerRadiusBottomEnd="8dp"
+                app:boxCornerRadiusBottomStart="8dp"
+                app:boxCornerRadiusTopStart="8dp"
+                app:boxCornerRadiusTopEnd="8dp"
                 app:boxStrokeErrorColor="@android:color/holo_red_light"
                 android:id="@+id/edtDVTLayout">
                 <com.google.android.material.textfield.TextInputEditText
@@ -188,10 +188,10 @@
         <!--        android:layout_height="120dp"-->
         <!--        app:boxStrokeWidth="3dp"-->
         <!--        app:boxStrokeColor="@color/primary_color"-->
-        <!--        app:boxCornerRadiusBottomEnd="15dp"-->
-        <!--        app:boxCornerRadiusBottomStart="15dp"-->
-        <!--        app:boxCornerRadiusTopStart="15dp"-->
-        <!--        app:boxCornerRadiusTopEnd="15dp"-->
+        <!--        app:boxCornerRadiusBottomEnd="8dp"-->
+        <!--        app:boxCornerRadiusBottomStart="8dp"-->
+        <!--        app:boxCornerRadiusTopStart="8dp"-->
+        <!--        app:boxCornerRadiusTopEnd="8dp"-->
         <!--        app:boxStrokeErrorColor="@android:color/holo_red_light"-->
         <!--        android:id="@+id/edtGhichuLayout">-->
         <!--        <com.google.android.material.textfield.TextInputEditText-->
