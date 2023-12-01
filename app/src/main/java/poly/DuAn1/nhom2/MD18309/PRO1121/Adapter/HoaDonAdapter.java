@@ -73,9 +73,14 @@ public class HoaDonAdapter extends RecyclerView.Adapter<HoaDonAdapter.ViewFucker
     @Override
     public void onBindViewHolder(@NonNull ViewFucker holder, int position) {
         holder.holderPOS = holder.getAdapterPosition();
-        holder.txtTenNguoiTao.setText("N.T: "+findTaiKhoan(hoaDonArrayList.get(holder.getAdapterPosition()).getIdNguoiTao()).getHoTen());
+        holder.txtTenNguoiTao.setText("N.Tạo: "+findTaiKhoan(hoaDonArrayList.get(holder.getAdapterPosition()).getIdNguoiTao()).getHoTen());
         holder.txtMaHoaDon.setText("Hóa Đơn: "+hoaDonArrayList.get(holder.getAdapterPosition()).getIdHD());
         holder.txtNgayTao.setText("Tạo: "+hoaDonArrayList.get(holder.getAdapterPosition()).getNgayTao());
+        if (hoaDonArrayList.get(holder.getAdapterPosition()).getTrangThai() == 1){
+            holder.txtMaHoaDon.setChecked(true);
+        } else if (hoaDonArrayList.get(holder.getAdapterPosition()).getTrangThai() == 0) {
+            holder.txtMaHoaDon.setChecked(false);
+        }
     }
 
     @Override

@@ -59,7 +59,7 @@ public class NganhHangAdapter extends RecyclerView.Adapter<NganhHangAdapter.View
         if (nganhHangArrayList.get(holder.getAdapterPosition()).getTrangThai() == 1){
             ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) holder.itemView.getLayoutParams();
             params.height = 0;
-            params.topMargin = -10;
+            params.topMargin = -14;
             holder.itemView.setLayoutParams(params);
         }
     }

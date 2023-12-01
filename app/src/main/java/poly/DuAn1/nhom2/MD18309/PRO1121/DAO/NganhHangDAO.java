@@ -66,9 +66,11 @@ public class NganhHangDAO {
     public boolean DeleteNganhHang(int id) {
         SQLiteDatabase database = dbFucker.getWritableDatabase();
         boolean result = false;
+        ContentValues values = new ContentValues();
+        values.put("STATUS", 1);
         database.beginTransaction();
         try {
-            long kq = database.delete("NGANHHANG", "idNH = ?", new String[]{String.valueOf(id)});
+            long kq = database.update("NGANHHANG", values,"idNH = ?", new String[]{String.valueOf(id)});
             if (kq > -1) {
                 result = true;
             }
@@ -82,7 +84,7 @@ public class NganhHangDAO {
     }
 
     public boolean updateNganhHang(NganhHang nganhHang) {
-        boolean result = true;
+        boolean result = false;
         SQLiteDatabase database = dbFucker.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put("TenNH", nganhHang.getTenNganhHang());
@@ -100,7 +102,6 @@ public class NganhHangDAO {
         } finally {
             database.endTransaction();
         }
-
         return result;
     }
 

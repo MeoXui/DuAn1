@@ -46,7 +46,7 @@ public class NhaCungCapDAO {
         SQLiteDatabase database = dbFucker.getWritableDatabase();
         database.beginTransaction();
         ContentValues values = new ContentValues();
-        values.put("idNCC", nhaCungCap.getIdNhaCungCap());
+//        values.put("idNCC", nhaCungCap.getIdNhaCungCap());
         values.put("TenNCC", nhaCungCap.getTenNhaCungCap());
         values.put("NguoiDaiDien", nhaCungCap.getHoTenNguoiDaiDien());
         values.put("DiaChi", nhaCungCap.getDiaChiNhaCungCap());
@@ -70,10 +70,12 @@ public class NhaCungCapDAO {
     public boolean DeleteNhaCungCap(int id) {
         SQLiteDatabase database = dbFucker.getWritableDatabase();
         boolean result = false;
+        ContentValues values = new ContentValues();
+        values.put("STATUS", 1);
         database.beginTransaction();
         try {
-            long kq = database.delete("NHACUNGCAP", "idNCC = ?", new String[]{String.valueOf(id)});
-            if (kq > -1) {
+            long kq = database.update("NHACUNGCAP", values, "idNCC = ?", new String[]{String.valueOf(id)});
+            if (kq != -1) {
                 result = true;
             }
             database.setTransactionSuccessful();
@@ -94,7 +96,7 @@ public class NhaCungCapDAO {
         values.put("DiaChi", nhaCungCap.getDiaChiNhaCungCap());
         values.put("Sdt", nhaCungCap.getSdtNhaCungCap());
         values.put("STATUS", 0);
-        database.setTransactionSuccessful();
+        database.beginTransaction();
         try {
             long kq = database.update("NHACUNGCAP", values, "idNCC = ?", new String[]{String.valueOf(nhaCungCap.getIdNhaCungCap())});
             if (kq != -1) {

@@ -16,15 +16,15 @@
         android:textSize="25sp"
         android:textStyle="bold"
         android:layout_marginBottom="50dp"
-        android:layout_marginTop="-100dp"></TextView>
+        android:layout_marginTop="-10dp">
+    </TextView>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="10dp"
-        android:theme="@style/Theme.Material3.DayNight"
-        >
+        android:theme="@style/Theme.Material3.DayNight">
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -65,7 +65,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Mật khẩu cũ"
-                android:lines="1"></com.google.android.material.textfield.TextInputEditText>
+                android:lines="1">
+            </com.google.android.material.textfield.TextInputEditText>
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -83,7 +84,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Mật khẩu mưới"
-                android:lines="1"></com.google.android.material.textfield.TextInputEditText>
+                android:lines="1">
+            </com.google.android.material.textfield.TextInputEditText>
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout

@@ -8,7 +8,7 @@ import androidx.annotation.Nullable;
 
 public class DBFucker extends SQLiteOpenHelper {
     public DBFucker(@Nullable Context context) {
-        super(context, "DA1", null, 6);
+        super(context, "DA1", null, 7);
     }
 
     @Override
@@ -25,7 +25,7 @@ public class DBFucker extends SQLiteOpenHelper {
         db.execSQL(createTableCongViec);
         String createTableMatHang = "CREATE TABLE MATHANG(idMH INTEGER PRIMARY KEY AUTOINCREMENT, idNCC REFERENCES NhaCungCap(idNCC), idNH REFERENCES NganhHang(idNH), TenMH TEXT NOT NULL, SoLuong REAL NOT NULL, DVT TEXT NOT NULL, GiaNhap INTEGER NOT NULL, GiaBan INTEGER NOT NULL, STATUS INTEGER NOT NULL)";
         db.execSQL(createTableMatHang);
-        String createTableHoaDon = "CREATE TABLE HOADON(idHD INTEGER PRIMARY KEY AUTOINCREMENT, idNguoiTao REFERENCES TaiKhoan(UserName), idNguoiMua REFERENCES KhachHang(idKH), NgayTao TEXT NOT NULL, TrangThai INTEGER NOT NULL)";
+        String createTableHoaDon = "CREATE TABLE HOADON(idHD INTEGER PRIMARY KEY AUTOINCREMENT, idNguoiTao REFERENCES TaiKhoan(UserName), idNguoiMua REFERENCES KhachHang(idKH), Loai TEXT NOT NULL,NgayTao TEXT NOT NULL, TrangThai INTEGER NOT NULL, STATUS INTEGER NOT NULL)";
         db.execSQL(createTableHoaDon);
         String createTableChiTietHoaDon = "CREATE TABLE CHITIETHOADON(idCTHD INTEGER PRIMARY KEY AUTOINCREMENT, idHD REFERENCES HoaDon(idHD), idMH REFERENCES MatHang(idMH), SoLuong INTEGER NOT NULL)";
         db.execSQL(createTableChiTietHoaDon);
@@ -43,7 +43,7 @@ public class DBFucker extends SQLiteOpenHelper {
         db.execSQL(dummyCongViec);
         String dummyMatHang = "INSERT INTO MATHANG VALUES(1, 1, 1, 'MH1', 1, 'KG', 10000, 20000, 0),(2, 3, 3, 'MH2', 3, 'Tấn', 20000, 69000, 0)";
         db.execSQL(dummyMatHang);
-        String dummyHoaDon = "INSERT INTO HOADON VALUES(1, 'admin', 1, '30-10-2023', 0), (2, 'admin', 2, '01-11-2023', 0), (3, 'admin', 3, '30-10-2023', 0)";
+        String dummyHoaDon = "INSERT INTO HOADON VALUES(1, 'admin', 1, '30-10-2023', 'Ban', 0, 0), (2, 'admin', 2, '01-11-2023', 'Nhap', 0, 0), (3, 'nhanvien', 3, '30-10-2023', 'Ban', 1, 0)";
         db.execSQL(dummyHoaDon);
         String dummyChiTietHoaDon = "INSERT INTO CHITIETHOADON VALUES(1, 1, 1, 10), (2, 2 ,2, 45), (3, 3 ,2, 69)";
         db.execSQL(dummyChiTietHoaDon);

@@ -1,5 +1,6 @@
 package poly.DuAn1.nhom2.MD18309.PRO1121.fragments_mini;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.os.Bundle;
 
@@ -90,6 +91,7 @@ public class ThemNganhHang extends Fragment {
 
         Button btnCancel = view.findViewById(R.id.btnCancel);
         Button btnAdd = view.findViewById(R.id.btnAdd);
+        Button btnDelete = view.findViewById(R.id.btnDelete);
         AtomicBoolean editMode = new AtomicBoolean(false);
         TextInputLayout edtTenNganhHangLayout = view.findViewById(R.id.edtTennganhhangLayout);
         TextInputEditText edtTenNganhHang = view.findViewById(R.id.edtTennganhhang);
@@ -100,14 +102,27 @@ public class ThemNganhHang extends Fragment {
             btnAdd.setText("Chỉnh Sửa");
             edtTenNganhHang.setEnabled(false);
             edtTenNganhHang.setText(nganhHangDAO.getNganhHangByID(idNH).getTenNganhHang());
+        }else{
+            btnDelete.setVisibility(View.GONE);
         }
 
         btnAdd.setOnClickListener(v -> {
             String tenNganhHang = edtTenNganhHang.getText().toString();
             if (idNH != -1){
                 if (editMode.get()){
-
-                    Toast.makeText(getContext(), "Sửa Thành Bại", Toast.LENGTH_SHORT).show();
+                    if (tenNganhHang.isEmpty()){
+                        edtTenNganhHangLayout.setError("Trống");
+                        Runnable runnable = () -> edtTenNganhHangLayout.setErrorEnabled(false);
+                        Handler handler = new Handler();
+                        handler.postDelayed(runnable, 1200);
+                    }else{
+                        if(nganhHangDAO.updateNganhHang(new NganhHang(idNH, tenNganhHang, 0))){
+                            Toast.makeText(getContext(), "Sửa Thành Công", Toast.LENGTH_SHORT).show();
+                            fragmentCallBack.finishCall(2);
+                        }else{
+                            Toast.makeText(getContext(), "Sửa Thành Bại", Toast.LENGTH_SHORT).show();
+                        }
+                    }
                 }else{
                     btnAdd.setText("Xong");
                     edtTenNganhHang.setEnabled(true);
@@ -129,6 +144,24 @@ public class ThemNganhHang extends Fragment {
                     }
                 }
             }
+        });
+        btnDelete.setOnClickListener(v -> {
+            AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+            builder.setTitle("Xác Nhận Xóa");
+            builder.setMessage("Chắc Không Đấy Bạn?");
+            builder.setPositiveButton("Chắc", (dialog, which) -> {
+                if (nganhHangDAO.DeleteNganhHang(idNH)){
+                    Toast.makeText(getContext(), "Xóa Thành Công", Toast.LENGTH_SHORT).show();
+                    fragmentCallBack.finishCall(2);
+                }else{
+                    Toast.makeText(getContext(), "Xóa Thành Bại", Toast.LENGTH_SHORT).show();
+                }
+            });
+            builder.setNegativeButton("Không", (dialog, which) -> {
+
+            });
+            AlertDialog alertDialog = builder.create();
+            alertDialog.show();
         });
         return view;
     }

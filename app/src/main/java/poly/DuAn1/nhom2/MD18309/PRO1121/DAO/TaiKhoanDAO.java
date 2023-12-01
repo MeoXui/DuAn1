@@ -156,6 +156,28 @@ public class TaiKhoanDAO {
         return result;
     }
 
+    public boolean changePass(String userName, String oldPass, String newPass) {
+        boolean result = false;
+        SQLiteDatabase database = dbFucker.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("Password", newPass);
+        database.beginTransaction();
+        try {
+            long kq = database.update("TAIKHOAN", values, "UserName = ? AND PassWord = ?", new String[]{userName, oldPass});
+            if (kq != -1) {
+                result = true;
+            }
+            values.clear();
+            database.setTransactionSuccessful();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        } finally {
+            database.endTransaction();
+        }
+        return result;
+    }
+
+
 
 
 }

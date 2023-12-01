@@ -59,7 +59,7 @@ public class NhaCungCapAdapter extends RecyclerView.Adapter<NhaCungCapAdapter.Vi
         if (nhaCungCapArrayList.get(holder.getAdapterPosition()).getTrangThai() == 1){
             ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) holder.itemView.getLayoutParams();
             params.height = 0;
-            params.topMargin = -10;
+            params.topMargin = -14;
             holder.itemView.setLayoutParams(params);
         }
     }

@@ -73,12 +73,12 @@ public class DoiMatKhau extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_doimatkhau, container, false);
-        Toolbar toolbar = view.findViewById(R.id.toolbar);
-        toolbar.setTitle("");
-        ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
-        ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        ((AppCompatActivity)getActivity()).getSupportActionBar().setHomeButtonEnabled(true);
-        toolbar.setNavigationOnClickListener(v -> fragmentCallBack.exitFragment());
+//        Toolbar toolbar = view.findViewById(R.id.toolbar);
+//        toolbar.setTitle("");
+//        ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
+//        ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//        ((AppCompatActivity)getActivity()).getSupportActionBar().setHomeButtonEnabled(true);
+//        toolbar.setNavigationOnClickListener(v -> fragmentCallBack.exitFragment());
         return view;
     }
 }

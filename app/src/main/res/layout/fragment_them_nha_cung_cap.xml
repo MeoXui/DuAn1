@@ -22,10 +22,10 @@
         android:layout_height="83dp"
         app:boxStrokeWidth="3dp"
         app:boxStrokeColor="@color/primary_color"
-        app:boxCornerRadiusBottomEnd="15dp"
-        app:boxCornerRadiusBottomStart="15dp"
-        app:boxCornerRadiusTopStart="15dp"
-        app:boxCornerRadiusTopEnd="15dp"
+        app:boxCornerRadiusBottomEnd="7dp"
+        app:boxCornerRadiusBottomStart="7dp"
+        app:boxCornerRadiusTopStart="7dp"
+        app:boxCornerRadiusTopEnd="7dp"
         app:boxStrokeErrorColor="@android:color/holo_red_light"
         android:id="@+id/edtTenNCCLayout">
         <com.google.android.material.textfield.TextInputEditText
@@ -42,10 +42,10 @@
         android:layout_height="83dp"
         app:boxStrokeWidth="3dp"
         app:boxStrokeColor="@color/primary_color"
-        app:boxCornerRadiusBottomEnd="15dp"
-        app:boxCornerRadiusBottomStart="15dp"
-        app:boxCornerRadiusTopStart="15dp"
-        app:boxCornerRadiusTopEnd="15dp"
+        app:boxCornerRadiusBottomEnd="7dp"
+        app:boxCornerRadiusBottomStart="7dp"
+        app:boxCornerRadiusTopStart="7dp"
+        app:boxCornerRadiusTopEnd="7dp"
         app:boxStrokeErrorColor="@android:color/holo_red_light"
         android:id="@+id/edtHoTenDaiDienLayout">
         <com.google.android.material.textfield.TextInputEditText
@@ -62,16 +62,16 @@
         android:layout_height="83dp"
         app:boxStrokeWidth="3dp"
         app:boxStrokeColor="@color/primary_color"
-        app:boxCornerRadiusBottomEnd="15dp"
-        app:boxCornerRadiusBottomStart="15dp"
-        app:boxCornerRadiusTopStart="15dp"
-        app:boxCornerRadiusTopEnd="15dp"
+        app:boxCornerRadiusBottomEnd="7dp"
+        app:boxCornerRadiusBottomStart="7dp"
+        app:boxCornerRadiusTopStart="7dp"
+        app:boxCornerRadiusTopEnd="7dp"
         app:boxStrokeErrorColor="@android:color/holo_red_light"
         android:id="@+id/edtSDTNCCLayout">
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Ngành hàng"
+            android:hint="Số Điện Thoại NCC"
             android:id="@+id/edtSDTNCC"
             android:lines="1">
         </com.google.android.material.textfield.TextInputEditText>
@@ -82,19 +82,51 @@
         android:layout_height="83dp"
         app:boxStrokeWidth="3dp"
         app:boxStrokeColor="@color/primary_color"
-        app:boxCornerRadiusBottomEnd="15dp"
-        app:boxCornerRadiusBottomStart="15dp"
-        app:boxCornerRadiusTopStart="15dp"
-        app:boxCornerRadiusTopEnd="15dp"
+        app:boxCornerRadiusBottomEnd="7dp"
+        app:boxCornerRadiusBottomStart="7dp"
+        app:boxCornerRadiusTopStart="7dp"
+        app:boxCornerRadiusTopEnd="7dp"
         app:boxStrokeErrorColor="@android:color/holo_red_light"
-        android:id="@+id/edtNganhhangLayout">
+        android:id="@+id/edtDiaChiNCCLayout">
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Ngành hàng"
-            android:id="@+id/edtNganhhang"
+            android:hint="Địa Chỉ NCC"
+            android:id="@+id/edtDiaChiNCC"
             android:lines="1">
         </com.google.android.material.textfield.TextInputEditText>
     </com.google.android.material.textfield.TextInputLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:layout_marginEnd="10dp"
+            android:text="Hủy"
+            android:id="@+id/btnCancel"
+            android:background="@drawable/cancel_button_background"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:text="HOÀN THÀNH"
+            android:id="@+id/btnAdd"
+            android:background="@drawable/button_background"/>
+    </LinearLayout>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="Xóa"
+        android:id="@+id/btnDelete"
+        android:background="@drawable/cancel_button_background"
+        />
 
 </LinearLayout>
