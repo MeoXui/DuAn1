@@ -2,83 +2,96 @@ package poly.DuAn1.nhom2.MD18309.PRO1121.fragments_mini;
 
 import android.os.Bundle;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import poly.DuAn1.nhom2.MD18309.PRO1121.DAO.TaiKhoanDAO;
+import poly.DuAn1.nhom2.MD18309.PRO1121.ObjectClass.TaiKhoan;
 import poly.DuAn1.nhom2.MD18309.PRO1121.R;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link DoiMatKhau#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class DoiMatKhau extends Fragment {
 
     private FragmentCallBack fragmentCallBack;
+    private TaiKhoan taiKhoan;
+    private TaiKhoanDAO TKDAO;
 
     public interface FragmentCallBack{
         void exitFragment();
     }
 
+    public DoiMatKhau() {}
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    public DoiMatKhau() {
-        // Required empty public constructor
-    }
-
-    public DoiMatKhau(FragmentCallBack fragmentCallBack) {
+    public DoiMatKhau(FragmentCallBack fragmentCallBack, TaiKhoan taiKhoan) {
         this.fragmentCallBack = fragmentCallBack;
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment DoiMatKhau.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static DoiMatKhau newInstance(String param1, String param2) {
-        DoiMatKhau fragment = new DoiMatKhau();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
+        this.taiKhoan = taiKhoan;
+        TKDAO = new TaiKhoanDAO(getContext());
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_doimatkhau, container, false);
-//        Toolbar toolbar = view.findViewById(R.id.toolbar);
-//        toolbar.setTitle("");
-//        ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
-//        ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-//        ((AppCompatActivity)getActivity()).getSupportActionBar().setHomeButtonEnabled(true);
-//        toolbar.setNavigationOnClickListener(v -> fragmentCallBack.exitFragment());
+
+        TextView TVUN = view.findViewById(R.id.tv_un);
+        TVUN.setText(taiKhoan.getUserName());
+
+        EditText EdtOP = view.findViewById(R.id.edt_old_pass),
+                EdtNP = view.findViewById(R.id.edt_new_pass),
+                EdtRNP = view.findViewById(R.id.edt_re_new_pass);
+        Button BtnDONE = view.findViewById(R.id.btn_done),
+                BtnCancel = view.findViewById(R.id.btn_cancel);
+
+        //EdtOP.setText(taiKhoan.getPassWord());
+
+        BtnDONE.setOnClickListener(v -> {
+            if(Check(EdtOP,EdtNP,EdtRNP)){
+                taiKhoan.setPassWord(EdtNP.getText().toString());
+                if(TKDAO.updateTaiKhoan(taiKhoan)) {
+                    Toast.makeText(getContext(), "Tay đổi mật khẩu thành công", Toast.LENGTH_SHORT).show();
+                    //fragmentCallBack.exitFragment();
+                }
+                else
+                    Toast.makeText(getContext(), "Thay đổi thất bại, đã xẩy ra lỗi", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        BtnCancel.setOnClickListener(v -> {
+            EdtOP.setText("");
+            EdtNP.setText("");
+            EdtRNP.setText("");
+            fragmentCallBack.exitFragment();
+        });
+
         return view;
+    }
+
+    private boolean Check(EditText edtOP, EditText edtNP, EditText edtRNP) {
+        String sOP = edtOP.getText().toString(),
+                sNP = edtNP.getText().toString(),
+                sRNP = edtRNP.getText().toString();
+        if(sOP.isEmpty()|sNP.isEmpty()|sRNP.isEmpty()){
+            Toast.makeText(getContext(), "Vui lòng không bỏ trống thông tin", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if(!sOP.equals(taiKhoan.getPassWord())){
+            Toast.makeText(getContext(), "Mật khẩu cũ chưa đúng", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if(!sNP.equals(sRNP)){
+            Toast.makeText(getContext(), "Mật khẩu nhập lại chưa khớp", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        return true;
     }
 }
