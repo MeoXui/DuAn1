@@ -16,15 +16,15 @@
         android:textSize="25sp"
         android:textStyle="bold"
         android:layout_marginBottom="50dp"
-        android:layout_marginTop="-10dp">
-    </TextView>
+        android:layout_marginTop="-100dp"/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="10dp"
-        android:theme="@style/Theme.Material3.DayNight">
+        android:theme="@style/Theme.Material3.DayNight"
+        >
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -37,15 +37,15 @@
                 android:layout_height="wrap_content"
                 android:text="Tài khoản: "
                 android:textStyle="bold"
-                android:textSize="15dp"/>
+                android:textSize="15sp"/>
 
             <TextView
+                android:id="@+id/tv_un"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="abcxyz123"
                 android:textStyle="bold"
-                android:textSize="15dp"/>
-            />
+                android:textSize="15sp"/>
 
         </LinearLayout>
 
@@ -62,11 +62,11 @@
             app:boxStrokeWidth="3dp">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edt_old_pass"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Mật khẩu cũ"
-                android:lines="1">
-            </com.google.android.material.textfield.TextInputEditText>
+                android:lines="1"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -81,11 +81,11 @@
             app:boxStrokeWidth="3dp">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edt_new_pass"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Mật khẩu mưới"
-                android:lines="1">
-            </com.google.android.material.textfield.TextInputEditText>
+                android:hint="Mật khẩu mới"
+                android:lines="1"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -100,12 +100,11 @@
             app:boxStrokeWidth="3dp">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edt_re_new_pass"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Nhập lại mật khẩu mới"
-                android:lines="1">
-
-            </com.google.android.material.textfield.TextInputEditText>
+                android:lines="1"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <LinearLayout
@@ -114,7 +113,7 @@
             android:orientation="horizontal">
 
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btnCancel"
+                android:id="@+id/btn_cancel"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="10dp"
@@ -123,7 +122,7 @@
                 android:text="Hủy" />
 
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btnAdd"
+                android:id="@+id/btn_done"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.5"
