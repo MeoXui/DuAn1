@@ -9,6 +9,7 @@ public class TaiKhoan implements Serializable {
     private String hoTen;
     private String phone;
     private String email;
+    private int status;
 
     public String getUserName() {
         return userName;
@@ -58,19 +59,26 @@ public class TaiKhoan implements Serializable {
         this.email = email;
     }
 
-    public TaiKhoan(String userName, String passWord, String role, String hoTen, String phone, String email) {
+    public int getStatus() {
+        return status;
+    }
+
+    public TaiKhoan(String userName, String passWord, String role, String hoTen, String phone, String email, int status) {
         this.userName = userName;
         this.passWord = passWord;
         this.role = role;
         this.hoTen = hoTen;
         this.phone = phone;
         this.email = email;
+        this.status = status;
     }
 
-    public TaiKhoan(String role, String hoTen, String phone, String email) {
+    public TaiKhoan(String userName, String role, String hoTen, String phone, String email, int status) {
+        this.userName = userName;
         this.role = role;
         this.hoTen = hoTen;
         this.phone = phone;
         this.email = email;
+        this.status = status;
     }
 }

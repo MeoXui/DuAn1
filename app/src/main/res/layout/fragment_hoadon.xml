@@ -25,7 +25,9 @@
             android:layout_gravity="center"
             android:text="Quản Lý Hóa Đơn"
             android:textColor="@color/cardview_dark_background"
-            android:textSize="22sp"></TextView>
+            android:textSize="22sp">
+
+        </TextView>
     </androidx.appcompat.widget.Toolbar>
 
     <com.google.android.material.tabs.TabLayout
@@ -39,7 +41,8 @@
         app:tabIndicatorAnimationDuration="0"
         app:tabSelectedTextColor="@android:color/black"
         app:tabIndicatorFullWidth="false"
-        app:tabTextAppearance="@android:style/TextAppearance.Widget.TabWidget">
+        app:tabTextAppearance="@android:style/TextAppearance.Widget.TabWidget"
+        app:tabMode="fixed">
     </com.google.android.material.tabs.TabLayout>
 
     <androidx.viewpager2.widget.ViewPager2
@@ -47,7 +50,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.846"
-        android:padding="16dp">
+        android:padding="10dp">
     </androidx.viewpager2.widget.ViewPager2>
 
 </LinearLayout>

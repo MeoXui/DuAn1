@@ -5,6 +5,8 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import java.util.ArrayList;
+
 import poly.DuAn1.nhom2.MD18309.PRO1121.DBFucker;
 import poly.DuAn1.nhom2.MD18309.PRO1121.ObjectClass.TaiKhoan;
 
@@ -15,15 +17,38 @@ public class TaiKhoanDAO {
         this.dbFucker = new DBFucker(context);
     }
 
+    public ArrayList<TaiKhoan> getListTaiKhoan(){
+        ArrayList<TaiKhoan> taiKhoanArrayList = new ArrayList<>();
+        SQLiteDatabase database = dbFucker.getReadableDatabase();
+        database.beginTransaction();
+        try{
+            Cursor cursor = database.rawQuery("SELECT UserName, ROLE, HOTEN, PHONE, EMAIL, STATUS FROM TAIKHOAN", null);
+            if (cursor != null && cursor.getCount() >0){
+                cursor.moveToFirst();
+                while (!cursor.isAfterLast()){
+                    taiKhoanArrayList.add(new TaiKhoan(cursor.getString(0), cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4), cursor.getInt(5)));
+                    cursor.moveToNext();
+                }
+                cursor.close();
+            }
+            database.setTransactionSuccessful();
+        }catch (Exception e){
+            throw new RuntimeException(e);
+        }finally {
+            database.endTransaction();
+        }
+        return taiKhoanArrayList;
+    }
+
     public TaiKhoan login(String tk, String mk){
         TaiKhoan taiKhoan = null;
         SQLiteDatabase database = dbFucker.getReadableDatabase();
         database.beginTransaction();
         try {
-            Cursor cursor = database.rawQuery("SELECT ROLE, HOTEN, PHONE, EMAIL FROM TAIKHOAN WHERE UserName=? AND Password=?", new String[]{tk, mk});
+            Cursor cursor = database.rawQuery("SELECT ROLE, HOTEN, PHONE, EMAIL, STATUS FROM TAIKHOAN WHERE UserName=? AND Password=?", new String[]{tk, mk});
             if (cursor != null && cursor.getCount() > 0){
                 cursor.moveToFirst();
-                taiKhoan = new TaiKhoan(cursor.getString(0), cursor.getString(1), cursor.getString(2), cursor.getString(3));
+                taiKhoan = new TaiKhoan("", cursor.getString(0), cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getInt(4));
                 cursor.close();
             }
             database.setTransactionSuccessful();
