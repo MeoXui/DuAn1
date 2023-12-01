@@ -1,9 +1,12 @@
 package poly.DuAn1.nhom2.MD18309.PRO1121.fragments;
 
+import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.viewpager.widget.ViewPager;
 import androidx.viewpager2.widget.ViewPager2;
 
 import android.view.LayoutInflater;
@@ -73,6 +76,7 @@ public class HoaDon extends Fragment {
         //Tạo ViewPager Adapter
         ViewPager2Adapter viewPager2Adapter = new ViewPager2Adapter(this);
         viewPager2.setAdapter(viewPager2Adapter);
+        viewPager2.setUserInputEnabled(false);
 
         tabLayout.setTabRippleColor(null);
 //        tabLayout.setVisibility(View.INVISIBLE);
@@ -89,6 +93,28 @@ public class HoaDon extends Fragment {
                     break;
             }
         }).attach();
+
+        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                if (tabLayout.getSelectedTabPosition() == 0){
+                    tabLayout.setSelectedTabIndicatorColor(getResources().getColor(R.color.primary_color));
+                } else if (tabLayout.getSelectedTabPosition() == 1) {
+                    tabLayout.setSelectedTabIndicatorColor(Color.GREEN);
+                }
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
+
         return view;
     }
 }

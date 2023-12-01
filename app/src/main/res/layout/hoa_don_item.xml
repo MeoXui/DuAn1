@@ -18,7 +18,7 @@
         <LinearLayout
             android:id="@+id/layout_1"
             android:layout_width="0dp"
-            android:layout_weight="0.9"
+            app:layout_constraintHorizontal_weight="0.6"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             app:layout_constraintStart_toStartOf="parent"
@@ -30,17 +30,19 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Place Holder"
-                android:id="@+id/txtTenMatHang"
+                android:id="@+id/txtMaHoaDon"
                 android:textSize="20sp"
-                android:textStyle="bold">
+                android:textStyle="bold"
+                android:layout_marginStart="-6dp"
+                android:buttonTint="@color/white">
             </CheckBox>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Place Holder"
-                android:id="@+id/txtMaMatHang"
-                android:textSize="17sp"
+                android:id="@+id/txtTenNguoiTao"
+                android:textSize="12sp"
                 android:textStyle="normal">
             </TextView>
         </LinearLayout>
@@ -48,7 +50,7 @@
         <LinearLayout
             android:id="@+id/layout_2"
             android:layout_width="0dp"
-            android:layout_weight="0.9"
+            app:layout_constraintHorizontal_weight="0.4"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             app:layout_constraintTop_toTopOf="parent"
@@ -61,17 +63,17 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Place Holder"
-                android:id="@+id/txtSoLuong"
-                android:textSize="17sp"
+                android:id="@+id/txtNgayTao"
+                android:textSize="12sp"
                 android:textStyle="normal">
             </TextView>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/chinh_sua"
-                android:id="@+id/txtGiaMatHang"
-                android:textSize="13sp"
+                android:text="PlaceHolder"
+                android:id="@+id/txtGiaHoaDon"
+                android:textSize="12sp"
                 android:textStyle="normal"
                 android:textColor="#F19C99">
             </TextView>

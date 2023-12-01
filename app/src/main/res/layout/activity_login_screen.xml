@@ -53,7 +53,9 @@
             android:backgroundTintMode="add"
             android:hint="Tên Đăng Nhập"
             android:layerType="none"
-            android:lines="1"></com.google.android.material.textfield.TextInputEditText>
+            android:lines="1">
+
+        </com.google.android.material.textfield.TextInputEditText>
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -76,7 +78,8 @@
             android:hint="Mật Khẩu"
             android:inputType="textPassword"
             android:lines="1"
-            android:textColorHint="#FFFFFF"></com.google.android.material.textfield.TextInputEditText>
+            android:textColorHint="#FFFFFF">
+        </com.google.android.material.textfield.TextInputEditText>
     </com.google.android.material.textfield.TextInputLayout>
 
     <CheckBox
@@ -86,7 +89,8 @@
         android:layout_marginTop="-20dp"
         android:text="Ghi Nhớ Tôi"
         app:buttonTint="@color/primary_color"
-        android:layout_marginLeft="-3dp"></CheckBox>
+        android:layout_marginLeft="-3dp">
+    </CheckBox>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -101,7 +105,8 @@
             android:layout_marginEnd="10dp"
             android:layout_weight="1"
             android:background="@drawable/button_background"
-            android:text="Đăng Nhập"></androidx.appcompat.widget.AppCompatButton>
+            android:text="Đăng Nhập">
+        </androidx.appcompat.widget.AppCompatButton>
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnForgot"
@@ -109,7 +114,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@drawable/cancel_button_background"
-            android:text="Huỷ"></androidx.appcompat.widget.AppCompatButton>
+            android:text="Huỷ">
+        </androidx.appcompat.widget.AppCompatButton>
     </LinearLayout>
 
 </LinearLayout>
