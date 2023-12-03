@@ -1,5 +1,6 @@
 package poly.DuAn1.nhom2.MD18309.PRO1121.fragments_mini;
 
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -13,13 +14,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import poly.DuAn1.nhom2.MD18309.PRO1121.DAO.TaiKhoanDAO;
-import poly.DuAn1.nhom2.MD18309.PRO1121.ObjectClass.TaiKhoan;
 import poly.DuAn1.nhom2.MD18309.PRO1121.R;
 
 public class DoiMatKhau extends Fragment {
 
     private FragmentCallBack fragmentCallBack;
-    private TaiKhoan taiKhoan;
+    private String tk;
     private TaiKhoanDAO TKDAO;
 
     public interface FragmentCallBack{
@@ -28,10 +28,10 @@ public class DoiMatKhau extends Fragment {
 
     public DoiMatKhau() {}
 
-    public DoiMatKhau(FragmentCallBack fragmentCallBack, TaiKhoan taiKhoan) {
+    public DoiMatKhau(FragmentCallBack fragmentCallBack,String tk, Context context) {
         this.fragmentCallBack = fragmentCallBack;
-        this.taiKhoan = taiKhoan;
-        TKDAO = new TaiKhoanDAO(getContext());
+        this.tk = tk;
+        TKDAO = new TaiKhoanDAO(context);
     }
 
     @Override
@@ -44,7 +44,7 @@ public class DoiMatKhau extends Fragment {
         View view = inflater.inflate(R.layout.fragment_doimatkhau, container, false);
 
         TextView TVUN = view.findViewById(R.id.tv_un);
-        TVUN.setText(taiKhoan.getUserName());
+        TVUN.setText(tk);
 
         EditText EdtOP = view.findViewById(R.id.edt_old_pass),
                 EdtNP = view.findViewById(R.id.edt_new_pass),
@@ -52,14 +52,14 @@ public class DoiMatKhau extends Fragment {
         Button BtnDONE = view.findViewById(R.id.btn_done),
                 BtnCancel = view.findViewById(R.id.btn_cancel);
 
-        //EdtOP.setText(taiKhoan.getPassWord());
-
         BtnDONE.setOnClickListener(v -> {
             if(Check(EdtOP,EdtNP,EdtRNP)){
-                taiKhoan.setPassWord(EdtNP.getText().toString());
-                if(TKDAO.updateTaiKhoan(taiKhoan)) {
+                if(TKDAO.changePass(tk,EdtOP.getText().toString(),EdtNP.getText().toString())) {
                     Toast.makeText(getContext(), "Tay đổi mật khẩu thành công", Toast.LENGTH_SHORT).show();
-                    //fragmentCallBack.exitFragment();
+                    EdtOP.setText("");
+                    EdtNP.setText("");
+                    EdtRNP.setText("");
+                    fragmentCallBack.exitFragment();
                 }
                 else
                     Toast.makeText(getContext(), "Thay đổi thất bại, đã xẩy ra lỗi", Toast.LENGTH_SHORT).show();
@@ -79,19 +79,25 @@ public class DoiMatKhau extends Fragment {
     private boolean Check(EditText edtOP, EditText edtNP, EditText edtRNP) {
         String sOP = edtOP.getText().toString(),
                 sNP = edtNP.getText().toString(),
-                sRNP = edtRNP.getText().toString();
-        if(sOP.isEmpty()|sNP.isEmpty()|sRNP.isEmpty()){
-            Toast.makeText(getContext(), "Vui lòng không bỏ trống thông tin", Toast.LENGTH_SHORT).show();
-            return false;
+                sRNP = edtRNP.getText().toString(),
+                ee = "Vui lòng không bỏ trống thông tin";
+        boolean check = true;
+        if(sOP.isEmpty()){
+            edtOP.setError(ee);
+            check = false;
         }
-        if(!sOP.equals(taiKhoan.getPassWord())){
-            Toast.makeText(getContext(), "Mật khẩu cũ chưa đúng", Toast.LENGTH_SHORT).show();
-            return false;
+        if(sNP.isEmpty()){
+            edtNP.setError(ee);
+            check = false;
+        }
+        if(sRNP.isEmpty()){
+            edtRNP.setError(ee);
+            check = false;
         }
         if(!sNP.equals(sRNP)){
-            Toast.makeText(getContext(), "Mật khẩu nhập lại chưa khớp", Toast.LENGTH_SHORT).show();
-            return false;
+            edtRNP.setError("Mật khẩu nhập lại chưa khớp");
+            check = false;
         }
-        return true;
+        return check;
     }
 }

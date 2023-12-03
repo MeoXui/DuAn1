@@ -110,7 +110,7 @@ public class Menu extends Fragment implements DanhSachKhachHang.FragmentCallBack
         danhSachKhachHang = new DanhSachKhachHang(this);
         thongKe = new ThongKe(this);
         baoCao = new BaoCao(this);
-        doiMatKhau = new DoiMatKhau(this);
+        doiMatKhau = new DoiMatKhau(this, taiKhoan.getUserName(), getContext());
 
 
         //Hiện Thị Thông Tin
