@@ -48,7 +48,7 @@ public class TaiKhoanDAO {
             Cursor cursor = database.rawQuery("SELECT ROLE, HOTEN, PHONE, EMAIL, STATUS FROM TAIKHOAN WHERE UserName=? AND Password=?", new String[]{tk, mk});
             if (cursor != null && cursor.getCount() > 0){
                 cursor.moveToFirst();
-                taiKhoan = new TaiKhoan("", cursor.getString(0), cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getInt(4));
+                taiKhoan = new TaiKhoan(tk, cursor.getString(0), cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getInt(4));
                 cursor.close();
             }
             database.setTransactionSuccessful();

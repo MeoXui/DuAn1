@@ -50,7 +50,6 @@
         </LinearLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/edtTenmathangLayout"
             android:layout_width="match_parent"
             android:layout_height="83dp"
             app:boxCornerRadiusBottomEnd="8dp"
